@@ -1,0 +1,1932 @@
+{
+ "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "USD"
+ },
+ "nep141:22.contract.portalbridge.near": {
+  "symbol": "SOL",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "coingecko:solana"
+ },
+ "nep141:2260fac5e5542a773aa44fbcfedf7c193bc2c599.factory.bridge.near": {
+  "symbol": "WBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:bitcoin"
+ },
+ "nep141:438e48ed4ce6beecf503d43b9dbd3c30d516e7fd.factory.bridge.near": {
+  "symbol": "UWON",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": null
+ },
+ "nep141:853d955acef822db058eb8505911ed77f175b99e.factory.bridge.near": {
+  "symbol": "FRAX",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "USD"
+ },
+ "nep141:a35923162c49cf95e6bf26623385eb431ad920d3.factory.bridge.near": {
+  "symbol": "TURBO",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": null
+ },
+ "nep141:aaaaaa20d9e0e2461697782ef11675f668207961.factory.bridge.near": {
+  "symbol": "AURORA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": null
+ },
+ "nep141:abg-966.meme-cooking.near": {
+  "symbol": "ABG",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:abg-966.meme-cooking.near"
+ },
+ "nep141:aleo-usad.omft.near": {
+  "symbol": "USAD",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "aleo",
+  "price_key": null
+ },
+ "nep141:aleo-usdcx.omft.near": {
+  "symbol": "USDCx",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "aleo",
+  "price_key": "USD"
+ },
+ "nep141:aleo.omft.near": {
+  "symbol": "ALEO",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "aleo",
+  "price_key": null
+ },
+ "nep141:angl.tkn.near": {
+  "symbol": "ANGL",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:aptos-34ee497f210c5a511e8d5b53bc56d75b63612bb5.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "aptos",
+  "price_key": "USD"
+ },
+ "nep141:aptos-88cb7619440a914fe6400149a12b443c3ac21d59.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "aptos",
+  "price_key": "USD"
+ },
+ "nep141:aptos.omft.near": {
+  "symbol": "APT",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "aptos",
+  "price_key": "coingecko:aptos"
+ },
+ "nep141:arb-0x82af49447d8a07e3bd95bd0d56f35241523fbab1.omft.near": {
+  "symbol": "WETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:arb-0x912ce59144191c1204e64559fe8253a0e49e6548.omft.near": {
+  "symbol": "ARB",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "coingecko:arbitrum"
+ },
+ "nep141:arb-0xaf88d065e77c8cc2239327c5edb3a432268e5831.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "USD"
+ },
+ "nep141:arb-0xca7dec8550f43a5e46e3dfb95801f64280e75b27.omft.near": {
+  "symbol": "SWEAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "arbitrum:0xca7dec8550f43a5e46e3dfb95801f64280e75b27"
+ },
+ "nep141:arb-0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a.omft.near": {
+  "symbol": "GMX",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "arbitrum:0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a"
+ },
+ "nep141:arb-0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "USD"
+ },
+ "nep141:arb.omft.near": {
+  "symbol": "ETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "arbitrum",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:arni.tknx.near": {
+  "symbol": "ARNI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:arni.tknx.near"
+ },
+ "nep141:babloweb4.launch.intear.near": {
+  "symbol": "BABLOWEB4",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:base-0x0bb69b79bc829e1cfcc34a740110886d98d2bd14.omft.near": {
+  "symbol": "gtUSDCp",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": null
+ },
+ "nep141:base-0x227d920e20ebac8a40e7d6431b7d724bb64d7245.omft.near": {
+  "symbol": "SWEAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "base:0x227d920e20ebac8a40e7d6431b7d724bb64d7245"
+ },
+ "nep141:base-0x4200000000000000000000000000000000000006.omft.near": {
+  "symbol": "WETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:base-0x532f27101965dd16442e59d40670faf5ebb142e4.omft.near": {
+  "symbol": "BRETT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "base:0x532f27101965dd16442e59d40670faf5ebb142e4"
+ },
+ "nep141:base-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "USD"
+ },
+ "nep141:base-0x959fc04dbf97a27073f89237cd62605f4d1b906d.omft.near": {
+  "symbol": "COCA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "base:0x959fc04dbf97a27073f89237cd62605f4d1b906d"
+ },
+ "nep141:base-0x98d0baa52b2d063e780de12f615f963fe8537553.omft.near": {
+  "symbol": "KAITO",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "base:0x98d0baa52b2d063e780de12f615f963fe8537553"
+ },
+ "nep141:base-0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf.omft.near": {
+  "symbol": "VVV",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "base:0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf"
+ },
+ "nep141:base-0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf.omft.near": {
+  "symbol": "cbBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "coingecko:bitcoin"
+ },
+ "nep141:base-0xe62bfbe57763ec24c0f130426f34dbce11fc5b06.omft.near": {
+  "symbol": "TITN",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "base:0xe62bfbe57763ec24c0f130426f34dbce11fc5b06"
+ },
+ "nep141:base.omft.near": {
+  "symbol": "ETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "base",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:batcat.nearlytrade.near": {
+  "symbol": "BATCAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:batman-4.nearlytrade.near": {
+  "symbol": "BATMAN",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bch.omft.near": {
+  "symbol": "BCH",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "bitcoin-cash",
+  "price_key": "coingecko:bitcoin-cash"
+ },
+ "nep141:bees.tkn.near": {
+  "symbol": "BEES",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:benthedog.near": {
+  "symbol": "BENDOG",
+  "decimals": 9,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:benthedog.near"
+ },
+ "nep141:bera-0x779ded0c9e1022225f8e0630b35a9b54be713736.omft.near": {
+  "symbol": "USDT0",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "berachain",
+  "price_key": null
+ },
+ "nep141:bera.omft.near": {
+  "symbol": "BERA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "berachain",
+  "price_key": null
+ },
+ "nep141:blackdragon.tkn.near": {
+  "symbol": "BLACKDRAGON",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:blackdragon.tkn.near"
+ },
+ "nep141:bnb-0x08ce97f3d5cf11e577d091ab048bc5e2eae3fabb.omdep.near": {
+  "symbol": "AGGon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x091fc7778e6932d4009b087b191d1ee3bac5729a.omdep.near": {
+  "symbol": "GOOGLon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x0cde6936d305d5b34667fc46425e852efd73559a.omdep.near": {
+  "symbol": "QQQon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x1501ec83ffef405b4331cc4f73277a40fb0c627d.omdep.near": {
+  "symbol": "MRVLon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x19601179a60f55ff6636f5d1a8b6671053bd60a8.omdep.near": {
+  "symbol": "HOODon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x2494b603319d4d9f9715c9f4496d9e0364b59d93.omdep.near": {
+  "symbol": "TSLAon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x2ac26ec236df5d1d2ad1a6dd4e448a90e45dc35d.omdep.near": {
+  "symbol": "TIPon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x390a684ef9cade28a7ad0dfa61ab1eb3842618c4.omdep.near": {
+  "symbol": "AAPLon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x4553cfe1c09f37f38b12dc509f676964e392f8fc.omdep.near": {
+  "symbol": "AMZNon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x6a708ead771238919d85930b5a0f10454e1c331a.omdep.near": {
+  "symbol": "SPYon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x6bfe75d1ad432050ea973c3a3dcd88f02e2444c3.omdep.near": {
+  "symbol": "MSFTon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x8b872732b07be325a8803cdb480d9d20b6f8d11b.omdep.near": {
+  "symbol": "SLVon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0x992879cd8ce0c312d98648875b5a8d6d042cbf34.omdep.near": {
+  "symbol": "CRCLon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0xa9ee28c80f960b889dfbd1902055218cba016f75.omdep.near": {
+  "symbol": "NVDAon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0xcb2a0f46f67dc4c58a316f1c008edef5c2311795.omdep.near": {
+  "symbol": "IAUon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0xd7df5863a3e742f0c767768cdfcb63f09e0422f6.omdep.near": {
+  "symbol": "METAon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0xf69e40069ac227c11459e3f4e8a446b3401616b6.omdep.near": {
+  "symbol": "TLTon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:bnb-0xfa9a1e901085e269f6d428f79cd5252d8b919344.omdep.near": {
+  "symbol": "GLDon",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:btc-1.launch.intear.near": {
+  "symbol": "btc",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:btc.omft.near": {
+  "symbol": "BTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "bitcoin",
+  "price_key": "coingecko:bitcoin"
+ },
+ "nep141:cardano.omft.near": {
+  "symbol": "ADA",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "cardano",
+  "price_key": "coingecko:cardano"
+ },
+ "nep141:catminer-5b83fb.launchpad.justhoot.near": {
+  "symbol": "CATMINER",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:cballs-ef4686.launchpad.justhoot.near": {
+  "symbol": "CBALLS",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:cfi.consumer-fi.near": {
+  "symbol": "CFI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:cfi.consumer-fi.near"
+ },
+ "nep141:cnear.assetize.near": {
+  "symbol": "cNEAR",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:d9c2d319cd7e6177336b0a9c93c21cb48d84fb54.factory.bridge.near": {
+  "symbol": "HAPI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": null
+ },
+ "nep141:darai.tkn.near": {
+  "symbol": "Darai",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:darai.tkn.near"
+ },
+ "nep141:dash.omft.near": {
+  "symbol": "DASH",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "dash",
+  "price_key": "coingecko:dash"
+ },
+ "nep141:dd.tg": {
+  "symbol": "DD",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:dd.tg"
+ },
+ "nep141:dn.gra-fun.near": {
+  "symbol": "DN",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:doge.omft.near": {
+  "symbol": "DOGE",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "dogecoin",
+  "price_key": "coingecko:dogecoin"
+ },
+ "nep141:dragon-3.nearlytrade.near": {
+  "symbol": "DRAGON",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:dragons-2.nearlytrade.near": {
+  "symbol": "DRAGONS",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:dragons.v2-launchpad.justhoot.near": {
+  "symbol": "DRAGONS",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:elon2028.v2-launchpad.justhoot.near": {
+  "symbol": "ELON2028",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:epep.gaypad.j1-racing.near": {
+  "symbol": "EPEP",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:eth-0x06ea695b91700071b161a434fed42d1dcbad9f00.omft.near": {
+  "symbol": "hemiBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0x06ea695b91700071b161a434fed42d1dcbad9f00"
+ },
+ "nep141:eth-0x0f38f1ce62776d4a0038bc6cac66877a5687383b.omft.near": {
+  "symbol": "TLO",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0x0f38f1ce62776d4a0038bc6cac66877a5687383b"
+ },
+ "nep141:eth-0x1f9840a85d5af5bf1d1762f925bdaddc4201f984.omft.near": {
+  "symbol": "UNI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:uniswap"
+ },
+ "nep141:eth-0x2260fac5e5542a773aa44fbcfedf7c193bc2c599.omft.near": {
+  "symbol": "WBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:bitcoin"
+ },
+ "nep141:eth-0x514910771af9ca656af840dff83e8264ecf986ca.omft.near": {
+  "symbol": "LINK",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:chainlink"
+ },
+ "nep141:eth-0x5afe3855358e112b5647b952709e6165e1c1eeee.omft.near": {
+  "symbol": "SAFE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0x5afe3855358e112b5647b952709e6165e1c1eeee"
+ },
+ "nep141:eth-0x68749665ff8d2d112fa859aa293f07a622782f38.omft.near": {
+  "symbol": "XAUT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:tether-gold"
+ },
+ "nep141:eth-0x6982508145454ce325ddbe47a25d4ec3d2311933.omft.near": {
+  "symbol": "PEPE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:pepe"
+ },
+ "nep141:eth-0x6b175474e89094c44da98b954eedeac495271d0f.omft.near": {
+  "symbol": "DAI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "USD"
+ },
+ "nep141:eth-0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0.omft.near": {
+  "symbol": "wstETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+ },
+ "nep141:eth-0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9.omft.near": {
+  "symbol": "AAVE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:aave"
+ },
+ "nep141:eth-0x8b1484d57abbe239bb280661377363b03c89caea.omft.near": {
+  "symbol": "ADI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0x8b1484d57abbe239bb280661377363b03c89caea"
+ },
+ "nep141:eth-0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d.omft.near": {
+  "symbol": "USD1",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "USD"
+ },
+ "nep141:eth-0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce.omft.near": {
+  "symbol": "SHIB",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:shiba-inu"
+ },
+ "nep141:eth-0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "USD"
+ },
+ "nep141:eth-0xa35923162c49cf95e6bf26623385eb431ad920d3.omft.near": {
+  "symbol": "TURBO",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xa35923162c49cf95e6bf26623385eb431ad920d3"
+ },
+ "nep141:eth-0xaaaaaa20d9e0e2461697782ef11675f668207961.omft.near": {
+  "symbol": "AURORA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xaaaaaa20d9e0e2461697782ef11675f668207961"
+ },
+ "nep141:eth-0xaaee1a9723aadb7afa2810263653a34ba2c21c7a.omft.near": {
+  "symbol": "MOG",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xaaee1a9723aadb7afa2810263653a34ba2c21c7a"
+ },
+ "nep141:eth-0xb4b9dc1c77bdbb135ea907fd5a08094d98883a35.omft.near": {
+  "symbol": "SWEAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xb4b9dc1c77bdbb135ea907fd5a08094d98883a35"
+ },
+ "nep141:eth-0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.omft.near": {
+  "symbol": "WETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:eth-0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf.omft.near": {
+  "symbol": "cbBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:bitcoin"
+ },
+ "nep141:eth-0xce6170ea245dc8d1f275a710a062b70f125f0110.omft.near": {
+  "symbol": "FXRP",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xce6170ea245dc8d1f275a710a062b70f125f0110"
+ },
+ "nep141:eth-0xd9c2d319cd7e6177336b0a9c93c21cb48d84fb54.omft.near": {
+  "symbol": "HAPI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xd9c2d319cd7e6177336b0a9c93c21cb48d84fb54"
+ },
+ "nep141:eth-0xdac17f958d2ee523a2206206994597c13d831ec7.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "USD"
+ },
+ "nep141:eth-0xdef1b2d939edc0e4d35806c59b3166f790175afe.omft.near": {
+  "symbol": "INX",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xdef1b2d939edc0e4d35806c59b3166f790175afe"
+ },
+ "nep141:eth-0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202.omft.near": {
+  "symbol": "KNC",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202"
+ },
+ "nep141:eth-0xe0f63a424a4439cbe457d80e4f4b51ad25b2c56c.omft.near": {
+  "symbol": "SPX",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "ethereum:0xe0f63a424a4439cbe457d80e4f4b51ad25b2c56c"
+ },
+ "nep141:eth.bridge.near": {
+  "symbol": "ETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:eth.omft.near": {
+  "symbol": "ETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "ethereum",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:evona.gra-fun.near": {
+  "symbol": "EVONA",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:fehu.tkn.near": {
+  "symbol": "FEHU",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:fehu.tkn.near"
+ },
+ "nep141:fexu.tkn.near": {
+  "symbol": "Fexu",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:fluff.tkn.near": {
+  "symbol": "FLUFF",
+  "decimals": 3,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:fogo.omdep.near": {
+  "symbol": "FOGO",
+  "decimals": 9,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:ftv2.nekotoken.near": {
+  "symbol": "NEKO",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:ftv2.nekotoken.near"
+ },
+ "nep141:gdarai.tkn.near": {
+  "symbol": "GDarai",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:gear.enleap.near": {
+  "symbol": "GEAR",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:gear.enleap.near"
+ },
+ "nep141:gj.tkn.near": {
+  "symbol": "GJ",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:gnear-229.meme-cooking.near": {
+  "symbol": "gnear",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:gnear-229.meme-cooking.near"
+ },
+ "nep141:gnosis-0x177127622c4a00f3d409b75571e12cb3c8973d3c.omft.near": {
+  "symbol": "COW",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "xdai:0x177127622c4a00f3d409b75571e12cb3c8973d3c"
+ },
+ "nep141:gnosis-0x2a22f9c3b484c3629090feed35f17ff8f88f76f0.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "USD"
+ },
+ "nep141:gnosis-0x420ca0f9b9b604ce0fd9c18ef134c705e5fa3430.omft.near": {
+  "symbol": "EURe",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "xdai:0x420ca0f9b9b604ce0fd9c18ef134c705e5fa3430"
+ },
+ "nep141:gnosis-0x4d18815d14fe5c3304e87b3fa18318baa5c23820.omft.near": {
+  "symbol": "SAFE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "xdai:0x4d18815d14fe5c3304e87b3fa18318baa5c23820"
+ },
+ "nep141:gnosis-0x4ecaba5870353805a9f068101a40e0f32ed605c6.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "USD"
+ },
+ "nep141:gnosis-0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1.omft.near": {
+  "symbol": "WETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:gnosis-0x9c58bacc331c9aa871afd802db6379a98e80cedb.omft.near": {
+  "symbol": "GNO",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": "xdai:0x9c58bacc331c9aa871afd802db6379a98e80cedb"
+ },
+ "nep141:gnosis.omft.near": {
+  "symbol": "xDAI",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "gnosis",
+  "price_key": null
+ },
+ "nep141:gp.tkn.near": {
+  "symbol": "GP",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:grecha.tkn.near": {
+  "symbol": "GRECHA",
+  "decimals": 3,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:grecha.tkn.near"
+ },
+ "nep141:gt-1733.meme-cooking.near": {
+  "symbol": "GT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:gt-1733.meme-cooking.near"
+ },
+ "nep141:hood-0x020bfc650a365f8bb26819deaabf3e21291018b4.omft.near": {
+  "symbol": "CASHCAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "hood",
+  "price_key": null
+ },
+ "nep141:hood-0x0bd7d308f8e1639fab988df18a8011f41eacad73.omft.near": {
+  "symbol": "WETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "hood",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:hood-0x39dbed3a2bd333467115de45665cc57f813c4571.omft.near": {
+  "symbol": "PONS",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "hood",
+  "price_key": null
+ },
+ "nep141:hood-0x5fc5360d0400a0fd4f2af552add042d716f1d168.omft.near": {
+  "symbol": "USDG",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "hood",
+  "price_key": "USD"
+ },
+ "nep141:hood.omft.near": {
+  "symbol": "ETH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "hood",
+  "price_key": "coingecko:ethereum"
+ },
+ "nep141:hoodl-95275b.launchpad.justhoot.near": {
+  "symbol": "HOODL",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:hoot-8ecf65.launchpad.justhoot.near": {
+  "symbol": "HOOT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:hootdog.v2-launchpad.justhoot.near": {
+  "symbol": "HOOTDOG",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:hooters-f5dd7a.launchpad.justhoot.near": {
+  "symbol": "HOOTERS",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:hope.tkn.near": {
+  "symbol": "HOPE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:hope.tkn.near"
+ },
+ "nep141:icp.v2-launchpad.justhoot.near": {
+  "symbol": "ICP",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:ikp.v2-launchpad.justhoot.near": {
+  "symbol": "IKP",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:illia-2.v2-launchpad.justhoot.near": {
+  "symbol": "ILLIA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:illia.v2-launchpad.justhoot.near": {
+  "symbol": "ILLIA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:ironclaw-1956.meme-cooking.near": {
+  "symbol": "IRONCLAW",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:ironclaw-1956.meme-cooking.near"
+ },
+ "nep141:iseepee.v2-launchpad.justhoot.near": {
+  "symbol": "ISEEPEE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:itlx.intellex_xyz.near": {
+  "symbol": "ITLX",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:itlx.intellex_xyz.near"
+ },
+ "nep141:jambo-1679.meme-cooking.near": {
+  "symbol": "JAMBO",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:jambo-1679.meme-cooking.near"
+ },
+ "nep141:jholudi.tkn.near": {
+  "symbol": "JHOLUDI",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:kat.token0.near": {
+  "symbol": "KAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:kat.token0.near"
+ },
+ "nep141:leoneardo-f5b166.launchpad.justhoot.near": {
+  "symbol": "LEONEARDO",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:lisn.tkn.near": {
+  "symbol": "LISN",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:lisn.tkn.near"
+ },
+ "nep141:lsd-usdt.rhealab.near": {
+  "symbol": "nrUsdt",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:lsd-usdt.rhealab.near"
+ },
+ "nep141:lst-pool.near": {
+  "symbol": "stNEAR",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:lst.rhealab.near": {
+  "symbol": "rNEAR",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:lst.rhealab.near"
+ },
+ "nep141:ltc.omft.near": {
+  "symbol": "LTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "litecoin",
+  "price_key": "coingecko:litecoin"
+ },
+ "nep141:magicdust.tkn.near": {
+  "symbol": "magicdust",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:mana.tkn.near": {
+  "symbol": "MANA",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:med.tkn.near": {
+  "symbol": "MED",
+  "decimals": 3,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:med.tkn.near"
+ },
+ "nep141:meta-pool.near": {
+  "symbol": "STNEAR",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "coingecko:near"
+ },
+ "nep141:movement.omft.near": {
+  "symbol": "MOVE",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "movement",
+  "price_key": null
+ },
+ "nep141:mpdao-token.near": {
+  "symbol": "mpDAO",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:mpdao-token.near"
+ },
+ "nep141:n3ar.v2-launchpad.justhoot.near": {
+  "symbol": "N3AR",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:nbtc.bridge.near": {
+  "symbol": "NBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "bitcoin",
+  "price_key": "coingecko:bitcoin"
+ },
+ "nep141:nearkat-630f25.nearlytrade.near": {
+  "symbol": "NEARKAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:nearly-993927.nearlytrade.near": {
+  "symbol": "NEARLY",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:nearnvidia.near": {
+  "symbol": "NEARVIDIA",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:nearnvidia.near"
+ },
+ "nep141:nearszn-4155cf.launchpad.justhoot.near": {
+  "symbol": "NEARSZN",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:nepe-5.nearlytrade.near": {
+  "symbol": "NEPE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:ninu-4.nearlytrade.near": {
+  "symbol": "NINU",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:ninu.v2-launchpad.justhoot.near": {
+  "symbol": "NINU",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:noear-324.meme-cooking.near": {
+  "symbol": "NOEAR",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:noear-324.meme-cooking.near"
+ },
+ "nep141:norbert.v2-launchpad.justhoot.near": {
+  "symbol": "NORBERT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:npro.nearmobile.near": {
+  "symbol": "NPRO",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:npro.nearmobile.near"
+ },
+ "nep141:ntdarai.tkn.near": {
+  "symbol": "NTDarai",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:nzec.bridge.near": {
+  "symbol": "WZEC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:penguin-3.v2-launchpad.justhoot.near": {
+  "symbol": "PENGUIN",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:plasma-0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "plasma",
+  "price_key": "USD"
+ },
+ "nep141:plasma.omft.near": {
+  "symbol": "XPL",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "plasma",
+  "price_key": null
+ },
+ "nep141:pol-0x543fba4805210b0cd54fdf3fe9d4f9d3171c7e8c.omdep.near": {
+  "symbol": "",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:pol-0x7b12598e3616261df1c05ec28de0d2fb10c1f206.omdep.near": {
+  "symbol": "COCA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:prl.omft.near": {
+  "symbol": "PRL",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "prl",
+  "price_key": null
+ },
+ "nep141:purge-558.meme-cooking.near": {
+  "symbol": "PURGE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:purge-558.meme-cooking.near"
+ },
+ "nep141:qcat-2223.meme-cooking.near": {
+  "symbol": "QCat",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:qtc.omft.near": {
+  "symbol": "QTC",
+  "decimals": 12,
+  "fetched": "2026-10-30",
+  "origin_chain": "qtc",
+  "price_key": null
+ },
+ "nep141:racerbot.v2-launchpad.justhoot.near": {
+  "symbol": "RACERBOT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:raen-e1328c.launchpad.justhoot.near": {
+  "symbol": "RAEN",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sbr.tkn.near": {
+  "symbol": "SBR",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:sbr.tkn.near"
+ },
+ "nep141:seeds.tkn.near": {
+  "symbol": "SEEDs",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sfuel.tkn.near": {
+  "symbol": "sFuel",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sol-0x936420c6ae310eb29511d139991654f922456fbe.omdep.near": {
+  "symbol": "USD1",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "USD"
+ },
+ "nep141:sol-0xa69aa1bcb03a369e338156a8718ad60271145803.omdep.near": {
+  "symbol": "kV-gtSOLb",
+  "decimals": 9,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sol-0xaad74c68eecfc9f8c5bdcea614f6167048c795ef.omdep.near": {
+  "symbol": "PENGU",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sol-0xeb5809c5053dae2350bdbf3831724183a29dcedb.omdep.near": {
+  "symbol": "CASH",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sol-57d087fd8c460f612f8701f5499ad8b2eec5ab68.omft.near": {
+  "symbol": "BOME",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": null
+ },
+ "nep141:sol-5ce3bf3a31af18be40ba30f721101b4341690186.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": "USD"
+ },
+ "nep141:sol-91914f13d3b54f8126a2824d71632d4b078d7403.omft.near": {
+  "symbol": "xBTC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": null
+ },
+ "nep141:sol-b9c68f94ec8fd160137af8cdfe5e61cd68e2afba.omft.near": {
+  "symbol": "WIF",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": null
+ },
+ "nep141:sol-c58e6539c2f2e097c251f8edf11f9c03e581f8d4.omft.near": {
+  "symbol": "TRUMP",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": null
+ },
+ "nep141:sol-c634d063ceff771aff0c972ec396fd915a6bbd0e.omft.near": {
+  "symbol": "SPX",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": null
+ },
+ "nep141:sol-c800a4bd850783ccb82c2b2c7e84175443606352.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": "USD"
+ },
+ "nep141:sol-df27d7abcc1c656d4ac3b1399bbfbba1994e6d8c.omft.near": {
+  "symbol": "TURBO",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": null
+ },
+ "nep141:sol.omft.near": {
+  "symbol": "SOL",
+  "decimals": 9,
+  "fetched": "2026-10-30",
+  "origin_chain": "solana",
+  "price_key": "coingecko:solana"
+ },
+ "nep141:spike-cb7512.rhea.meme-launchpad.near": {
+  "symbol": "SPIKE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:starknet.omft.near": {
+  "symbol": "STRK",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "starknet",
+  "price_key": null
+ },
+ "nep141:strk-0x65a839eb3847105820d4a2eee84e137f33525e8f.omdep.near": {
+  "symbol": "STRK",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:sui-349a5b23674603c086ceac1fa9f139c4bbc30cf8.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "sui",
+  "price_key": "USD"
+ },
+ "nep141:sui-c1b81ecaf27933252d31a963bc5e9458f13c18ce.omft.near": {
+  "symbol": "USDC",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "sui",
+  "price_key": "USD"
+ },
+ "nep141:sui.omft.near": {
+  "symbol": "SUI",
+  "decimals": 9,
+  "fetched": "2026-10-30",
+  "origin_chain": "sui",
+  "price_key": "coingecko:sui"
+ },
+ "nep141:three-de86d6.launchpad.justhoot.near": {
+  "symbol": "THREE",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:token.0xshitzu.near": {
+  "symbol": "SHITZU",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:token.0xshitzu.near"
+ },
+ "nep141:token.lonkingnearbackto2024.near": {
+  "symbol": "LONK",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:token.lonkingnearbackto2024.near"
+ },
+ "nep141:token.publicailab.near": {
+  "symbol": "PUBLIC",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:token.publicailab.near"
+ },
+ "nep141:token.rhealab.near": {
+  "symbol": "RHEA",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:token.rhealab.near"
+ },
+ "nep141:token.sweat": {
+  "symbol": "SWEAT",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:token.sweat"
+ },
+ "nep141:token.v2.ref-finance.near": {
+  "symbol": "REF",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:token.v2.ref-finance.near"
+ },
+ "nep141:tron-d28a265909efecdcee7c5028585214ea0b96f015.omft.near": {
+  "symbol": "USDT",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "tron",
+  "price_key": "USD"
+ },
+ "nep141:tron.omft.near": {
+  "symbol": "TRX",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "tron",
+  "price_key": "coingecko:tron"
+ },
+ "nep141:trump.tknx.near": {
+  "symbol": "TRUMP",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:trump.tknx.near"
+ },
+ "nep141:uptober.nearlytrade.near": {
+  "symbol": "UPTOBER",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:usdt.tether-token.near": {
+  "symbol": "USDt",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "USD"
+ },
+ "nep141:usmeme.tg": {
+  "symbol": "USM",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:usmeme.tg"
+ },
+ "nep141:veil-5.nearlytrade.near": {
+  "symbol": "VEIL",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:wbnb.hot.tg": {
+  "symbol": "WBNB",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:wbnb.hot.tg"
+ },
+ "nep141:wnear.gra-fun.near": {
+  "symbol": "Wnear",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "near:wnear.gra-fun.near"
+ },
+ "nep141:wrap.gra-fun.near": {
+  "symbol": "wrap",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:wrap.near": {
+  "symbol": "wNEAR",
+  "decimals": 24,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": "coingecko:near"
+ },
+ "nep141:wth-0b2227.launchpad.justhoot.near": {
+  "symbol": "WTH",
+  "decimals": 18,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:xrp.omft.near": {
+  "symbol": "XRP",
+  "decimals": 6,
+  "fetched": "2026-10-30",
+  "origin_chain": "xrp",
+  "price_key": "coingecko:ripple"
+ },
+ "nep141:yupland.tkn.near": {
+  "symbol": "YUPLAND",
+  "decimals": 0,
+  "fetched": "2026-10-30",
+  "origin_chain": "near",
+  "price_key": null
+ },
+ "nep141:zec.omft.near": {
+  "symbol": "ZEC",
+  "decimals": 8,
+  "fetched": "2026-10-30",
+  "origin_chain": "zcash",
+  "price_key": "coingecko:zcash"
+ },
+ "nep245:v2_1.omni.hot.tg:1001_11111111111111111111111111111111": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_8GXbgVkkTBgMQpaXbdp6ALJuFnYcBGKmX4x3zhyMpump": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_ASRRjA1R4RHVk5H9QKKm1jaQqMkxvv6nh5EypPrvwmxQ": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_CbBzPvPWWfu5sFHB17nuu6CTjkMrdiZh6GwYiJjupump": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_GCKTFLxkMeUTUbuQM1k6f1cy4o4tC2V13ye2ebL3p52r": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1001_Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs": {
+  "origin_chain": "hot:1001",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:10_11111111111111111111": {
+  "origin_chain": "optimism",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:10_2R1RXDBxCyJTeMEsdXydh7xsHmz": {
+  "origin_chain": "optimism",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:10_359RPSJVdTxwTJT9TyGssr2rFoWo": {
+  "origin_chain": "optimism",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:10_A2ewyUyDp6qsue1jqZsGypkCxRJ": {
+  "origin_chain": "optimism",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:10_vLAiSt9KfUGKpw5cD3vsSyNYBn5": {
+  "origin_chain": "optimism",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:10_vLAiSt9KfUGKpw5cD3vsSyNYBo7": {
+  "origin_chain": "optimism",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5sfJeUF2zT4gBJUT5avr4Nj25gedEZ1qc1tVB1SxSMNg1": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5uBD3Wrr7pthp8XhJsreEcwTVnmjQ1wpbzkvHLEQf3ygS": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5v7AhLyPMDwS8uJgQV24KaAPXtwyVWu2KXbbfQU6NXRCz": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5vJ9eESX4KKz8khGZXjNJupGusWgpPiYJvUcEFVRKe4Gn": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5xzU1EsXby4ckez2qjWFTBiPoqHzZpPkq1Gr9gB7FQpeZ": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5y5yhcUCbDKaCx4zNjEHQbwLAdvwucCecVzC5Ub7uNKEb": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB5yT2A5maKJqJQsuNg7BA6VG4S4ZATpqmKYLwYBsfEfh6e": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB62XZkuam1hPr5wsG54FvwhYaPvecKwgZo1ZoKMWEXcE2n": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB65GxAPAVoxqmMcgYo5oS3txhqs1Uh1cgahKQUeTUq1TJu": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB66Lr9d7WU1sDna78SqG5x1ZraFjkpPdiYXjHFRnZJUhuV": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1100_111bzQBB696MmGsGfk4XU7LWfKV7bScsZHmgv5NTw65HWQ69o7ufM": {
+  "origin_chain": "hot:1100",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1117_": {
+  "origin_chain": "hot:1117",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1117_3tsdfyziyc7EJbP2aULWSKU4toBaAcN4FdTgfm5W1mC4ouR": {
+  "origin_chain": "hot:1117",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1117_3ttDwRfANwyLkWbCbJBzTb9ovjFSE1hjHBKqLDqQoUyzEfh": {
+  "origin_chain": "hot:1117",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:1117_3txqK8PxBJAXRJ6DF2QofgzA9LeXtBEb47Pn4f95twwQM2X": {
+  "origin_chain": "hot:1117",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:137_11111111111111111111": {
+  "origin_chain": "polygon",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:137_2jwTGwKRX3AEe7tyzDrxtDjEFgSt": {
+  "origin_chain": "polygon",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:137_3hpYoaLtt8MP1Z2GH1U473DMRKgr": {
+  "origin_chain": "polygon",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:137_qiStmoQJDQPTebaPjgx5VBxZv6L": {
+  "origin_chain": "polygon",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:143_11111111111111111111": {
+  "origin_chain": "hot:143",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:143_2dmLwYWkCQKyTjeUPAsGJuiVLbFx": {
+  "origin_chain": "hot:143",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:143_4EJiJxSALvGoTZbnc8K7Ft9533et": {
+  "origin_chain": "hot:143",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:196_11111111111111111111": {
+  "origin_chain": "hot:196",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:196_2dK9kLNR7Ekq7su8FxNGiUW3djTw": {
+  "origin_chain": "hot:196",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:196_2fezDCvVYRsG8wrK6deJ2VRPiAS1": {
+  "origin_chain": "hot:196",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:2222_11111111111111111111": {
+  "origin_chain": "hot:2222",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:2222_XdinoXyPMpi8BecaUFd1hHVjyYo": {
+  "origin_chain": "hot:2222",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:36900_11111111111111111111": {
+  "origin_chain": "hot:36900",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:42161_11111111111111111111": {
+  "origin_chain": "arbitrum",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:42161_3SqdNmADRHjp14YDiqXwoJ6ctnUx": {
+  "origin_chain": "arbitrum",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:42161_4XTgey8ZoqNsf2qRR5cN1WLGd5Bv": {
+  "origin_chain": "arbitrum",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:43114_11111111111111111111": {
+  "origin_chain": "avalanche",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:43114_372BeH7ENZieCaabwkbWkBiTTgXp": {
+  "origin_chain": "avalanche",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:43114_3atVJH3r5c4GqiSYmg9fECvjc47o": {
+  "origin_chain": "avalanche",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:4444119_wyixUKCL": {
+  "origin_chain": "hot:4444119",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:534352_11111111111111111111": {
+  "origin_chain": "hot:534352",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:534352_4RG3Q2wFsMQmd45m5m89RjsLfupA": {
+  "origin_chain": "hot:534352",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_11111111111111111111": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_12zbnsg6xndDVj25QyL82YMPudb": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_24S22V8GMmQN8t6PbCdRb3mBewAd": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_28V9BijGeZDBFEEtkAcnJo4tPRH4": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_2CMMyVTGZkeyNZTSvS5sarzfir6g": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_2DLFm46FPXDUZ6DWU3gn4cP6F9Av": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_2YKBUrcSKsFVQAcF1wP9mmT68DgH": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_2gkGdc1LcdSpDDYyZkUoPqQY9zyN": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_2td8fB5rKhL62EBuyEjkyWiNTA1W": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_2w93GqMcEmQFDru84j3HZZWt557r": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_31XZ1V67dEPpBAuoHcp7RSu6d3tp": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_3DvGk8xJeU2WjJf6GKbrRWNNBNoh": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_42mAc2yLYzEMuRkmDC5rHQKXgFdj": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_4G1FqL2h9zF9x8uKaYf466LmH4ER": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_4SogdKSHy6JYT1HptQGMS4Bzitzi": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_CLxJB2FW1qLrjdAH3qTZd3Tznnu": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_EN1R2k5TdHKH2xX6yGwdTi5PUSm": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_EnrGHeqPePEpwumX1fGiJ88THAR": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_NnBUmw3rCxsGXA6tGqUbyisHVGn": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_SZzgw3HSudhZcTwPWUTi2RJB19t": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:56_U2FvEoSq6HYHb6V31ZsVXegYmSw": {
+  "origin_chain": "bnb",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:8453_11111111111111111111": {
+  "origin_chain": "base",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:8453_2q2Gg8TH19xwTZeyUCme313nZsTQ": {
+  "origin_chain": "base",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:8453_3Q55N8Mt1AuwVLqZwLFNDa1tacKV": {
+  "origin_chain": "base",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:8453_44swr1zPbr9a6vTLgKaxooTEsEi3": {
+  "origin_chain": "base",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:9745_11111111111111111111": {
+  "origin_chain": "hot:9745",
+  "price_key": null
+ },
+ "nep245:v2_1.omni.hot.tg:9745_3aL9skCy1yhPoDB8oKMmRHRN7SJW": {
+  "origin_chain": "hot:9745",
+  "price_key": null
+ }
+}

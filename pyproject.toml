@@ -1,0 +1,18 @@
+[project]
+name = "intentional"
+version = "0.1.0"
+description = "A data-backed, re-runnable investment thesis on NEAR, centered on NEAR Intents"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+    "db-dtypes==1.9.0",
+    "duckdb==2.0.0",
+    "google-cloud-bigquery==3.47.0",
+    "pandas==3.1.0",
+    "pyarrow==26.0.0",
+    "python-dotenv==1.2.4",
+    "requests==2.34.2",
+]
+
+[tool.uv]
+package = false

@@ -1,0 +1,26 @@
+# Daily rebuild of the static dashboard from committed snapshots + a fresh DefiLlama pull.
+# BigQuery refresh (data/metrics from new on-chain days) is a deliberate local step: no cloud credentials live in CI.
+name: dashboard
+on:
+  schedule: [{cron: "17 5 * * *"}]
+  workflow_dispatch:
+permissions: {contents: read, pages: write, id-token: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run --frozen python -m pipeline.defillama
+      - run: uv run --frozen python -m pipeline.model
+      - run: uv run --frozen python -m dashboard.build
+      - uses: actions/upload-pages-artifact@v3
+        with: {path: dashboard/dist}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: {name: github-pages, url: "${{ steps.d.outputs.page_url }}"}
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

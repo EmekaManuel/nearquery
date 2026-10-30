@@ -1,0 +1,23 @@
+# secrets and local config
+.env
+*.pem
+*.key
+*credentials*.json
+service-account*.json
+
+# raw pulls (large, re-creatable, and may be subject to source terms): only derived snapshots are committed
+data/raw/
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# os / editor
+.DS_Store
+.idea/
+dashboard/dist/
+
+# third-party raw series: DefiLlama ToS 8(7) forbids republishing their data; re-fetched by `make reference`
+data/reference/prices.csv
+data/reference/defillama_near_intents.csv
