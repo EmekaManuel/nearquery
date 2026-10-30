@@ -1,4 +1,9 @@
-<p align="center"><img src="brand/logos/nearquery-lockup.svg" alt="NearQuery" width="320"></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="brand/logos/nearquery-lockup-dark.svg">
+    <img src="brand/logos/nearquery-lockup.svg" alt="NearQuery" width="320">
+  </picture>
+</p>
 
 # NearQuery
 
