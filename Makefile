@@ -1,7 +1,7 @@
 UV ?= uv
 RUN = $(UV) run --frozen python -m
 
-.PHONY: thesis setup extract-logs extract-flows reference metrics model dashboard rebuild
+.PHONY: all video thesis setup extract-logs extract-flows reference metrics model dashboard rebuild
 
 setup:
 	$(UV) sync --frozen
@@ -42,3 +42,12 @@ rebuild:
 
 thesis:
 	$(RUN) pipeline.thesis
+
+# One command: install pinned deps, rebuild model + dashboard from committed snapshots, re-render the thesis.
+all: setup rebuild thesis
+
+# Demo video (needs ffmpeg, vhs, and `npm i` in demo/). Rebuilds numbers, footage and renders to demo/out/.
+video:
+	$(MAKE) rebuild
+	$(RUN) pipeline.video_numbers
+	bash demo/scripts/make_video.sh

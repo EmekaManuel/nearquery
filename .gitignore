@@ -21,3 +21,13 @@ dashboard/dist/
 # third-party raw series: DefiLlama ToS 8(7) forbids republishing their data; re-fetched by `make reference`
 data/reference/prices.csv
 data/reference/defillama_near_intents.csv
+
+# demo video build products
+demo/node_modules/
+demo/out/*
+!demo/out/nearquery-demo.mp4
+!demo/out/nearquery-demo-nocaptions.mp4
+!demo/out/nearquery-demo.srt
+demo/public/brand/
+demo/work/
+demo/public/clips/
