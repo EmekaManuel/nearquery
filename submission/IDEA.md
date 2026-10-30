@@ -1,0 +1,3 @@
+# Submission "idea" field (20 to 2000 characters; draft, not submitted)
+
+NearQuery is a re-runnable, data-backed investment thesis on NEAR. It tests whether NEAR Intents is becoming real cross-chain settlement and whether that creates value for the NEAR token, using on-chain event logs, a committed SQL pipeline and a static dashboard where every chart shows its date range, source and the exact query behind it. The thesis follows the data: Intents looks like real infrastructure, but captured revenue and NEAR-token demand are small, and the repo states what evidence would change that view. Everything reproduces from the repo with no accounts: `make setup rebuild`.

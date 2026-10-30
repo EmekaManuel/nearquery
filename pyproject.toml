@@ -1,5 +1,5 @@
 [project]
-name = "intentional"
+name = "nearquery"
 version = "0.1.0"
 description = "A data-backed, re-runnable investment thesis on NEAR, centered on NEAR Intents"
 requires-python = ">=3.12,<3.13"

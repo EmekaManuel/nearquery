@@ -9,6 +9,7 @@ revenue inputs of the value-capture model because protocol fees are not visible 
 """
 import datetime as dt
 import json
+import sys
 
 import pandas as pd
 import requests
@@ -38,15 +39,23 @@ def main() -> None:
     df.to_csv(OUT, index=False)
     print(f"wrote {OUT.relative_to(config.ROOT)}: {len(df)} rows {df.date.min()}..{df.date.max()}")
 
-    r = requests.post(RPC, json={"jsonrpc": "2.0", "id": 1, "method": "block", "params": {"finality": "final"}}, timeout=30)
-    h = r.json()["result"]["header"]
-    px = requests.get("https://coins.llama.fi/prices/current/coingecko:near", timeout=30).json()["coins"]["coingecko:near"]
-    SUPPLY.write_text(json.dumps({
-        "total_supply_near": int(h["total_supply"]) / 1e24, "block_height": h["height"],
-        "near_price_usd": px["price"], "near_price_fetched_utc": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
-        "block_time_utc": dt.datetime.fromtimestamp(h["timestamp"] / 1e9, dt.UTC).isoformat(),
-        "source": f"block header via {RPC}"}, indent=1))
-    print("wrote", SUPPLY.relative_to(config.ROOT), json.loads(SUPPLY.read_text())["total_supply_near"])
+    # NEAR price is pinned to the end of the pipeline window (not live spot) so the model re-runs to the same numbers.
+    end = pd.read_csv(config.ROOT / "data" / "metrics" / "daily_volume.csv", parse_dates=["date"])["date"].max() - pd.Timedelta(days=1)
+    ts = int(dt.datetime(end.year, end.month, end.day, 12, tzinfo=dt.timezone.utc).timestamp())
+    px = requests.get(f"https://coins.llama.fi/prices/historical/{ts}/coingecko:near", timeout=30).json()["coins"]["coingecko:near"]["price"]
+    # Total supply is a committed chain-state snapshot; it is only re-read when missing or with --refresh-supply.
+    if not SUPPLY.exists() or "--refresh-supply" in sys.argv:
+        r = requests.post(RPC, json={"jsonrpc": "2.0", "id": 1, "method": "block", "params": {"finality": "final"}}, timeout=30)
+        h = r.json()["result"]["header"]
+        snap = {"total_supply_near": int(h["total_supply"]) / 1e24, "block_height": h["height"],
+                "block_time_utc": dt.datetime.fromtimestamp(h["timestamp"] / 1e9, dt.UTC).isoformat(),
+                "source": f"block header via {RPC}"}
+    else:
+        snap = json.loads(SUPPLY.read_text())
+    snap |= {"near_price_usd": px, "near_price_date": end.date().isoformat(), "near_price_source": "DefiLlama coins API, historical at 12:00 UTC"}
+    snap.pop("near_price_fetched_utc", None)
+    SUPPLY.write_text(json.dumps(snap, indent=1))
+    print("wrote", SUPPLY.relative_to(config.ROOT), f"supply={snap['total_supply_near']:.0f} NEAR, price {px:.4f} on {end.date()}")
 
 
 if __name__ == "__main__":

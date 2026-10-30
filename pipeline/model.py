@@ -30,7 +30,7 @@ def main() -> None:
     win = lambda d: d[(d["date"] >= start) & (d["date"] <= end)]
     v, g, d = win(vol), win(gas), win(dl)
     n = a["window_days"]
-    near_px = sup["near_price_usd"]  # spot at snapshot time (see near_price_fetched_utc)
+    near_px = sup["near_price_usd"]  # DefiLlama price at the window end (see near_price_date)
     mcap = near_px * supply
 
     pipe_public_legsum = v["leg_sum_priced_usd"].sum() + v["leg_sum_imputed_usd"].fillna(0).sum()

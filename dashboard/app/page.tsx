@@ -1,0 +1,35 @@
+import Link from "next/link"
+import { Chart } from "@/components/ChartGrid"
+import { Tiles } from "@/components/Tiles"
+import { CHARTS, byId } from "@/lib/charts"
+import { loadDashboard } from "@/lib/data"
+import { pct, usd } from "@/lib/format"
+
+export default function Overview() {
+  const d = loadDashboard()
+  const ten = d.scenarios.find((s) => s.case === "current_observed" && s.volumeMultiple === 10)
+  return (
+    <>
+      <header className="page-head">
+        <p className="label">NearQuery · NEAR hackathon, thesis track</p>
+        <h1 className="display">Ask the chain. Show the work.</h1>
+        <p className="lede">Is NEAR Intents becoming real cross-chain settlement, and does that create value for NEAR? Every figure below comes from public on-chain data and links to the query that produced it.</p>
+      </header>
+      <div className="verdict">
+        <b className="label">Draft verdict</b>
+        <p>Intents looks like real infrastructure, but the data shows weak value for the token so far. Captured revenue annualizes to {usd(d.obs.revenueAnnual)}, {pct(d.obs.buybackYield, 2)} of market cap; ten times today’s volume would be {pct(ten?.pctOfMarketCap ?? null, 1)}. THESIS.md has the claim, the findings, the bear case and what would change our mind.</p>
+      </div>
+      <Tiles d={d} />
+      <Chart c={byId("daily-volume")} d={d} />
+      <h2 className="sec">Every chart, with its query</h2>
+      <ul className="index">
+        {CHARTS.map((c) => (
+          <li key={c.id}>
+            <Link href={`/charts/${c.id}/`}><b>{c.title}</b><span>{c.definition.split(". ")[0].replace(/\.$/, "")}.</span></Link>
+          </li>
+        ))}
+      </ul>
+      <p className="foot">Public events only. Confidential Intents (about {pct(d.obs.confidentialShare)} of reported volume) are invisible here, so on-chain declines can reflect migration. The cache has gaps; see METHODOLOGY.md. DefiLlama’s raw series is deliberately not republished on this site.</p>
+    </>
+  )
+}

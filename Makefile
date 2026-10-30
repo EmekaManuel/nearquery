@@ -30,8 +30,10 @@ metrics:
 model:
 	$(RUN) pipeline.model
 
+# Emit dashboard/data/dashboard.json, then render the static Next.js site to dashboard/out (needs Node 20+)
 dashboard:
 	$(RUN) dashboard.build
+	cd dashboard && npm ci --no-audit --no-fund && npm run build
 
 # Judges: `make setup rebuild` regenerates the model outputs and dashboard from the committed data/metrics CSVs.
 rebuild:

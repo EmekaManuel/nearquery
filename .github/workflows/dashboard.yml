@@ -15,8 +15,12 @@ jobs:
       - run: uv run --frozen python -m pipeline.defillama
       - run: uv run --frozen python -m pipeline.model
       - run: uv run --frozen python -m dashboard.build
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: cd dashboard && npm ci --no-audit --no-fund && npm run build
+        env: {NEXT_PUBLIC_BASE_PATH: "/${{ github.event.repository.name }}"}
       - uses: actions/upload-pages-artifact@v3
-        with: {path: dashboard/dist}
+        with: {path: dashboard/out}
   deploy:
     needs: build
     runs-on: ubuntu-latest

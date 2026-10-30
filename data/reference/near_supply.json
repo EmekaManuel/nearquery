@@ -1,8 +1,9 @@
 {
  "total_supply_near": 1310343294.052268,
  "block_height": 222246501,
- "near_price_usd": 4.291196668400729,
- "near_price_fetched_utc": "2026-10-30T08:16:03+00:00",
+ "near_price_usd": 4.660163007299602,
  "block_time_utc": "2026-10-30T08:16:00.733685+00:00",
- "source": "block header via https://free.rpc.fastnear.com"
+ "source": "block header via https://free.rpc.fastnear.com",
+ "near_price_date": "2026-10-28",
+ "near_price_source": "DefiLlama coins API, historical at 12:00 UTC"
 }
