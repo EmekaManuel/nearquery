@@ -1,5 +1,6 @@
 import type { ChartDef } from "@/lib/charts"
 import type { Dashboard } from "@/lib/types"
+import { fillChart } from "@/lib/fill"
 import { BarCard, ChartCard } from "./ChartCard"
 
 type Row = Record<string, string | number | null>
@@ -8,7 +9,8 @@ export function rowsFor(c: ChartDef, d: Dashboard): Row[] {
   return (c.dataset === "daily" ? d.daily : d.monthly) as unknown as Row[]
 }
 
-export function Chart({ c, d, big }: { c: ChartDef; d: Dashboard; big?: boolean }) {
+export function Chart({ c: raw, d, big }: { c: ChartDef; d: Dashboard; big?: boolean }) {
+  const c = fillChart(raw, d)
   const href = `/charts/${c.id}/`
   if (c.kind === "bar") return <BarCard title={c.title} note={c.note} rows={d.flows.rows} fmt={c.fmt} source={c.source} href={big ? undefined : href} height={big ? 420 : 300} />
   return (

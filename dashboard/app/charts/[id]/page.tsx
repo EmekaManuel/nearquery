@@ -8,6 +8,7 @@ import { CHARTS, inGroup } from "@/lib/charts"
 import type { ChartDef } from "@/lib/charts"
 import { asset } from "@/lib/asset"
 import { loadDashboard } from "@/lib/data"
+import { fillChart } from "@/lib/fill"
 import { fmtBy } from "@/lib/format"
 import { readRepoFile, readSql } from "@/lib/sql"
 
@@ -39,9 +40,10 @@ function stats(c: ChartDef, rows: Record<string, string | number | null>[]) {
 
 export default async function ChartPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const c = CHARTS.find((x) => x.id === id)
-  if (!c) notFound()
+  const found = CHARTS.find((x) => x.id === id)
+  if (!found) notFound()
   const d = loadDashboard()
+  const c = fillChart(found, d)
   const st = c.kind === "line" ? stats(c, rowsFor(c, d)) : []
   const related = inGroup(c.group).filter((x) => x.id !== c.id)
   const stem = c.sql[0]?.replace(/^\d+_/, "").replace(/\.sql$/, "")

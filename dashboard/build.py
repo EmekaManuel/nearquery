@@ -22,6 +22,12 @@ PUBLIC_BRAND = config.ROOT / "dashboard" / "public" / "brand"
 DOWNLOADS = ["daily_volume", "solver_concentration", "user_stickiness", "account_quality", "near_touch", "chain_pairs", "model_scenarios", "model_observed"]
 
 
+def intents_change(vol: pd.DataFrame) -> float:
+    """Relative change in mean intents/day, October vs August (the two full months the thesis compares)."""
+    by = vol["intents"].groupby(vol.index.strftime("%Y-%m")).mean()
+    return float(by["2026-10"] / by["2026-08"] - 1)
+
+
 def main() -> None:
     vol = pd.read_csv(M / "daily_volume.csv", parse_dates=["date"])
     cutoff = vol["date"].max() - pd.Timedelta(days=1)  # newest cache day is partial
@@ -66,7 +72,9 @@ def main() -> None:
         "scenarios": [{"case": r.take_rate_case, "volumeMultiple": float(r.volume_multiple), "annualBuyback": float(r.annual_buyback_usd),
                        "pctOfMarketCap": float(r.buyback_pct_of_mcap), "takeBps": float(r.take_bps)} for r in scen.itertuples()],
         "accounts": {"implicitOneDayShare": float(acct.loc["implicit_hex", "share_one_day"]),
+                     "implicitSingleEntryShare": float(acct.loc["implicit_hex", "share_single_entry"]),
                      "implicitAccounts": int(acct.loc["implicit_hex", "accounts"])},
+        "facts": {"intentsAugToOctChange": intents_change(vol)},
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "dashboard.json").write_text(json.dumps(data))

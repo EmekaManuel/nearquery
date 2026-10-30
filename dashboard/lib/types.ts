@@ -8,5 +8,6 @@ export interface Dashboard {
   flows: { month: string; rows: { pair: string; usd: number }[] }
   obs: { netSwap30d: number; legSum30d: number; confidentialShare: number; grossBps: number; capturedBps: number; capturedShare: number; revenueAnnual: number; buybackYield: number; gasBurnAnnual: number; nearPrice: number; marketCap: number }
   scenarios: Scenario[]
-  accounts: { implicitOneDayShare: number; implicitAccounts: number }
+  accounts: { implicitOneDayShare: number; implicitSingleEntryShare: number; implicitAccounts: number }
+  facts: { intentsAugToOctChange: number }
 }

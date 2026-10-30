@@ -52,7 +52,7 @@ export const CHARTS: ChartDef[] = [
     sql: ["10_daily_volume.sql", "00_setup.sql"], csv: "daily_volume",
     definition: "Distinct intent hashes on successful token_diff events per UTC day. One intent is one signed user instruction; a swap settles when a solver's intent matches it.",
     method: ["Same legs table as daily volume.", "count(DISTINCT intent_hash) over non-failed entries, grouped by date."],
-    caveats: ["Public intents only.", "Counts fell by about half from August to October while average size rose; the cause is untested."],
+    caveats: ["Public intents only.", "Mean intents per day moved {{intentsChg}} from August to October while average size rose; the cause is untested."],
   },
   {
     id: "usd-per-intent", group: "activity", title: "Average leg-sum per intent", kind: "line", dataset: "daily", xKey: "date", ranged: true,
@@ -65,10 +65,10 @@ export const CHARTS: ChartDef[] = [
   },
   {
     id: "accounts-not-users", group: "activity", title: "Accounts are not users", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true, warn: true,
-    note: "Share of accounts active on 2 or more days within a month. Almost every account is used once.",
+    note: "{{oneDay}} of {{implicit}} implicit accounts are active on exactly one day. Below: the share of accounts active on 2 or more days within a month.",
     series: [{ key: "repeatPct", label: "Active 2+ days (%)", color: "var(--chart-2)" }], fmt: "pu2", source: "pipeline/sql/76_user_stickiness.sql and 77_account_quality.sql. Months under 28 cached days are gaps.",
     sql: ["76_user_stickiness.sql", "77_account_quality.sql", "00_setup.sql"], csv: "user_stickiness",
-    definition: "Among user accounts (non-solver) that swapped in a month, the share that transacted on at least two distinct days. Since April, 99.96% of 64-hex implicit accounts are active on exactly one day and about 80% have a single entry, consistent with per-swap deposit accounts. Account counts and account-level retention therefore cannot measure adoption.",
+    definition: "Among user accounts (non-solver) that swapped in a month, the share that transacted on at least two distinct days. Since April, {{oneDay}} of {{implicit}} 64-hex implicit accounts are active on exactly one day and {{singleEntry}} have a single entry, consistent with per-swap deposit accounts. Account counts and account-level retention therefore cannot measure adoption.",
     method: ["Classify accounts as solver or user (>= 100 distinct counterparties = solver).", "For each user account count distinct active days within the month.", "Report the share with 2+ days, 5+ days, and the top-100 volume share."],
     caveats: ["Mechanism (single-use deposit accounts) is inferred from behaviour and not yet confirmed against the Intents documentation.", "Repeat EVM and named accounts are the only retention signal available."],
   },

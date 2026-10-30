@@ -3,6 +3,7 @@ import { Chart } from "@/components/ChartGrid"
 import { Tiles } from "@/components/Tiles"
 import { CHARTS, byId } from "@/lib/charts"
 import { loadDashboard } from "@/lib/data"
+import { fillText } from "@/lib/fill"
 import { pct, usd } from "@/lib/format"
 
 export default function Overview() {
@@ -25,7 +26,7 @@ export default function Overview() {
       <ul className="index">
         {CHARTS.map((c) => (
           <li key={c.id}>
-            <Link href={`/charts/${c.id}/`}><b>{c.title}</b><span>{c.definition.split(". ")[0].replace(/\.$/, "")}.</span></Link>
+            <Link href={`/charts/${c.id}/`}><b>{c.title}</b><span>{fillText(c.definition, d).split(". ")[0].replace(/\.$/, "")}.</span></Link>
           </li>
         ))}
       </ul>
