@@ -32,6 +32,10 @@ def main() -> None:
     int_aug, int_oct = f("intents", "2026-08"), f("intents", "2026-10")
     sz_aug = vol[vol.date.dt.strftime("%Y-%m") == "2026-08"].eval("leg_sum_usd.sum()/intents.sum()")
     sz_oct = vol[vol.date.dt.strftime("%Y-%m") == "2026-10"].eval("leg_sum_usd.sum()/intents.sum()")
+    s5 = scen[(scen.take_rate_case == "current_observed") & (scen.volume_multiple == 5)].iloc[0]
+    ints_30d = vol.tail(30)["intents"].mean()
+    yld = float(obs["annualized_buyback_yield_on_mcap"])
+    touch_oct, touch_sep = touch.loc["2026-10-01", "near_touching_share"], touch.loc["2026-09-01", "near_touching_share"]
     s10 = scen[(scen.take_rate_case == "current_observed") & (scen.volume_multiple == 10)].iloc[0]
     k = {
         "window": f"{obs['window_start']} to {obs['window_end']}",
@@ -57,6 +61,9 @@ def main() -> None:
         "yield": f"{float(obs['annualized_buyback_yield_on_mcap']) * 100:.2f}%",
         "mcap": usd(float(obs["near_mcap_usd"])), "near_px": f"${float(obs['near_price_usd']):.2f}",
         "gas_ann": usd(float(obs["annualized_gas_burn_usd"])),
+        "yield_5x": f"{s5.buyback_pct_of_mcap * 100:.1f}%", "yield_gap": f"{0.02 / yld:.1f}x", "touch_gap": f"{0.10 / touch_oct:.0f}x",
+        "near_touch_sep": f"{touch_sep * 100:.1f}%", "ints_30d": f"{ints_30d:,.0f}", "ints_below": f"{(1 - 30000 / ints_30d) * 100:.0f}%",
+        "top5_jan": f"{sol.loc['2026-01-01', 'top5_share'] * 100:.0f}%", "top5_sep": f"{sol.loc['2026-09-01', 'top5_share'] * 100:.0f}%",
         "yield_10x": f"{s10.buyback_pct_of_mcap * 100:.1f}%", "rev_10x": usd(s10.annual_buyback_usd),
     }
     txt = (config.ROOT / "THESIS.template.md").read_text()
