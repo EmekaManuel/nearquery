@@ -1,0 +1,51 @@
+1
+00:00:00,400 --> 00:00:03,600
+Is NEAR Intents real settlement?
+
+2
+00:00:03,600 --> 00:00:06,800
+And does it create value for NEAR?
+
+3
+00:00:07,200 --> 00:00:11,200
+Up front: real infrastructure, thin value for the token.
+
+4
+00:00:11,200 --> 00:00:14,800
+Every figure carries its date range.
+
+5
+00:00:15,200 --> 00:00:23,000
+$1.30B net swap volume, 2026-09-29 → 2026-10-28, read straight from intents.near event logs.
+
+6
+00:00:23,000 --> 00:00:31,800
+About 35% of reported volume is confidential and invisible on-chain. Public events only, read from the logs.
+
+7
+00:00:32,200 --> 00:00:40,000
+99.96% of 4.2M implicit accounts are used on one day only. In October, just 0.22% were active twice or more.
+
+8
+00:00:40,000 --> 00:00:48,800
+So account counts can't prove adoption. Every chart ships the SQL behind it.
+
+9
+00:00:49,400 --> 00:00:55,000
+Captured revenue: $26.2M a year, 0.43% of NEAR's market cap.
+
+10
+00:00:55,000 --> 00:01:03,800
+Even at 10x today's volume it would be 4.28% of market cap.
+
+11
+00:01:04,200 --> 00:01:09,800
+One command re-runs the whole thesis: no accounts, no keys.
+
+12
+00:01:09,800 --> 00:01:15,800
+The numbers don't move. (Terminal sped up 2.1x.)
+
+13
+00:01:16,500 --> 00:01:23,500
+Ask the chain. Show the work.
