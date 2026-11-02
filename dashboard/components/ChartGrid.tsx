@@ -6,7 +6,7 @@ import { BarCard, ChartCard } from "./ChartCard"
 type Row = Record<string, string | number | null>
 
 export function rowsFor(c: ChartDef, d: Dashboard): Row[] {
-  return (c.dataset === "daily" ? d.daily : d.monthly) as unknown as Row[]
+  return (c.dataset === "daily" ? d.daily : c.dataset === "weekly" ? d.weekly : d.monthly) as unknown as Row[]
 }
 
 export function Chart({ c: raw, d, big }: { c: ChartDef; d: Dashboard; big?: boolean }) {

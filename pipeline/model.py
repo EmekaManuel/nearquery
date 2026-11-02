@@ -17,6 +17,43 @@ from pipeline.assets import REF
 M = config.ROOT / "data" / "metrics"
 
 
+def confidential_residual(vol: pd.DataFrame, dl: pd.DataFrame, end: pd.Timestamp) -> None:
+    """Implied confidential share = 1 - public on-chain leg-sum / DefiLlama reported volume (a residual, not a measurement).
+
+    Writes derived ratios only (never DefiLlama's own series): weekly share, and one row of facts about where the share
+    breaks out of its pre-September level, so the thesis can test the "migration to Confidential Intents" explanation.
+    """
+    v = vol[vol["date"] <= end].copy()
+    v["pub"] = v["leg_sum_priced_usd"] + v["leg_sum_imputed_usd"].fillna(0)
+    df = v.merge(dl[["date", "volume_usd"]], on="date").query("volume_usd > 0").set_index("date").sort_index()
+    wk = df.groupby(df.index - pd.to_timedelta(df.index.weekday, unit="D")).agg(days=("pub", "size"), pub=("pub", "sum"), dl=("volume_usd", "sum"))
+    wk = wk[wk["days"] == 7]
+    pd.DataFrame({"week_start": wk.index.date, "days": wk["days"], "implied_confidential_share": 1 - wk["pub"] / wk["dl"]}) \
+        .to_csv(M / "confidential_weekly.csv", index=False, float_format="%.6g")
+
+    share = lambda x: 1 - x["pub"].sum() / x["volume_usd"].sum()
+    daily = 1 - df["pub"] / df["volume_usd"]
+    brk = None
+    for d in df.index[df.index >= df.index.min() + pd.Timedelta(days=14)]:
+        before, after = df.loc[d - pd.Timedelta(days=14): d - pd.Timedelta(days=1)], df.loc[d: d + pd.Timedelta(days=13)]
+        if len(after) == 14 and daily[d] >= 0.05 and abs(share(before)) < 0.02 and share(after) >= 0.05:
+            brk = (d, before, after)
+            break
+    rows = {}
+    if brk:
+        d, before, after = brk
+        later = df.loc[d + pd.Timedelta(days=14): d + pd.Timedelta(days=41)]
+        rows = {
+            "break_date": d.date(), "share_14d_before": share(before), "share_14d_after": share(after),
+            "public_per_day_change": after["pub"].mean() / before["pub"].mean() - 1,
+            "reported_per_day_change": after["volume_usd"].mean() / before["volume_usd"].mean() - 1,
+            "intents_per_day_14d_before": before["intents"].mean(), "intents_per_day_14d_after": after["intents"].mean(),
+            "intents_per_day_days_15_to_42": later["intents"].mean(),
+            "share_month_before_break": share(df[df.index.strftime("%Y-%m") == (d - pd.Timedelta(days=1)).strftime("%Y-%m")]),
+        }
+    pd.Series(rows, name="value").to_frame().to_csv(M / "confidential_break.csv", float_format="%.6g", index_label="key")
+
+
 def main() -> None:
     a = json.loads((REF / "model_assumptions.json").read_text())
     vol = pd.read_csv(M / "daily_volume.csv", parse_dates=["date"])
@@ -67,6 +104,7 @@ def main() -> None:
                              "annual_buyback_usd": annual_rev,
                              "buyback_pct_of_mcap": annual_rev / (mcap * pm)})
     pd.DataFrame(rows).to_csv(M / "model_scenarios.csv", index=False, float_format="%.8g")
+    confidential_residual(vol, dl, end)
     print(pd.DataFrame([obs]).T.to_string(header=False))
 
 

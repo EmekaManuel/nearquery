@@ -8,6 +8,7 @@ export function fillText(text: string, d: Dashboard): string {
     oneDay: pct(d.accounts.implicitOneDayShare, 2),
     singleEntry: pct(d.accounts.implicitSingleEntryShare, 0),
     implicit: num(d.accounts.implicitAccounts),
+    breakDate: d.facts.confidentialBreakDate,
     intentsChg: `${d.facts.intentsAugToOctChange >= 0 ? "+" : ""}${(d.facts.intentsAugToOctChange * 100).toFixed(0)}%`,
   }
   return text.replace(/\{\{(\w+)\}\}/g, (_, k: string) => {

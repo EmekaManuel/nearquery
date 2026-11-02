@@ -1,6 +1,6 @@
 // Chart registry: one entry per chart. Plain data only, so server pages can hand it to client components.
 export type FmtKind = "usd" | "usd0" | "num" | "frac0" | "pu1" | "pu2"
-export type Dataset = "daily" | "monthly" | "flows" | "scenarios"
+export type Dataset = "daily" | "weekly" | "monthly" | "flows" | "scenarios"
 
 export interface SeriesDef { key: string; label: string; color: string }
 export interface ChartDef {
@@ -97,6 +97,16 @@ export const CHARTS: ChartDef[] = [
     definition: "The share of user-received volume in swaps where either side is NEAR, wNEAR or stNEAR. It indicates how much of Intents activity creates direct demand for the NEAR token.",
     method: ["Take user-side entries of two-account swaps.", "Flag entries whose legs include a NEAR-family symbol.", "Divide the flagged bought-leg USD by the total."],
     caveats: ["Only public swaps; confidential swaps are not visible.", "Does not include indirect demand such as users funding gas."],
+  },
+  {
+    id: "confidential-residual", group: "market", title: "Implied confidential share, weekly", kind: "line", dataset: "weekly", xKey: "week", warn: true,
+    note: "Share of DefiLlama's reported volume that public on-chain events do not account for. A residual, not a measurement.",
+    series: [{ key: "confidentialPct", label: "Implied confidential (%)", color: "var(--chart-1)" }], fmt: "pu1",
+    source: "pipeline/model.py (confidential_residual), from public leg-sum and DefiLlama's reported volume.",
+    sql: ["10_daily_volume.sql", "00_setup.sql"], extraFiles: ["pipeline/model.py"], csv: "confidential_weekly",
+    definition: "One minus public on-chain leg-sum divided by DefiLlama's reported volume, by week. It is near zero until the end of August, then steps up around {{breakDate}} and keeps rising. Only this derived ratio is published, never DefiLlama's own series.",
+    method: ["Take public leg-sum per day from the pipeline (priced plus imputed legs).", "Divide by DefiLlama's reported volume for the same days and take one minus the ratio.", "Aggregate by Monday-start week and keep full weeks only."],
+    caveats: ["The step lands on {{breakDate}}, a month boundary, while public volume does not fall at the same time, so it can reflect DefiLlama adding volume to its series, not only users moving to Confidential Intents. This chart cannot separate the two.", "Small negative values before September are noise around zero: the two sources agree within about 1% there.", "Confidential Intents reached general availability on 2026-07-07, two months before this series moves."],
   },
   {
     id: "top-flows", group: "market", title: "Top flows, latest full month", kind: "bar", dataset: "flows",

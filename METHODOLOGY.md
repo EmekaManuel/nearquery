@@ -32,6 +32,7 @@ Not used: NEAR Lake S3 (deprecated 2026-03-24), neardata.xyz (recent blocks only
 
 ## Known gaps and biases
 
+- **Implied confidential share is a residual.** It is one minus public leg-sum over DefiLlama's reported volume. Day by day it is within about 1% of zero until 2026-08-31 and jumps on 2026-09-01 (a month boundary) with no matching fall in public volume. That is as consistent with a change in DefiLlama's coverage as with users moving to Confidential Intents (GA 2026-07-07). `data/metrics/confidential_weekly.csv` and `confidential_break.csv` hold only derived ratios, never DefiLlama's series.
 - **Confidential Intents (GA 2026-07-07) are invisible on-chain** and are 35-40% of reported volume recently. Every on-chain trend here covers the public side only, so a shift to confidential reads as a decline.
 - **Cache coverage**: every day from Jan 1, 2026 to the cutoff (no missing days; THESIS.md prints the count). Nothing before 2026-01-01 is pulled. Monthly tables carry `days_covered`; a month under 28 covered days would be drawn as a gap, not zero.
 - **Newest day is partial** and dropped from every snapshot.

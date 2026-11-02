@@ -26,6 +26,7 @@ def main() -> None:
     scen = pd.read_csv(M / "model_scenarios.csv")
     sol = pd.read_csv(M / "solver_concentration.csv").set_index("month")
     stick = pd.read_csv(M / "user_stickiness.csv").set_index("month")
+    brk = pd.read_csv(M / "confidential_break.csv", index_col=0)["value"]
     touch = pd.read_csv(M / "near_touch.csv").set_index("month")
     vol["usd_per_intent"] = vol.leg_sum_usd / vol.intents
     f = lambda c, m: month_mean(vol, c, m)
@@ -64,6 +65,11 @@ def main() -> None:
         "yield_5x": f"{s5.buyback_pct_of_mcap * 100:.1f}%", "yield_gap": f"{0.02 / yld:.1f}x", "touch_gap": f"{0.10 / touch_oct:.0f}x",
         "near_touch_sep": f"{touch_sep * 100:.1f}%", "ints_30d": f"{ints_30d:,.0f}", "ints_below": f"{(1 - 30000 / ints_30d) * 100:.0f}%",
         "top5_jan": f"{sol.loc['2026-01-01', 'top5_share'] * 100:.0f}%", "top5_sep": f"{sol.loc['2026-09-01', 'top5_share'] * 100:.0f}%",
+        "break_date": brk["break_date"], "conf_before": f"{float(brk['share_14d_before']) * 100:.1f}%", "conf_after": f"{float(brk['share_14d_after']) * 100:.0f}%",
+        "pub_chg": f"{float(brk['public_per_day_change']) * 100:+.0f}%", "rep_chg": f"{float(brk['reported_per_day_change']) * 100:+.0f}%",
+        "break_note": (" The step falls on the first day of a month and public volume did not drop with it, so it is as consistent with DefiLlama adding volume to its series from that date as with users moving to Confidential Intents; this analysis cannot tell which."
+                       if brk["break_date"].endswith("-01") and float(brk["public_per_day_change"]) > -0.2 else ""),
+        "ints_pre": f"{float(brk['intents_per_day_14d_before']):,.0f}", "ints_post": f"{float(brk['intents_per_day_14d_after']):,.0f}", "ints_later": f"{float(brk['intents_per_day_days_15_to_42']):,.0f}",
         "yield_10x": f"{s10.buyback_pct_of_mcap * 100:.1f}%", "rev_10x": usd(s10.annual_buyback_usd),
     }
     txt = (config.ROOT / "THESIS.template.md").read_text()

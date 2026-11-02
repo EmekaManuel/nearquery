@@ -30,7 +30,7 @@ export default function Overview() {
           </li>
         ))}
       </ul>
-      <p className="foot">Public events only. Confidential Intents (about {pct(d.obs.confidentialShare)} of reported volume) are invisible here, so on-chain declines can reflect migration. The cache has gaps; see METHODOLOGY.md. DefiLlama’s raw series is deliberately not republished on this site.</p>
+      <p className="foot">Public events only. About {pct(d.obs.confidentialShare)} of reported volume does not appear in public events (implied to be Confidential Intents, but inferred, not measured), so on-chain declines can reflect migration. See METHODOLOGY.md for definitions and limits. DefiLlama’s raw series is deliberately not republished on this site.</p>
     </>
   )
 }

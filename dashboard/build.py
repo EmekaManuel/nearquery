@@ -19,7 +19,7 @@ PUBLIC = config.ROOT / "dashboard" / "public" / "data"
 BRAND = config.ROOT / "brand"
 PUBLIC_BRAND = config.ROOT / "dashboard" / "public" / "brand"
 # derived metric CSVs offered for download on chart pages (never raw third-party series)
-DOWNLOADS = ["daily_volume", "solver_concentration", "user_stickiness", "account_quality", "near_touch", "chain_pairs", "model_scenarios", "model_observed"]
+DOWNLOADS = ["daily_volume", "solver_concentration", "user_stickiness", "account_quality", "near_touch", "confidential_weekly", "chain_pairs", "model_scenarios", "model_observed"]
 
 
 def intents_change(vol: pd.DataFrame) -> float:
@@ -50,6 +50,9 @@ def main() -> None:
                 "solvers": nn(sol.active_solvers[m]), "users": nn(stick.users[m]),
                 "repeatPct": nn(stick.share_2plus_days[m] * 100), "nearTouchPct": nn(touch.near_touching_share[m] * 100)}
                for m in months]
+    brk = pd.read_csv(M / "confidential_break.csv", index_col=0)["value"]
+    conf = pd.read_csv(M / "confidential_weekly.csv")
+    weekly = [{"week": r.week_start, "confidentialPct": float(r.implied_confidential_share * 100)} for r in conf.itertuples()]
     pairs = pd.read_csv(M / "chain_pairs.csv")
     last_m = pairs[pairs.days_covered >= 28].month.max()
     top = (pairs[pairs.month == last_m].assign(pair=lambda d: d.sold_chain + " → " + d.bought_chain)
@@ -62,7 +65,7 @@ def main() -> None:
         "meta": {"cutoff": cutoff.date().isoformat(), "cacheStart": days[0].date().isoformat(),
                  "windowStart": str(obs["window_start"]), "windowEnd": str(obs["window_end"]),
                  "generated": pd.Timestamp.now("UTC").strftime("%Y-%m-%d")},
-        "daily": daily, "monthly": monthly,
+        "daily": daily, "monthly": monthly, "weekly": weekly,
         "flows": {"month": str(last_m), "rows": [{"pair": r.pair, "usd": float(r.usd)} for r in top.itertuples()]},
         "obs": {"netSwap30d": f("pipeline_public_net_swap_usd"), "legSum30d": f("pipeline_public_legsum_usd"),
                 "confidentialShare": f("implied_confidential_share"), "grossBps": f("gross_fee_bps_of_reported_volume"),
@@ -74,7 +77,7 @@ def main() -> None:
         "accounts": {"implicitOneDayShare": float(acct.loc["implicit_hex", "share_one_day"]),
                      "implicitSingleEntryShare": float(acct.loc["implicit_hex", "share_single_entry"]),
                      "implicitAccounts": int(acct.loc["implicit_hex", "accounts"])},
-        "facts": {"intentsAugToOctChange": intents_change(vol)},
+        "facts": {"intentsAugToOctChange": intents_change(vol), "confidentialBreakDate": brk["break_date"]},
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "dashboard.json").write_text(json.dumps(data))
