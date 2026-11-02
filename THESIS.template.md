@@ -1,6 +1,6 @@
 # NearQuery: a data-backed thesis on NEAR Intents
 
-> DRAFT. Rendered by `python -m pipeline.thesis` from `THESIS.template.md`; every number below is computed from the committed snapshots in `data/metrics/` and `data/reference/`. Cache: {{cache_start}} to {{cache_end}} ({{cache_days}} days; Feb 9 to Mar 20 not yet pulled). Public on-chain activity only.
+> DRAFT. Rendered by `python -m pipeline.thesis` from `THESIS.template.md`; every number below is computed from the committed snapshots in `data/metrics/` and `data/reference/`. Cache: {{cache_start}} to {{cache_end}} ({{cache_days}} days, {{cache_missing}} missing). Public on-chain activity only.
 
 ## Claim
 

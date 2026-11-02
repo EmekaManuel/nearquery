@@ -19,7 +19,7 @@ export function buildCaptions(n: Numbers, speed: number): Caption[] {
     at("overview", 0.2, 4.2, "Up front: real infrastructure, thin value for the token."),
     at("overview", 4.2, 7.8, "Every figure carries its date range."),
     at("volume", 0.2, 8.0, `${n.net_swap} net swap volume, ${n.window}, read straight from intents.near event logs.`),
-    at("volume", 8.0, 16.8, `About ${n.confidential} of reported volume is confidential and invisible on-chain. The gap is days not pulled yet.`),
+    at("volume", 8.0, 16.8, `About ${n.confidential} of reported volume is confidential and invisible on-chain. Public events only, read from the logs.`),
     at("accounts", 0.2, 8.0, `${n.one_day_share} of ${n.implicit_accounts} implicit accounts are used on one day only. In October, just ${n.repeat_pct_latest} were active twice or more.`),
     at("accounts", 8.0, 16.8, "So account counts can't prove adoption. Every chart ships the SQL behind it."),
     at("value", 0.4, 6.0, `Captured revenue: ${n.revenue_year} a year, ${n.buyback_yield} of NEAR's market cap.`),

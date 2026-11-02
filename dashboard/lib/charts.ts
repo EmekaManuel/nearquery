@@ -44,7 +44,7 @@ export const CHARTS: ChartDef[] = [
       "For an entry with exactly one unpriced asset, impute its value as minus the sum of the priced legs, only when the sign matches. Imputed value is stored in its own column and not mixed silently.",
       "Sum positive legs per UTC day.",
     ],
-    caveats: ["Confidential Intents (GA 2026-07-07) are invisible on-chain, so a fall here can be migration, not a decline in total use.", "Cache gap: Feb 9 to Mar 20 awaits the next BigQuery quota window.", "The newest day is partial and dropped.", "Legs still without a value after imputation make this a lower bound (see unvalued_pos_legs in the CSV)."],
+    caveats: ["Confidential Intents (GA 2026-07-07) are invisible on-chain, so a fall here can be migration, not a decline in total use.", "History starts 2026-01-01; nothing earlier is pulled.", "The newest day is partial and dropped.", "Legs still without a value after imputation make this a lower bound (see unvalued_pos_legs in the CSV)."],
   },
   {
     id: "intents-per-day", group: "activity", title: "Intents per day", kind: "line", dataset: "daily", xKey: "date", ranged: true,

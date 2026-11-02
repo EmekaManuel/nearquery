@@ -60,7 +60,7 @@ On-chain figures come from the public BigQuery dataset of NEAR mainnet, parsed f
 ## Known limits
 
 - Confidential Intents (generally available since 2026-07-07) are not visible in on-chain events. The dashboard shows public activity only, and the implied confidential share is an inference.
-- The cache has a gap (Feb 9 to Mar 20, 2026) awaiting the next BigQuery quota window; charts show it as a gap.
+- The on-chain cache covers every day from 2026-01-01 to the cutoff shown on each chart (no missing days); earlier history is not pulled.
 - Account counts are not user counts: nearly every account is used on a single day. The thesis treats this as a measurement limit.
 
 ## Hackathon disclosures

@@ -11,7 +11,7 @@ Numbers are never typed. `pipeline/video_numbers.py` (new) writes `demo/out/numb
 | --- | --- | --- | --- | --- |
 | 1 | 0:00 to 0:07 | Hook card, Paper ground, Space Grotesk. Lens mark draws in. | "Is NEAR Intents real settlement?" then "And does it create value for NEAR?" | Remotion |
 | 2 | 0:07 to 0:15 | Hosted overview: verdict box, then the figure tiles. Slow pause on each. | "The data's answer, up front: real infrastructure, thin value for the token." | Playwright (hosted site) |
-| 3 | 0:15 to 0:32 | **Finding 1.** Overview chart "Daily volume". Click 90d, then All; hover a peak; pause on the Feb to Mar gap. | "{net_vol_30d} net swap volume, {window}. About {conf_share} of reported volume is invisible on-chain (confidential). The gap is days not yet pulled." | Playwright |
+| 3 | 0:15 to 0:32 | **Finding 1.** Overview chart "Daily volume". Click 90d, then All; hover a peak; rest on the early-year stretch. | "{net_vol_30d} net swap volume, {window}. About {conf_share} of reported volume is invisible on-chain (confidential). Public events only." | Playwright |
 | 4 | 0:32 to 0:49 | **Finding 2.** Activity, "Accounts are not users" chart, hover the last point. Click **Open ↗**, scroll to the SQL, click Copy. | "Only {rep_oct} of {users_oct} accounts were active on 2+ days in October. Account counts can't prove adoption. Every chart ships its SQL." | Playwright |
 | 5 | 0:49 to 1:04 | **Finding 3.** Value capture page: scenario table, pause on the 1x row, then 10x. | "Captured revenue: {rev_ann} a year, {yield} of market cap. Even 10x today's volume: {yield_10x}." | Playwright |
 | 6 | 1:04 to 1:16 | Terminal (VHS, Terminal theme): the single re-run command, build output scrolling, then `git diff --stat THESIS.md` printing nothing. Real `make all` run, idle time trimmed, speed-up measured and labelled (currently 1.6x). | "One command re-runs the whole thesis. No accounts, no keys. The numbers don't move." | VHS |
@@ -32,6 +32,6 @@ Captions: Plex Sans, ink on a Paper strip at the bottom, at most two lines, each
 1. **Install tools:** `brew install ffmpeg vhs` (pulls `ttyd`), plus `npm i` for Playwright, Chromium and Remotion inside `demo/` (about 300 MB of downloads).
 2. **`make all` does not exist.** The Makefile has `make setup rebuild thesis`. I would add `all: setup rebuild thesis` (one line). Or tell me to show the three-target form on screen instead.
 3. **Terminal segment is sped up** (the real run takes about 55 s) and labelled as such. Say if you would rather show it real-time and cut the outro shorter.
-4. **When to record.** The Feb 9 to Mar 20 gap is still visible in the charts, and a refill after Nov 1 may shift monthly numbers. Recording after the refill avoids a re-record; recording now is fine since `make video` regenerates it. Your call.
+4. **When to record.** Resolved: the Feb 9 to Mar 20 gap was filled on 2026-11-02, so the charts have no missing days. Re-record after any data refresh; `make video` regenerates everything.
 5. **Theme:** Paper for the site footage and Terminal for the terminal clip. Say if you want one theme throughout.
 6. Nothing is posted or uploaded, and nothing is committed without your OK.

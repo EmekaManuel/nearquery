@@ -14,7 +14,7 @@ Key facts: submissions are accepted only 2026-11-01 to 2026-11-14 (deadline 2026
 ## Repo and hosting
 - [ ] Tag the first commit `pre-hackathon`, the final one `hackathon-submission`; README diff link already points at EmekaManuel/nearquery.
 - [ ] Enable GitHub Pages (source: GitHub Actions) and run the `dashboard` workflow once; set `NEXT_PUBLIC_SITE_URL` if you want absolute og:image URLs. Keep the site up until at least 2026-11-18, ideally 2026-11-25.
-- [ ] Optional: after 2026-11-01, run `make extract-logs` once to fill the Feb 9 to Mar 20 gap, then `make metrics model thesis dashboard`.
+- [x] Feb 9 to Mar 20 gap filled (2026-11-02) via a second Cloud project; cache now has every day from 2026-01-01.
 
 ## Demo and post
 - [ ] Record the demo (see DEMO_SCRIPT.md).

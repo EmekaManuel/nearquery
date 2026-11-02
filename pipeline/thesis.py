@@ -37,6 +37,7 @@ def main() -> None:
         "window": f"{obs['window_start']} to {obs['window_end']}",
         "cache_start": vol.date.min().date().isoformat(), "cache_end": vol.date.max().date().isoformat(),
         "cache_days": str(vol.date.nunique()),
+        "cache_missing": str((vol.date.max() - vol.date.min()).days + 1 - vol.date.nunique()),
         "net_vol_30d": usd(float(obs["pipeline_public_net_swap_usd"])),
         "legsum_30d": usd(float(obs["pipeline_public_legsum_usd"])),
         "conf_share": f"{float(obs['implied_confidential_share']) * 100:.0f}%",

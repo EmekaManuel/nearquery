@@ -33,7 +33,7 @@ Not used: NEAR Lake S3 (deprecated 2026-03-24), neardata.xyz (recent blocks only
 ## Known gaps and biases
 
 - **Confidential Intents (GA 2026-07-07) are invisible on-chain** and are 35-40% of reported volume recently. Every on-chain trend here covers the public side only, so a shift to confidential reads as a decline.
-- **Cache coverage**: Jan 1-Feb 8, four days in late March, and Apr 1 onward (Feb 9-Mar 20 awaiting the next BigQuery quota window). Monthly tables carry `days_covered`; charts show gaps. Cohorts use only the contiguous window.
+- **Cache coverage**: every day from Jan 1, 2026 to the cutoff (no missing days; THESIS.md prints the count). Nothing before 2026-01-01 is pulled. Monthly tables carry `days_covered`; a month under 28 covered days would be drawn as a gap, not zero.
 - **Newest day is partial** and dropped from every snapshot.
 - **Reconciliation** (pre-confidential, Apr 1-Jul 6): leg-sum with imputation is within about 1% of DefiLlama's daily volume (daily correlation 0.998); priced-only is about 8% lower. Against Dune's public figures read on 2026-10-30, recent windows differ by about 0 to +17% depending on the window definition (unresolved; likely rolling-window and public/confidential classification differences). Because DefiLlama and Dune share a source, agreement is a check on definition, not independent verification.
 - **Fees**: the on-chain protocol fee is ~0.0001% (negligible); reported fees are mostly affiliate/distribution fees that are not visible in these events, so fee inputs to the model come from DefiLlama, not from on-chain data.

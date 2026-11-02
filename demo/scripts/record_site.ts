@@ -95,7 +95,7 @@ async function main() {
   const at = (frac: number) => plotL + plotW * frac
   await glide(page, at(0.1), cb.y + cb.height * 0.5, 20)
   for (const f of [0.14, 0.3, 0.55, 0.72, 0.8]) { await glide(page, at(f), cb.y + cb.height * 0.5, 16); await sleep(520) }
-  await glide(page, at(0.2), cb.y + cb.height * 0.5, 30) // sits on the Feb 9 to Mar 20 gap
+  await glide(page, at(0.2), cb.y + cb.height * 0.5, 30) // rests in the early-year stretch
   await holdTo(s, "volume")
 
   // ---- shot 4: accounts are not users (finding 2) -----------------------------------------------------------
