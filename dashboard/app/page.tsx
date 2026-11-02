@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { Chart } from "@/components/ChartGrid"
+import { ChartIndex } from "@/components/ChartIndex"
 import { Tiles } from "@/components/Tiles"
-import { CHARTS, byId } from "@/lib/charts"
+import { byId } from "@/lib/charts"
 import { loadDashboard } from "@/lib/data"
 import { fillText } from "@/lib/fill"
 import { pct, usd } from "@/lib/format"
@@ -23,13 +24,7 @@ export default function Overview() {
       <Tiles d={d} />
       <Chart c={byId("daily-volume")} d={d} />
       <h2 className="sec">Every chart, with its query</h2>
-      <ul className="index">
-        {CHARTS.map((c) => (
-          <li key={c.id}>
-            <Link href={`/charts/${c.id}/`}><b>{c.title}</b><span>{fillText(c.definition, d).split(". ")[0].replace(/\.$/, "")}.</span></Link>
-          </li>
-        ))}
-      </ul>
+      <ChartIndex d={d} />
       <p className="foot">Public events only. About {pct(d.obs.confidentialShare)} of reported volume does not appear in public events (implied to be Confidential Intents, but inferred, not measured), so on-chain declines can reflect migration. See METHODOLOGY.md for definitions and limits. DefiLlama’s raw series is deliberately not republished on this site.</p>
     </>
   )

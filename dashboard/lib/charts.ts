@@ -7,6 +7,8 @@ export interface ChartDef {
   id: string
   group: "activity" | "market" | "value"
   title: string
+  /** One short line for the index card; no figures (those come from the data). */
+  blurb: string
   note?: string
   kind: "line" | "bar" | "table"
   dataset: Dataset
@@ -32,7 +34,7 @@ const CHAIN = "BigQuery public NEAR dataset (execution_outcomes, intents.near lo
 
 export const CHARTS: ChartDef[] = [
   {
-    id: "daily-volume", group: "activity", title: "Daily volume, public on-chain", kind: "line", dataset: "daily", xKey: "date", ranged: true,
+    id: "daily-volume", blurb: "Both sides of every public swap, in USD, per day.", group: "activity", title: "Daily volume, public on-chain", kind: "line", dataset: "daily", xKey: "date", ranged: true,
     note: "Leg-sum: both sides of every swap, the definition NEAR reports. Net swap volume is about half. Confidential Intents are not visible here.",
     series: [{ key: "legSum", label: "Leg-sum (USD)", color: "var(--chart-1)" }], fmt: "usd", source: CHAIN,
     sql: ["10_daily_volume.sql", "00_setup.sql"], csv: "daily_volume",
@@ -47,7 +49,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["Confidential Intents (GA 2026-07-07) are invisible on-chain, so a fall here can be migration, not a decline in total use.", "History starts 2026-01-01; nothing earlier is pulled.", "The newest day is partial and dropped.", "Legs still without a value after imputation make this a lower bound (see unvalued_pos_legs in the CSV)."],
   },
   {
-    id: "intents-per-day", group: "activity", title: "Intents per day", kind: "line", dataset: "daily", xKey: "date", ranged: true,
+    id: "intents-per-day", blurb: "How many distinct intents settle each day.", group: "activity", title: "Intents per day", kind: "line", dataset: "daily", xKey: "date", ranged: true,
     series: [{ key: "intents", label: "Intents", color: "var(--chart-2)" }], fmt: "num", source: "BigQuery public NEAR dataset (token_diff events).",
     sql: ["10_daily_volume.sql", "00_setup.sql"], csv: "daily_volume",
     definition: "Distinct intent hashes on successful token_diff events per UTC day. One intent is one signed user instruction; a swap settles when a solver's intent matches it.",
@@ -55,7 +57,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["Public intents only.", "Mean intents per day moved {{intentsChg}} from August to October while average size rose; the cause is untested."],
   },
   {
-    id: "usd-per-intent", group: "activity", title: "Average leg-sum per intent", kind: "line", dataset: "daily", xKey: "date", ranged: true,
+    id: "usd-per-intent", blurb: "Average ticket size: volume divided by intents.", group: "activity", title: "Average leg-sum per intent", kind: "line", dataset: "daily", xKey: "date", ranged: true,
     note: "Rises while intent count falls; cause untested.",
     series: [{ key: "usdPerIntent", label: "USD per intent", color: "var(--chart-2)" }], fmt: "usd0", source: CHAIN,
     sql: ["10_daily_volume.sql", "00_setup.sql"], csv: "daily_volume",
@@ -64,7 +66,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["Ratio of two public-only series; a shift of small flows to Confidential Intents would raise it with no change in behaviour.", "Imputed legs are included in the numerator."],
   },
   {
-    id: "accounts-not-users", group: "activity", title: "Accounts are not users", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true, warn: true,
+    id: "accounts-not-users", blurb: "How many swapping accounts come back on a second day.", group: "activity", title: "Accounts are not users", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true, warn: true,
     note: "{{oneDay}} of {{implicit}} implicit accounts are active on exactly one day. Below: the share of accounts active on 2 or more days within a month.",
     series: [{ key: "repeatPct", label: "Active 2+ days (%)", color: "var(--chart-2)" }], fmt: "pu2", source: "pipeline/sql/76_user_stickiness.sql and 77_account_quality.sql. Months under 28 cached days are gaps.",
     sql: ["76_user_stickiness.sql", "77_account_quality.sql", "00_setup.sql"], csv: "user_stickiness",
@@ -73,7 +75,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["Mechanism (single-use deposit accounts) is inferred from behaviour and not yet confirmed against the Intents documentation.", "Repeat EVM and named accounts are the only retention signal available."],
   },
   {
-    id: "solver-concentration", group: "market", title: "Solver concentration", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
+    id: "solver-concentration", blurb: "How much volume the largest solvers handle.", group: "market", title: "Solver concentration", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
     note: "Share of solver-side volume. Solver = account facing 100+ distinct counterparties (heuristic).",
     series: [{ key: "top1", label: "Top 1", color: "var(--chart-1)" }, { key: "top5", label: "Top 5", color: "var(--chart-2)" }], fmt: "frac0",
     source: "pipeline/sql/71_solver_concentration.sql. Months under 28 cached days are gaps.", sql: ["71_solver_concentration.sql", "00_setup.sql"], csv: "solver_concentration",
@@ -82,7 +84,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["The solver label is a heuristic, not an on-chain flag.", "Volume attribution counts every positive leg, so the same swap contributes to both its user and solver."],
   },
   {
-    id: "active-solvers", group: "market", title: "Active solvers", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
+    id: "active-solvers", blurb: "How many solver accounts are active each month.", group: "market", title: "Active solvers", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
     series: [{ key: "solvers", label: "Solvers", color: "var(--chart-2)" }], fmt: "num", source: "pipeline/sql/71_solver_concentration.sql.",
     sql: ["71_solver_concentration.sql", "00_setup.sql"], csv: "solver_concentration",
     definition: "Distinct solver accounts with at least one positive leg in the month.",
@@ -90,7 +92,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["An operator running several accounts counts several times.", "Months under 28 cached days are gaps."],
   },
   {
-    id: "near-touch", group: "market", title: "User volume touching NEAR itself", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
+    id: "near-touch", blurb: "How much user volume has NEAR on one side.", group: "market", title: "User volume touching NEAR itself", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
     note: "Share of user-received volume where NEAR, wNEAR or stNEAR is sold or bought.",
     series: [{ key: "nearTouchPct", label: "NEAR-touching (%)", color: "var(--chart-3)" }], fmt: "pu1", source: "pipeline/sql/85_near_touch.sql.",
     sql: ["85_near_touch.sql", "00_setup.sql"], csv: "near_touch",
@@ -99,7 +101,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["Only public swaps; confidential swaps are not visible.", "Does not include indirect demand such as users funding gas."],
   },
   {
-    id: "confidential-residual", group: "market", title: "Implied confidential share, weekly", kind: "line", dataset: "weekly", xKey: "week", warn: true,
+    id: "confidential-residual", blurb: "Volume that public events cannot account for, by week.", group: "market", title: "Implied confidential share, weekly", kind: "line", dataset: "weekly", xKey: "week", warn: true,
     note: "Share of DefiLlama's reported volume that public on-chain events do not account for. A residual, not a measurement.",
     series: [{ key: "confidentialPct", label: "Implied confidential (%)", color: "var(--chart-1)" }], fmt: "pu1",
     source: "pipeline/model.py (confidential_residual), from public leg-sum and DefiLlama's reported volume.",
@@ -109,7 +111,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["The step lands on {{breakDate}}, a month boundary, while public volume does not fall at the same time, so it can reflect DefiLlama adding volume to its series, not only users moving to Confidential Intents. This chart cannot separate the two.", "Small negative values before September are noise around zero: the two sources agree within about 1% there.", "Confidential Intents reached general availability on 2026-07-07, two months before this series moves."],
   },
   {
-    id: "top-flows", group: "market", title: "Top flows, latest full month", kind: "bar", dataset: "flows",
+    id: "top-flows", blurb: "Which chain pairs carry the most volume.", group: "market", title: "Top flows, latest full month", kind: "bar", dataset: "flows",
     note: "Origin chain of asset sold → asset bought, USD of bought leg.", fmt: "usd0", source: "pipeline/sql/80_chain_pairs.sql.",
     sql: ["80_chain_pairs.sql", "00_setup.sql"], csv: "chain_pairs",
     definition: "Monthly user-side volume grouped by the origin chain of the asset sold and of the asset bought. Shows which chain pairs dominate settlement.",
@@ -117,7 +119,7 @@ export const CHARTS: ChartDef[] = [
     caveats: ["HOT Omni assets are mapped only for the EVM chain ids we can be sure of.", "Swaps whose bought leg is unpriced are counted separately (unvalued_swaps)."],
   },
   {
-    id: "value-scenarios", group: "value", title: "What volume would it take?", kind: "table", dataset: "scenarios", fmt: "usd",
+    id: "value-scenarios", blurb: "What volume a buyback would need to matter.", group: "value", title: "What volume would it take?", kind: "table", dataset: "scenarios", fmt: "usd",
     source: "pipeline/model.py. Observed inputs are computed; multiples are assumptions.", sql: [], extraFiles: ["pipeline/model.py", "data/reference/model_assumptions.json"], csv: "model_scenarios",
     definition: "Annual buyback if volume and the captured take rate scale from today's observed values, against a market cap held at today's. NEAR's captured revenue funds a buyback of $NEAR (not a burn) since 2026-02-23.",
     method: ["Observed: 30-day window of reported volume, gross fees and captured revenue from DefiLlama (fetched at build, not stored), gas burned from the pipeline, spot price and total supply from chain state.", "Scenarios multiply annualized volume and take rate by the multiples in model_assumptions.json.", "Market cap uses total supply, so yields are conservative."],
