@@ -10,7 +10,6 @@ const SPEC: Record<Key, { label: string; min: number; max: number; step: number;
   px: { label: "NEAR price vs now", min: 0.25, max: 4, step: 0.25, hint: "scales the market cap the buyback is measured against" },
 }
 const DEFAULT: Record<Key, number> = { vol: 1, take: 1, px: 1 }
-const TARGETS = [0.01, 0.05]
 
 function fromHash(): Record<Key, number> {
   const out = { ...DEFAULT }
@@ -38,6 +37,7 @@ export function ScenarioExplorer({ d }: { d: Dashboard }) {
   // Same arithmetic as pipeline/model.py: buyback = annualized captured revenue x volume multiple x take multiple; yield = buyback / (market cap x price multiple).
   const buyback = o.revenueAnnual * v.vol * v.take
   const yld = buyback / (o.marketCap * v.px)
+  const TARGETS = [d.facts.yieldTrigger, 0.05] // the thesis's own bullish trigger, then a stretch case
   const needVol = (t: number) => (t * o.marketCap * v.px) / (o.revenueAnnual * v.take)
   const changed = (Object.keys(v) as Key[]).some((k) => v[k] !== DEFAULT[k])
   return (

@@ -1,15 +1,17 @@
-// Records the hosted NearQuery dashboard at 1920x1080 with scripted scrolls, hovers and deliberate holds.
+// Records the NearQuery dashboard at 1920x1080 with scripted scrolls, a slider drag and deliberate holds.
 // Every number the video will show is asserted to be visible on the page first; a mismatch aborts the run.
 import { chromium, type Locator, type Page } from "playwright"
-import { copyFileSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs"
+import { mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
 const BASE = (process.env.SITE_URL ?? "https://emekamanuel.github.io/nearquery").replace(/\/$/, "")
 const WORK = join(process.cwd(), "work")
 const OUT = join(process.cwd(), "out")
 const N = JSON.parse(readFileSync(join(OUT, "numbers.json"), "utf8")) as Record<string, string>
-// planned (shown) seconds per shot; the recording keeps 0.6 s extra so cuts never land on a transition
-const PLAN = { overview: 8, volume: 17, accounts: 17, value: 15 } as const
+// planned (shown) seconds per shot; the recording keeps 0.6 s extra so cuts never land on a transition.
+// Keep in step with SHOTS in src/captions.ts.
+const PLAN = { method: 10, moment: 18, surprise: 22 } as const
+type Shot = keyof typeof PLAN
 const PAD = 600
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
@@ -27,7 +29,7 @@ const CURSOR = `
 async function expectVisible(page: Page, keys: string[], where: string) {
   const text = await page.evaluate(() => document.body.innerText)
   const missing = keys.filter((k) => !text.includes(N[k]))
-  if (missing.length) throw new Error(`NUMBER MISMATCH on ${where}: ${missing.map((k) => `${k}="${N[k]}"`).join(", ")} not found on the hosted page. Rebuild/redeploy the site or rerun the pipeline, then retry.`)
+  if (missing.length) throw new Error(`NUMBER MISMATCH on ${where}: ${missing.map((k) => `${k}="${N[k]}"`).join(", ")} not found on the page. Rebuild/redeploy the site or rerun the pipeline, then retry.`)
   console.log(`ok  ${where}: ${keys.map((k) => N[k]).join("  ")}`)
 }
 
@@ -41,6 +43,9 @@ async function glide(page: Page, x: number, y: number, steps = 24) {
   await page.mouse.move(x, y, { steps })
 }
 
+const center = async (l: Locator) => { const b = (await l.boundingBox())!; return { x: b.x + b.width / 2, y: b.y + b.height / 2 } }
+const click = async (page: Page, l: Locator, steps = 26) => { const c = await center(l); await glide(page, c.x, c.y, steps); await sleep(350); await page.mouse.down(); await page.mouse.up() }
+
 async function main() {
   mkdirSync(WORK, { recursive: true })
   rmSync(join(WORK, "raw"), { recursive: true, force: true })
@@ -53,119 +58,114 @@ async function main() {
   await ctx.addInitScript(CURSOR)
   const page = await ctx.newPage()
   const t0 = Date.now()
-  const marks: Record<string, { startMs: number; shownMs: number }> = {}
-  const begin = (name: keyof typeof PLAN) => { marks[name] = { startMs: Date.now() - t0 + PAD, shownMs: PLAN[name] * 1000 }; return Date.now() }
-  const holdTo = async (segStart: number, name: keyof typeof PLAN) => {
-    const left = segStart + PLAN[name] * 1000 + PAD - Date.now()
-    if (left < 0) throw new Error(`shot "${name}" overran its ${PLAN[name]}s budget by ${(-left / 1000).toFixed(1)}s; shorten the script`)
-    await sleep(left)
+  type Mark = { startMs: number; shownMs: number; events?: Record<string, number>; point?: { x: number; y: number } }
+  const marks: Record<string, Mark> = {}
+  let seg = 0
+  const begin = (name: Shot) => { seg = Date.now(); marks[name] = { startMs: seg - t0 + PAD, shownMs: PLAN[name] * 1000, events: {} }; return name }
+  /** seconds on the shot's own timeline (0 = first frame the video shows) */
+  const shown = () => (Date.now() - seg - PAD) / 1000
+  const waitShown = async (sec: number, name: Shot) => {
+    const left = seg + PAD + sec * 1000 - Date.now()
+    if (left < -150) throw new Error(`shot "${name}" is ${(-left / 1000).toFixed(1)}s late for its ${sec}s cue; shorten the script`)
+    if (left > 0) await sleep(left)
   }
+  const holdTo = (name: Shot) => waitShown(PLAN[name], name)
 
-  // ---- shot 2: overview ---------------------------------------------------------------------------------
+  // ---- shot: method (the chart, then the query behind it) ------------------------------------------------------
   await page.goto(`${BASE}/`, { waitUntil: "networkidle" })
   await page.evaluate(() => document.fonts.ready)
   await sleep(500)
   await expectVisible(page, ["net_swap", "confidential", "revenue_year", "buyback_yield"], "overview tiles")
-  let s = begin("overview")
-  await glide(page, 1500, 700, 1)
-  await sleep(2600)
-  const info = page.locator(".tile .info").first()
-  const ib = (await info.boundingBox())!
-  await glide(page, ib.x + ib.width / 2, ib.y + ib.height / 2, 30)
-  await sleep(2200)
-  await glide(page, 1500, 760, 20)
-  await holdTo(s, "overview")
-
-  // ---- shot 3: daily volume (finding 1) -------------------------------------------------------------------
   const volCard = page.locator("section.card", { hasText: "Daily volume, public on-chain" }).first()
   await scrollToEl(page, volCard, 70)
-  s = begin("volume")
-  const seg = (label: string) => volCard.getByRole("radio", { name: label })
-  await sleep(1200)
-  let b = (await seg("90d").boundingBox())!
-  await glide(page, b.x + b.width / 2, b.y + b.height / 2, 28)
-  await page.mouse.down(); await page.mouse.up()
-  await sleep(2800)
-  b = (await seg("All").boundingBox())!
-  await glide(page, b.x + b.width / 2, b.y + b.height / 2, 24)
-  await page.mouse.down(); await page.mouse.up()
-  await sleep(1600)
+  let m = begin("method")
+  await sleep(500)
   const cb = (await volCard.locator(".chart").boundingBox())!
   const plotL = cb.x + 60, plotW = cb.width - 70
   const at = (frac: number) => plotL + plotW * frac
-  await glide(page, at(0.1), cb.y + cb.height * 0.5, 20)
-  for (const f of [0.14, 0.3, 0.55, 0.72, 0.8]) { await glide(page, at(f), cb.y + cb.height * 0.5, 16); await sleep(520) }
-  await glide(page, at(0.2), cb.y + cb.height * 0.5, 30) // rests in the early-year stretch
-  await holdTo(s, "volume")
-
-  // ---- shot 4: accounts are not users (finding 2) -----------------------------------------------------------
-  await page.getByRole("link", { name: /^Activity/ }).first().click()
-  await page.waitForURL(/\/activity\/?$/)
-  const accCard = page.locator("section.card", { hasText: "Accounts are not users" }).first()
-  await scrollToEl(page, accCard, 70)
-  await expectVisible(page, ["one_day_share", "implicit_accounts"], "activity accounts note")
-  s = begin("accounts")
-  await sleep(1500)
-  const ab = (await accCard.locator(".chart").boundingBox())!
-  await glide(page, ab.x + ab.width * 0.5, ab.y + ab.height * 0.6, 24)
-  await sleep(800)
-  await glide(page, ab.x + ab.width - 160, ab.y + ab.height * 0.4, 30)
-  let tip = ""
-  for (let x = ab.x + ab.width - 160; x <= ab.x + ab.width - 4; x += 14) { // walk right until the tooltip shows the latest month
-    await page.mouse.move(x, ab.y + ab.height * 0.4, { steps: 3 })
-    tip = (await page.locator(".tt").first().innerText().catch(() => "")) ?? ""
-    if (tip.includes(N.repeat_pct_latest)) break
-    await sleep(60)
-  }
+  await glide(page, at(0.08), cb.y + cb.height * 0.5, 14)
+  for (const fr of [0.2, 0.36, 0.52, 0.68, 0.84]) { await glide(page, at(fr), cb.y + cb.height * 0.5, 14); await sleep(380) }
+  await waitShown(4.2, m)
+  await click(page, volCard.getByRole("link", { name: /Open/ }))
+  await page.waitForURL(/\/charts\/daily-volume\/?$/)
   await sleep(500)
-  if (!tip.includes(N.repeat_pct_latest)) throw new Error(`NUMBER MISMATCH: tooltip says "${tip.replace(/\n/g, " ")}", expected ${N.repeat_pct_latest}`)
-  console.log(`ok  accounts tooltip: ${N.repeat_pct_latest}`)
-  await sleep(2200)
-  const open = accCard.getByRole("link", { name: /Open/ })
-  const ob = (await open.boundingBox())!
-  await glide(page, ob.x + ob.width / 2, ob.y + ob.height / 2, 24)
-  await sleep(500)
-  await page.mouse.down(); await page.mouse.up()
-  await page.waitForURL(/\/charts\/accounts-not-users\/?$/)
-  await sleep(1400)
   const q = page.locator("section.card", { hasText: "The query" }).first()
   await scrollToEl(page, q, 80)
-  await sleep(1800)
-  const copy = q.getByRole("button", { name: "Copy" }).first()
-  const kb = (await copy.boundingBox())!
-  await glide(page, kb.x + kb.width / 2, kb.y + kb.height / 2, 30)
-  await page.mouse.down(); await page.mouse.up()
-  await sleep(1500)
-  await holdTo(s, "accounts")
+  await waitShown(7.8, m)
+  const kb = q.getByRole("button", { name: "Copy" }).first()
+  await click(page, kb, 30)
+  await holdTo(m)
 
-  // ---- shot 5: value capture (finding 3) ---------------------------------------------------------------------
-  await page.getByRole("link", { name: /^Value capture/ }).first().click()
-  await page.waitForURL(/\/value\/?$/)
-  await sleep(800)
-  await expectVisible(page, ["revenue_year", "buyback_yield", "yield_1x", "yield_10x"], "value capture")
-  const table = page.locator("section.card table").first()
-  await scrollToEl(page, table.locator("xpath=ancestor::section[1]"), 70)
-  s = begin("value")
-  await sleep(1800)
-  const hi = async (mult: string) => {
-    await page.evaluate((m) => {
-      document.querySelectorAll("tbody tr").forEach((r) => { (r as HTMLElement).style.outline = "" ; r.querySelectorAll("td").forEach((c) => ((c as HTMLElement).style.background = "")) })
-      const row = Array.from(document.querySelectorAll("tbody tr")).find((r) => r.children[0].textContent?.includes("current observed") && r.children[1].textContent?.trim() === m)
-      row?.querySelectorAll("td").forEach((c) => ((c as HTMLElement).style.background = "var(--signal-soft)"))
-    }, mult)
+  // ---- shot: moment (drag the volume slider until the buyback reaches the trigger) ----------------------------
+  await page.goto(`${BASE}/value/`, { waitUntil: "networkidle" })
+  await page.evaluate(() => document.fonts.ready)
+  await sleep(500)
+  await expectVisible(page, ["revenue_year", "buyback_yield", "need_vol_trigger"], "value capture")
+  const explorer = page.locator("section.explorer")
+  await scrollToEl(page, explorer, 90)
+  m = begin("moment")
+  const slider = explorer.locator('input[type="range"]').first()
+  const sb = (await slider.boundingBox())!
+  const [min, max] = await slider.evaluate((e) => [Number((e as HTMLInputElement).min), Number((e as HTMLInputElement).max)])
+  const thumbX = (v: number) => sb.x + 8 + ((v - min) / (max - min)) * (sb.width - 16)
+  const y = sb.y + sb.height / 2
+  const need = parseFloat(N.need_vol_trigger) // the multiple the trigger needs, as printed on the page
+  const target = Math.ceil(need * 2) / 2 // the slider moves in steps of 0.5: the first step at or past the trigger
+  await glide(page, 1400, 640, 12)
+  await waitShown(6.0, m)
+  await glide(page, thumbX(1), y, 28)
+  await sleep(400)
+  await page.mouse.down()
+  const x0 = thumbX(1), x1 = thumbX(target), steps = 46
+  for (let i = 1; i <= steps; i++) { await page.mouse.move(x0 + ((x1 - x0) * i) / steps, y); await sleep(85) }
+  await page.mouse.up()
+  marks.moment.events!.dragEnd = shown()
+  const result = await explorer.locator(".result b.sig").innerText()
+  const reached = parseFloat(result)
+  if (!(reached >= parseFloat(N.t_yield))) throw new Error(`slider ended at ${await slider.inputValue()}x giving ${result}; expected at least ${N.t_yield}`)
+  console.log(`ok  slider drag: ${await slider.inputValue()}x -> ${result} of market cap (trigger ${N.t_yield}, needs ${N.need_vol_trigger})`)
+  await glide(page, 1300, 640, 18)
+  await holdTo(m)
+
+  // ---- shot: surprise (the implied confidential share, and the day it breaks) -------------------------------------
+  await page.goto(`${BASE}/charts/confidential-residual/`, { waitUntil: "networkidle" })
+  await page.evaluate(() => document.fonts.ready)
+  await sleep(600)
+  const card = page.locator("section.card", { hasText: "Implied confidential share, weekly" }).first()
+  await scrollToEl(page, card, 70)
+  m = begin("surprise")
+  const c = (await card.locator(".chart").boundingBox())!
+  const my = c.y + c.height * 0.5
+  await glide(page, c.x + 90, my, 10)
+  for (let x = c.x + 90; x < c.x + c.width * 0.66; x += 24) { await page.mouse.move(x, my, { steps: 2 }); await sleep(45) }
+  await waitShown(4.4, m)
+  let tip = ""
+  let hit = false
+  for (let x = c.x + c.width * 0.66; x < c.x + c.width - 10; x += 8) {
+    await page.mouse.move(x, my, { steps: 2 })
+    await sleep(40)
+    tip = (await page.locator(".tt").first().innerText().catch(() => "")) ?? ""
+    if (tip.includes(N.step_week)) { hit = true; break }
   }
-  await hi("1×")
-  await sleep(3800)
-  await hi("10×")
-  await sleep(3800)
-  await holdTo(s, "value")
+  if (!hit || !tip.includes(N.step_week_share)) throw new Error(`NUMBER MISMATCH: tooltip says "${tip.replace(/\n/g, " ")}", expected ${N.step_week} and ${N.step_week_share}`)
+  console.log(`ok  step tooltip: ${tip.replace(/\n/g, " ")}`)
+  const dot = page.locator(".recharts-active-dot circle").first()
+  const pt = (await dot.count()) ? await center(dot) : { x: 0, y: my }
+  marks.surprise.point = pt.x ? pt : { x: c.x + c.width * 0.8, y: my }
+  marks.surprise.events!.zoomIn = shown()
+  await waitShown(marks.surprise.events!.zoomIn + 7.9, m) // zoom in, read the step, zoom back out
+  await glide(page, 1500, 200, 16) // clear of the chart before scrolling
+  const caveats = page.locator("section.card", { hasText: "Read this before quoting it" }).first()
+  await scrollToEl(page, caveats, 90)
+  await expectVisible(page, ["break_date"], "chart caveat")
+  await holdTo(m)
 
   await ctx.close()
   const vid = readdirSync(join(WORK, "raw")).find((f) => f.endsWith(".webm"))!
   renameSync(join(WORK, "raw", vid), join(WORK, "site.webm"))
   writeFileSync(join(WORK, "site_marks.json"), JSON.stringify(marks, null, 1))
   await browser.close()
-  console.log("recorded", marks)
+  console.log("recorded", JSON.stringify(marks))
 }
 
 main().catch((e) => { console.error(e.message ?? e); process.exit(1) })

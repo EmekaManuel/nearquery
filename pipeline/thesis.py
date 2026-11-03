@@ -9,6 +9,8 @@ import pandas as pd
 from pipeline import config
 
 M = config.ROOT / "data" / "metrics"
+# The falsifiers in THESIS.md ("What would change our mind"). Our stated choices, used by the text, the dashboard and the demo video.
+THRESH = {"yield": 0.02, "touch": 0.10, "ints": 30000, "top5": 0.95}
 
 
 def usd(v):
@@ -19,7 +21,8 @@ def month_mean(df, col, m):
     return df[df.date.dt.strftime("%Y-%m") == m][col].mean()
 
 
-def main() -> None:
+def keys() -> dict:
+    """Every figure the thesis (and the demo video) quotes, computed from the committed snapshots."""
     vol = pd.read_csv(M / "daily_volume.csv", parse_dates=["date"])
     vol = vol[vol.date < vol.date.max()]  # newest cache day is partial
     obs = pd.read_csv(M / "model_observed.csv", index_col=0)["value"]
@@ -62,8 +65,8 @@ def main() -> None:
         "yield": f"{float(obs['annualized_buyback_yield_on_mcap']) * 100:.2f}%",
         "mcap": usd(float(obs["near_mcap_usd"])), "near_px": f"${float(obs['near_price_usd']):.2f}",
         "gas_ann": usd(float(obs["annualized_gas_burn_usd"])),
-        "yield_5x": f"{s5.buyback_pct_of_mcap * 100:.1f}%", "yield_gap": f"{0.02 / yld:.1f}x", "touch_gap": f"{0.10 / touch_oct:.0f}x",
-        "near_touch_sep": f"{touch_sep * 100:.1f}%", "ints_30d": f"{ints_30d:,.0f}", "ints_below": f"{(1 - 30000 / ints_30d) * 100:.0f}%",
+        "yield_5x": f"{s5.buyback_pct_of_mcap * 100:.1f}%", "yield_gap": f"{THRESH['yield'] / yld:.1f}x", "touch_gap": f"{THRESH['touch'] / touch_oct:.0f}x",
+        "near_touch_sep": f"{touch_sep * 100:.1f}%", "ints_30d": f"{ints_30d:,.0f}", "ints_below": f"{(1 - THRESH['ints'] / ints_30d) * 100:.0f}%",
         "top5_jan": f"{sol.loc['2026-01-01', 'top5_share'] * 100:.0f}%", "top5_sep": f"{sol.loc['2026-09-01', 'top5_share'] * 100:.0f}%",
         "break_date": brk["break_date"], "conf_before": f"{float(brk['share_14d_before']) * 100:.1f}%", "conf_after": f"{float(brk['share_14d_after']) * 100:.0f}%",
         "pub_chg": f"{float(brk['public_per_day_change']) * 100:+.0f}%", "rep_chg": f"{float(brk['reported_per_day_change']) * 100:+.0f}%",
@@ -72,6 +75,16 @@ def main() -> None:
         "ints_pre": f"{float(brk['intents_per_day_14d_before']):,.0f}", "ints_post": f"{float(brk['intents_per_day_14d_after']):,.0f}", "ints_later": f"{float(brk['intents_per_day_days_15_to_42']):,.0f}",
         "yield_10x": f"{s10.buyback_pct_of_mcap * 100:.1f}%", "rev_10x": usd(s10.annual_buyback_usd),
     }
+    top5_oct, top5_sep = sol.loc["2026-10-01", "top5_share"], sol.loc["2026-09-01", "top5_share"]
+    fired = [yld >= THRESH["yield"], touch_oct >= THRESH["touch"] and touch_sep >= THRESH["touch"], ints_30d < THRESH["ints"],
+             top5_oct >= THRESH["top5"] and top5_sep >= THRESH["top5"]]
+    k |= {"t_yield": f"{THRESH['yield'] * 100:.0f}%", "t_touch": f"{THRESH['touch'] * 100:.0f}%", "t_ints": f"{THRESH['ints']:,}", "t_top5": f"{THRESH['top5'] * 100:.0f}%",
+          "triggers_today": "none of the four" if not any(fired) else f"{sum(fired)} of the four"}
+    return k
+
+
+def main() -> None:
+    k = keys()
     txt = (config.ROOT / "THESIS.template.md").read_text()
     missing = set(re.findall(r"\{\{(\w+)\}\}", txt)) - set(k)
     assert not missing, missing

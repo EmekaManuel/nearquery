@@ -12,7 +12,7 @@ import re
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 N = json.loads((ROOT / "demo" / "out" / "numbers.json").read_text())
-SHOTS = [("Hook", 7), ("Overview", 8), ("Daily volume", 17), ("Accounts", 17), ("Value capture", 15), ("Terminal", 12), ("Outro", 8)]
+SHOTS = [("Hook", 8), ("Method", 10), ("The moment", 18), ("The surprise", 22), ("Falsifiers", 12), ("Re-run", 10), ("Outro", 8)]
 WPS = 2.3  # comfortable speaking pace, words per second
 
 
@@ -33,18 +33,18 @@ def money(s: str) -> str:
 
 
 pct = lambda s: s.replace("%", " percent")
-start, end = N["window"].split(" → ")
+times = lambda s: s.replace("\u00d7", " times")
 LINES = [
-    "Is NEAR Intents real settlement? And does it create value for NEAR?",
-    "Short answer: real infrastructure, thin value for the token. Every figure shows its date range.",
-    f"{money(N['net_swap'])} of net swap volume, {day(start)} to {day(end)}, read straight from the intents dot near logs. "
-    f"About {pct(N['confidential'])} of reported volume isn't in public events: implied confidential, inferred, not measured.",
-    f"{pct(N['one_day_share'])} of {N['implicit_accounts'].replace('M', ' million')} implicit accounts are used on one day only. "
-    f"In October, just {pct(N['repeat_pct_latest'])} were active twice or more. So account counts can't prove adoption.",
-    f"Captured revenue is {money(N['revenue_year'])} a year, {pct(N['buyback_yield'])} of NEAR's market cap. "
-    f"Even at ten times today's volume, it would be {pct(N['yield_10x'])}.",
-    "One command re-runs the whole thesis. No accounts, no keys. The numbers don't move.",
-    "NearQuery. Ask the chain. Show the work.",
+    f"NEAR Intents settled {money(N['net_swap'])} in thirty days. Does any of it reach the NEAR token?",
+    "We read the chain: every swap, straight from the event logs. Every chart is one click from its query.",
+    f"Captured revenue is {money(N['revenue_year'])} a year: {pct(N['buyback_yield'])} of NEAR's market cap. Now stress-test it. Drag the volume up. "
+    f"It takes {times(N['need_vol_trigger'])} today's volume to reach {pct(N['t_yield'])}. Real infrastructure, thin value for the token.",
+    f"About {pct(N['confidential'])} of reported volume isn't in public events. The obvious story: Confidential Intents. "
+    f"But it sits near zero until {day(N['break_date'])}, then jumps to {pct(N['conf_after'])}, while public volume doesn't rise with it. "
+    "Users moving, or a data change? We can't tell, so we say so.",
+    f"We also say what would change our mind: four triggers, each with today's reading. Today, {N['triggers_today']} has triggered.",
+    "One command re-runs it all. No accounts, no keys. The thesis comes out identical.",
+    "NearQuery. Ask the chain. Show the work. What would change your mind?",
 ]
 assert len(LINES) == len(SHOTS)
 rows, t = [], 0

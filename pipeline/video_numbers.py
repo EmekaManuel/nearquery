@@ -5,9 +5,13 @@
 Formats mirror dashboard/lib/format.ts, so a string here is the string the hosted site renders. The recording
 script asserts that each string is actually visible on the hosted page before the video is built.
 """
+import datetime as dt
 import json
 
+import pandas as pd
+
 from pipeline import config
+from pipeline.thesis import THRESH, keys
 
 SRC = config.ROOT / "dashboard" / "data" / "dashboard.json"
 OUT = config.ROOT / "demo" / "out" / "numbers.json"
@@ -52,6 +56,19 @@ def main() -> None:
         "one_day_share": pct(d["accounts"]["implicitOneDayShare"], 2),
         "implicit_accounts": num(d["accounts"]["implicitAccounts"]),
         "repeat_pct_latest": f"{rep:.2f}%",
+    }
+    k = keys()  # the thesis's own computed values: the video quotes exactly what THESIS.md quotes
+    wk = pd.read_csv(config.ROOT / "data" / "metrics" / "confidential_weekly.csv", parse_dates=["week_start"])
+    bd = pd.Timestamp(k["break_date"])
+    step = wk[(wk.week_start <= bd) & (bd < wk.week_start + pd.Timedelta(days=7))].iloc[0]
+    need = THRESH["yield"] * o["marketCap"] / o["revenueAnnual"]  # same arithmetic as the dashboard's ScenarioExplorer
+    nums |= {
+        "need_vol_trigger": f"{need:.1f}\u00d7" if need < 10 else f"{need:.0f}\u00d7",  # as the explorer prints it
+        "t_yield": k["t_yield"], "t_touch": k["t_touch"], "t_ints": k["t_ints"], "t_top5": k["t_top5"],
+        "break_date": k["break_date"], "conf_before": k["conf_before"], "conf_after": k["conf_after"], "pub_chg": k["pub_chg"], "rep_chg": k["rep_chg"],
+        "step_week": step.week_start.date().isoformat(), "step_week_share": f"{step.implied_confidential_share * 100:.1f}%",
+        "today_yield": k["yield"], "today_touch": k["near_touch_oct"], "today_ints": k["ints_30d"], "today_top5": k["top5_oct"],
+        "triggers_today": k["triggers_today"],
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(nums, indent=1, ensure_ascii=False))

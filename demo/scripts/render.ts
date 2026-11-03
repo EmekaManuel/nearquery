@@ -23,9 +23,9 @@ function palettes() {
 
 async function main() {
   const numbers = read<Record<string, string>>("out/numbers.json")
-  const marks = read<Record<string, { startMs: number; shownMs: number }>>("work/site_marks.json")
+  const marks = read<Record<string, unknown>>("work/site_marks.json")
   const { durationSec } = read<{ durationSec: number }>("work/rerun_meta.json")
-  const speed = durationSec / SHOTS.terminal
+  const speed = durationSec / (SHOTS.rerun - 1.6) // the clip ends 1.6 s early and holds its last frame, so the result stays on screen
   const captionList = buildCaptions(numbers, speed)
   const problems = checkCaptions(captionList)
   if (problems.length) throw new Error("Caption rules violated:\n  " + problems.join("\n  "))

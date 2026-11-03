@@ -4,7 +4,7 @@
 
 ## Claim
 
-**Verdict: infrastructure yes, token value capture not yet.** It would flip if captured revenue held above 2% of market cap for 90 days (today {{yield}}, so {{yield_gap}} the current level); the full list of triggers, with today's readings, is under "What would change our mind".
+**Verdict: infrastructure yes, token value capture not yet.** It would flip if captured revenue held above {{t_yield}} of market cap for 90 days (today {{yield}}, so {{yield_gap}} the current level); the full list of triggers, with today's readings, is under "What would change our mind".
 
 NEAR Intents is real settlement infrastructure (about {{net_vol_30d}} of public net swap volume in the 30-day window {{window}}, spread across a solver market that is less concentrated than in January), but the data does not yet show it creating material value for the NEAR token: captured revenue annualizes to {{rev_ann}} ({{yield}} of market cap), gas burned on `intents.near` is negligible ({{gas_ann}} a year), and only {{near_touch_oct}} of user volume involves NEAR itself. The verdict is **positive on infrastructure, neutral-to-weak on token value capture**, and even 10x current volume would yield only {{yield_10x}} of market cap per year.
 
@@ -35,10 +35,10 @@ These thresholds are our stated choices, evaluated on the pipeline's own series.
 
 | Signal | Trigger | Today | Why this line |
 | --- | --- | --- | --- |
-| Captured revenue / market cap | above 2% for 90 days (more bullish on token value) | {{yield}} | {{yield_gap}} today's level, i.e. {{yield_gap}} current volume at today's take rate and price: large enough to matter against market cap |
-| NEAR-touching volume share | above 10% for two consecutive months (more bullish on token value) | {{near_touch_oct}} (Oct), {{near_touch_sep}} (Sep) | about {{touch_gap}} today's level: NEAR would be a routine leg, not an edge case |
-| Intents per day | below 30,000 for 30 days, without a matching rise in the implied confidential share (more bearish on infrastructure) | {{ints_30d}} (last 30 days) | {{ints_below}} below the last 30 days: a clear break from the recent range |
-| Top-5 solver share | above 95% for two months (more bearish on infrastructure) | {{top5_oct}} (Oct), {{top5_sep}} (Sep) | close to January's {{top5_jan}}: the diversification since then would have reversed |
+| Captured revenue / market cap | above {{t_yield}} for 90 days (more bullish on token value) | {{yield}} | {{yield_gap}} today's level, i.e. {{yield_gap}} current volume at today's take rate and price: large enough to matter against market cap |
+| NEAR-touching volume share | above {{t_touch}} for two consecutive months (more bullish on token value) | {{near_touch_oct}} (Oct), {{near_touch_sep}} (Sep) | about {{touch_gap}} today's level: NEAR would be a routine leg, not an edge case |
+| Intents per day | below {{t_ints}} for 30 days, without a matching rise in the implied confidential share (more bearish on infrastructure) | {{ints_30d}} (last 30 days) | {{ints_below}} below the last 30 days: a clear break from the recent range |
+| Top-5 solver share | above {{t_top5}} for two months (more bearish on infrastructure) | {{top5_oct}} (Oct), {{top5_sep}} (Sep) | close to January's {{top5_jan}}: the diversification since then would have reversed |
 
 Any one trigger moves the verdict in the direction shown.
 

@@ -22,6 +22,7 @@ python3 scripts/trim_idle.py work/rerun.mp4 work/rerun_trim.mp4
 ffmpeg -v error -y -i work/rerun_trim.mp4 -vf "fps=30,pad=1920:1080:0:0:color=0x121210,format=yuv420p" -c:v libx264 -crf 14 -preset medium -an public/clips/rerun.mp4
 DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 public/clips/rerun.mp4)
 echo "{\"durationSec\": $DUR}" > work/rerun_meta.json
+ffmpeg -v error -y -i public/clips/rerun.mp4 -vf "tpad=stop_mode=clone:stop_duration=4" -c:v libx264 -crf 14 -preset medium -an public/clips/rerun_hold.mp4
 
 echo "== 4/5 render with Remotion (captioned + plain) and write the .srt"
 BROWSER_EXECUTABLE="${BROWSER_EXECUTABLE:-$(ls -d "$HOME"/Library/Caches/ms-playwright/chromium_headless_shell-*/chrome-headless-shell-mac-arm64/chrome-headless-shell 2>/dev/null | head -1)}" npx tsx scripts/render.ts

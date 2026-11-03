@@ -11,5 +11,5 @@ export interface Dashboard {
   obs: { netSwap30d: number; legSum30d: number; confidentialShare: number; grossBps: number; capturedBps: number; capturedShare: number; revenueAnnual: number; buybackYield: number; gasBurnAnnual: number; nearPrice: number; marketCap: number }
   scenarios: Scenario[]
   accounts: { implicitOneDayShare: number; implicitSingleEntryShare: number; implicitAccounts: number }
-  facts: { intentsAugToOctChange: number; confidentialBreakDate: string }
+  facts: { intentsAugToOctChange: number; confidentialBreakDate: string; yieldTrigger: number }
 }

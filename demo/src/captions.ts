@@ -4,8 +4,8 @@ export type Numbers = Record<string, string>
 export interface Caption { start: number; end: number; text: string; burned: boolean }
 
 export const FPS = 30
-/** Seconds each shot is on screen. */
-export const SHOTS = { hook: 7, overview: 8, volume: 17, accounts: 17, value: 15, terminal: 12, outro: 8 } as const
+/** Seconds each shot is on screen. Keep demo/scripts/voiceover.py and record_site.ts PLAN in step. */
+export const SHOTS = { hook: 8, method: 10, moment: 18, surprise: 22, falsify: 12, rerun: 10, outro: 8 } as const
 export type ShotName = keyof typeof SHOTS
 const order = Object.keys(SHOTS) as ShotName[]
 export const shotStart = (name: ShotName): number => order.slice(0, order.indexOf(name)).reduce((a, n) => a + SHOTS[n], 0)
@@ -14,19 +14,23 @@ export const TOTAL_SECONDS = order.reduce((a, n) => a + SHOTS[n], 0)
 export function buildCaptions(n: Numbers, speed: number): Caption[] {
   const at = (shot: ShotName, a: number, b: number, text: string, burned = true): Caption => ({ start: shotStart(shot) + a, end: shotStart(shot) + b, text, burned })
   return [
-    at("hook", 0.4, 3.6, "Is NEAR Intents real settlement?", false),
-    at("hook", 3.6, 6.8, "And does it create value for NEAR?", false),
-    at("overview", 0.2, 4.2, "Up front: real infrastructure, thin value for the token."),
-    at("overview", 4.2, 7.8, "Every figure carries its date range."),
-    at("volume", 0.2, 8.0, `${n.net_swap} net swap volume, ${n.window}, read straight from intents.near event logs.`),
-    at("volume", 8.0, 16.8, `About ${n.confidential} of reported volume is not in public events: implied confidential, inferred, not measured.`),
-    at("accounts", 0.2, 8.0, `${n.one_day_share} of ${n.implicit_accounts} implicit accounts are used on one day only. In October, just ${n.repeat_pct_latest} were active twice or more.`),
-    at("accounts", 8.0, 16.8, "So account counts can't prove adoption. Every chart ships the SQL behind it."),
-    at("value", 0.4, 6.0, `Captured revenue: ${n.revenue_year} a year, ${n.buyback_yield} of NEAR's market cap.`),
-    at("value", 6.0, 14.8, `Even at 10x today's volume it would be ${n.yield_10x} of market cap.`),
-    at("terminal", 0.2, 5.8, "One command re-runs the whole thesis: no accounts, no keys."),
-    at("terminal", 5.8, 11.8, `The numbers don't move. (Terminal sped up ${speed.toFixed(1)}x.)`),
-    at("outro", 0.5, 7.5, "Ask the chain. Show the work.", false),
+    // hook: the card carries these words itself, so they are subtitles only
+    at("hook", 0.2, 4.0, `NEAR Intents settled ${n.net_swap} in the last 30 days.`, false),
+    at("hook", 4.0, 7.8, "Does any of it reach the NEAR token?", false),
+    at("method", 0.2, 5.2, "We read the chain: every swap, straight from intents.near's event logs."),
+    at("method", 5.2, 9.8, "Every chart is one click from the query behind it."),
+    at("moment", 0.2, 6.0, `Captured revenue is ${n.revenue_year} a year: ${n.buyback_yield} of NEAR's market cap.`),
+    at("moment", 6.0, 11.6, "Now stress-test it: drag the volume up."),
+    at("moment", 11.6, 17.8, `It takes ${n.need_vol_trigger} today's volume to reach ${n.t_yield} of market cap. Real infrastructure, thin value.`),
+    at("surprise", 0.2, 5.8, `About ${n.confidential} of reported volume isn't in public events.`),
+    at("surprise", 5.8, 11.4, `The obvious story: Confidential Intents. But it sits near zero until ${n.break_date}.`),
+    at("surprise", 11.4, 16.9, `That day: ${n.conf_before} before, ${n.conf_after} after. Public volume moved ${n.pub_chg}.`),
+    at("surprise", 16.9, 21.8, "Users moving, or a data change? We can't tell, so we say so."),
+    at("falsify", 0.2, 6.0, "We also say what would change our mind: four triggers, with today's readings."),
+    at("falsify", 6.0, 11.8, `Today, ${n.triggers_today} have triggered.`, false), // the card shows this line itself
+    at("rerun", 0.2, 4.8, "One command re-runs it all: no accounts, no keys."),
+    at("rerun", 4.8, 9.6, `The thesis comes out identical. (Sped up ${speed.toFixed(1)}x.)`),
+    at("outro", 0.5, 7.5, "Ask the chain. Show the work. What would change your mind?", false),
   ]
 }
 

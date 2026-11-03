@@ -11,6 +11,7 @@ import shutil
 import pandas as pd
 
 from pipeline import config
+from pipeline.thesis import THRESH
 
 M = config.ROOT / "data" / "metrics"
 REF = config.ROOT / "data" / "reference"
@@ -77,7 +78,7 @@ def main() -> None:
         "accounts": {"implicitOneDayShare": float(acct.loc["implicit_hex", "share_one_day"]),
                      "implicitSingleEntryShare": float(acct.loc["implicit_hex", "share_single_entry"]),
                      "implicitAccounts": int(acct.loc["implicit_hex", "accounts"])},
-        "facts": {"intentsAugToOctChange": intents_change(vol), "confidentialBreakDate": brk["break_date"]},
+        "facts": {"intentsAugToOctChange": intents_change(vol), "confidentialBreakDate": brk["break_date"], "yieldTrigger": THRESH["yield"]},
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "dashboard.json").write_text(json.dumps(data))
