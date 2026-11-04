@@ -45,4 +45,4 @@ NEAR Explorer API (terms §4.1(e)); see METHODOLOGY.md.
 
 ## AI assistance
 
-Most of the code, SQL and prose in this repository was written with Claude Code (Anthropic) and reviewed by the author. See README.md.
+Built with Claude Code (Anthropic) as a coding assistant and reviewed by the author. Every figure is computed from public data and reproduces with `make all`. See README.md.

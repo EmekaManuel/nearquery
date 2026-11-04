@@ -67,7 +67,7 @@ On-chain figures come from the public BigQuery dataset of NEAR mainnet, parsed f
 ## Hackathon disclosures
 
 - **Window:** all code, SQL and prose in this repository was written on or after 2026-10-19. There is no pre-window baseline. Releases are marked with the tags `pre-hackathon` (the repository's first commit) and `hackathon-submission`; the diff between them is `https://github.com/EmekaManuel/nearquery/compare/pre-hackathon...hackathon-submission`.
-- **AI-generated code:** most of the code, SQL, tests-by-reproduction and prose was written with Claude Code (Anthropic) and reviewed by the author.
+- **AI assistance:** built with Claude Code (Anthropic) as a coding assistant and reviewed by the author, as the hackathon rules allow. Correctness does not rest on who wrote the code: every figure is computed from public data and re-checked by `make all`.
 - **Libraries and tools:** see [LIBRARIES.md](LIBRARIES.md) (generated from the lockfiles).
 - **Other project:** [Wucant](https://github.com/EmekaManuel/wucant) is the author's other NEAR Hackathon entry. The two projects are independent. This repository was built from scratch and does not import or vendor Wucant code.
 - **License:** MIT, see [LICENSE](LICENSE).

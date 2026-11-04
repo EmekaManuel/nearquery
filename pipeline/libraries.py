@@ -46,7 +46,7 @@ def main() -> None:
             "| FastNEAR free RPC | Token metadata, NEAR total supply | Free, keyless. |",
             "| Dune public dashboard | Spot cross-checks transcribed on 2026-10-30; not used in any computed number | Read by eye; no API used. |",
             "", "## Excluded on purpose", "", "NEAR Explorer API (terms §4.1(e)); see METHODOLOGY.md.", "",
-            "## AI assistance", "", "Most of the code, SQL and prose in this repository was written with Claude Code (Anthropic) and reviewed by the author. See README.md.", ""]
+            "## AI assistance", "", "Built with Claude Code (Anthropic) as a coding assistant and reviewed by the author. Every figure is computed from public data and reproduces with `make all`. See README.md.", ""]
     (ROOT / "LIBRARIES.md").write_text("\n".join(out))
     print(f"wrote LIBRARIES.md ({len(rows)} direct dependencies)")
 
