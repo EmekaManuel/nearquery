@@ -215,7 +215,7 @@ export const Demo: React.FC<DemoProps> = ({ captions, numbers: n, marks, speed, 
         </Clip>
       ))}
       {seq("falsify", <Falsify p={light} n={n} />)}
-      {seq("rerun", <Clip src="clips/rerun_hold.mp4" fromSec={0} rate={speed} badge={`Sped up ${speed.toFixed(1)}x`} p={dark} />)}
+      {seq("rerun", <Clip src="clips/rerun_hold.mp4" fromSec={0} rate={speed} badge={speed > 1.15 ? `Sped up ${speed.toFixed(1)}x` : "Real time"} p={dark} />)}
       {seq("outro", <Outro p={light} repoUrl={repoUrl} />)}
       {captions && captionList.filter((c) => c.burned).map((c) => {
         const inTerminal = c.start >= shotStart("rerun") && c.start < shotStart("outro")

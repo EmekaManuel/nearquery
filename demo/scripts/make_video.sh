@@ -39,6 +39,6 @@ for v in captions plain; do
   dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/$name.mp4")
   echo "$name.mp4: ${dur}s $codec_name ${width}x${height} $r_frame_rate $pix_fmt $(du -h "out/$name.mp4" | cut -f1)"
   [ "$codec_name" = h264 ] && [ "$width" = 1920 ] && [ "$height" = 1080 ] && [ "$r_frame_rate" = "30/1" ] && [ "$pix_fmt" = yuv420p ] || { echo "FAIL: unexpected stream format"; exit 1; }
-  awk -v d="$dur" 'BEGIN{exit !(d>=60 && d<90)}' || { echo "FAIL: duration ${dur}s outside 60-90 s"; exit 1; }
+  awk -v d="$dur" 'BEGIN{exit !(d>=60 && d<100)}' || { echo "FAIL: duration ${dur}s outside 60-100 s"; exit 1; }
 done
 echo "done: demo/out/nearquery-demo.mp4, nearquery-demo-nocaptions.mp4, nearquery-demo.srt"

@@ -20,7 +20,7 @@ Sleep 1s
 Type "make all"
 Sleep 700ms
 Enter
-Sleep 40s
+Sleep 75s
 Type "git diff --quiet THESIS.md && echo 'THESIS.md: no changes'"
 Sleep 400ms
 Enter

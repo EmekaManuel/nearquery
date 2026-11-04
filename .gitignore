@@ -31,3 +31,7 @@ demo/out/*
 demo/public/brand/
 demo/work/
 demo/public/clips/
+
+# personal submission notes and drafts (kept locally, not published)
+submission/
+brand/BRAND.md
