@@ -8,7 +8,7 @@
 
 [Live dashboard](https://emekamanuel.github.io/nearquery/) · [Demo video (94 s)](demo/out/nearquery-demo.mp4) · [Read the thesis](THESIS.md) · [Method and limits](METHODOLOGY.md)
 
-![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet%2C%20read--only-blue) ![Python 3.12](https://img.shields.io/badge/python-3.12-lightgrey) ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
+![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet-2f6fed) ![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab) ![License: MIT](https://img.shields.io/badge/license-MIT-555555)
 
 </div>
 
@@ -148,5 +148,5 @@ Details, cross-checks and reconciliation against reported volume are in [METHODO
 - **Window:** all code, SQL and prose in this repository was written on or after 2026-10-19. There is no pre-window baseline. Releases are marked with the tags `pre-hackathon` (the repository's first commit) and `hackathon-submission`; the diff between them is `https://github.com/EmekaManuel/nearquery/compare/pre-hackathon...hackathon-submission`.
 - **AI assistance:** built with Claude Code (Anthropic) as a coding assistant and reviewed by the author, as the hackathon rules allow. Correctness does not rest on who wrote the code: every figure is computed from public data and re-checked by `make all`.
 - **Libraries and tools:** see [LIBRARIES.md](LIBRARIES.md) (generated from the lockfiles).
-- **Other project:** [Wucant](https://github.com/EmekaManuel/wucant) is the author's other NEAR Hackathon entry. The two projects are independent. This repository was built from scratch and does not import or vendor Wucant code.
+- **Other project:** [Nims](https://github.com/EmekaManuel/nims) is the author's other NEAR Hackathon entry. The two projects are independent. This repository was built from scratch and does not import or vendor Nims code.
 - **License:** MIT, see [LICENSE](LICENSE).
