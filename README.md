@@ -40,12 +40,30 @@ The step in that 35% is the interesting part. The implied confidential share sit
 </tr>
 </table>
 
-## What is in it
+## The problem and the product
 
-- **The thesis:** [THESIS.md](THESIS.md) has a verdict up front, five findings each tied to a chart and a number, the strongest bear and bull cases, four falsifiable "what would change our mind" triggers with today's readings, and a value-capture model with editable assumptions. It is rendered by code from the committed snapshots, so no number is typed by hand.
-- **The dashboard:** a static Next.js site. Every chart has its own page with its definition, how it is computed, caveats, the DuckDB SQL behind it with a Copy button, and a CSV download.
-- **The pipeline:** BigQuery extraction of `intents.near` event logs, DuckDB metrics, a value-capture model and the thesis renderer. One command, `make all`, rebuilds everything from the committed data.
-- **The demo video:** built by code too ([`demo/`](demo/)), with every on-screen figure asserted against the page before it is recorded.
+Investment cases for crypto projects are usually conviction: a story, a chart screenshot, a number nobody can re-derive. The case for NEAR leans on NEAR Intents becoming real cross-chain settlement. NearQuery replaces the story with a pipeline.
+
+- **A call, up front.** [THESIS.md](THESIS.md) opens with a verdict and the exact condition that would flip it, then five findings, each tied to a chart and a number, and the strongest bear and bull cases.
+- **Numbers that cannot drift.** The thesis is a template. Every figure is filled in by code from the committed metric snapshots, so rebuilding changes the text and the charts together, and `git diff` shows exactly what moved.
+- **Charts you can audit.** The dashboard gives every chart its own page: definition, how it is computed, caveats, the DuckDB SQL behind it with a Copy button, and a CSV download.
+- **A model you can break.** The value-capture model turns Intents fees into a buyback yield on market cap. Its assumptions are plain inputs, and sliders on the Value page recompute it in the browser with the pipeline's own formula.
+- **Falsifiers, not hedges.** Four signals, bullish and bearish, each with a stated threshold and today's reading. Any one of them moving changes the verdict in a named direction.
+- **Limits on the page.** The confidential-volume blind spot and the 2026-09-01 break are stated where the numbers appear, not in a footnote.
+
+The pipeline, the site and the demo video are all built by code ([`demo/`](demo/)), and the video asserts every on-screen figure against the page before it records.
+
+## Key findings (cutoff 2026-10-28)
+
+| # | Finding | Evidence |
+| --- | --- | --- |
+| 1 | **Scale is real, and about a third of it is invisible to us.** Public net swap volume is $1.30B over 30 days; comparing with DefiLlama's reported total implies about 35% is Confidential Intents. The implied share sits near 0.1% until 2026-09-01, then jumps to 21% on a month boundary while public volume fell 10%: as consistent with a DefiLlama coverage change as with users moving. | [Implied confidential share](https://emekamanuel.github.io/nearquery/charts/confidential-residual/) |
+| 2 | **Activity is falling while ticket size rises.** Intents per day fell 52% from August to October, while leg-sum per intent rose 1.9x. The cause is only partly tested. | [Intents per day](https://emekamanuel.github.io/nearquery/charts/intents-per-day/), [USD per intent](https://emekamanuel.github.io/nearquery/charts/usd-per-intent/) |
+| 3 | **Account counts are not users.** In October, 0.22% of swapping accounts were active on two or more days. | [Active accounts are not users](https://emekamanuel.github.io/nearquery/charts/accounts-not-users/) |
+| 4 | **The solver market is less concentrated than in January, but re-concentrated in October.** Top-1 share fell from 66% to 32%; top-5 share was 74% in July and 90% in October. | [Solver concentration](https://emekamanuel.github.io/nearquery/charts/solver-concentration/) |
+| 5 | **Value capture is thin.** NEAR keeps 34% of gross fees; annualized captured revenue is $26.2M, 0.43% of market cap. Even at 10x volume it would be 4.3%. | [Value capture](https://emekamanuel.github.io/nearquery/value/) |
+
+Figures are from the cutoff above. The dashboard and THESIS.md are rebuilt from fresh data and may differ.
 
 ## How the data is used
 
@@ -120,22 +138,38 @@ brand/        Brand tokens, logos and social card
 
 ## Fit to the track
 
-| The track asks for | NearQuery |
-| --- | --- |
-| A clear, falsifiable call | A verdict up front, and four triggers with thresholds that would change it |
-| Evidence you can check | Every figure traces to a chart page, its SQL and a CSV; `make all` reproduces it |
-| Honesty about uncertainty | The strongest bear case, the confidential-volume blind spot and the 2026-09-01 break are stated, not hidden |
-| Re-runnable | One command, no accounts or keys, and an empty diff on `THESIS.md` |
-| Built on NEAR | The whole analysis is of NEAR's own chain: `intents.near` settlement and the NEAR token's value capture |
+The Investment Thesis track is judged on the evidence, not the conviction. Each line below names the code that does it, how it is checked, and what to try.
 
-## Known limits
+| The track asks for | In NearQuery | Code | Checked by | Try it |
+| --- | --- | --- | --- | --- |
+| **A clear, falsifiable call** | A verdict first, with the exact condition that flips it, and four triggers with thresholds defined once (`THRESH`) and shown with today's readings | [`pipeline/thesis.py`](pipeline/thesis.py), [`THESIS.template.md`](THESIS.template.md) | The thesis build fails if any `{{placeholder}}` has no computed value; the video's falsifier card refuses to render if a trigger has fired | Open [THESIS.md](THESIS.md), "What would change our mind" |
+| **Evidence you can check** | Every figure traces to a chart page, the SQL behind it and a CSV | [`pipeline/sql/`](pipeline/sql/), [`dashboard/lib/charts.ts`](dashboard/lib/charts.ts) | Reconciliation against DefiLlama's reported volume: within about 1% before Confidential Intents launched (daily correlation 0.998) | On any chart, **Open**, then **Copy** the SQL |
+| **Honesty about uncertainty** | The strongest bear case, the residual caveat, the 2026-09-01 break and the cross-check gaps are stated beside the numbers | [`METHODOLOGY.md`](METHODOLOGY.md), [`dashboard/lib/charts.ts`](dashboard/lib/charts.ts) | Each derived chart carries a "Read this before quoting it" card | [Implied confidential share](https://emekamanuel.github.io/nearquery/charts/confidential-residual/) |
+| **Re-runnable** | One command, no accounts or keys | [`Makefile`](Makefile) | `make thesis` then `git diff THESIS.md` is empty | `make all` |
+| **Stress-testable** | Sliders for volume, take rate and NEAR price, with the 2% and 5% market-cap trigger multiples | [`dashboard/components/ScenarioExplorer.tsx`](dashboard/components/ScenarioExplorer.tsx), [`pipeline/model.py`](pipeline/model.py) | At the defaults the slider result equals the pipeline's own 1x row | **Value capture** page |
+| **Built on NEAR** | The whole analysis is of NEAR's own chain: `intents.near` settlement and the NEAR token's value capture | [`pipeline/extract_bq.py`](pipeline/extract_bq.py), [`pipeline/parse_events.py`](pipeline/parse_events.py) | Public BigQuery dataset of NEAR mainnet, read-only | Any chart's source line |
 
-- Confidential Intents (generally available since 2026-07-07) are not visible in on-chain events. The dashboard shows public activity only, and the implied confidential share is an inference.
-- The on-chain cache covers every day from 2026-01-01 to the cutoff shown on each chart (no missing days); earlier history is not pulled.
-- Account counts are not user counts: nearly every account is used on a single day. The thesis treats this as a measurement limit.
-- Captured revenue is DefiLlama's reported figure, not a sum of the on-chain events we can see.
+## What is real, and what is not
 
-Details, cross-checks and reconciliation against reported volume are in [METHODOLOGY.md](METHODOLOGY.md).
+**Computed from public data and re-runnable:**
+
+- Volume, intents per day, accounts, solver concentration and how often NEAR is a leg of a swap, from `intents.near` event logs.
+- The value-capture model and its scenarios, and the four falsifier readings.
+- The thesis text and every figure in it, rebuilt from the committed snapshots.
+
+**Not what it might sound like:**
+
+- **The implied confidential share is a residual, not a measurement.** It is one minus our public total over DefiLlama's reported volume, so it absorbs any coverage difference. The thesis says it cannot tell migration from a data change.
+- **Captured revenue is DefiLlama's reported figure,** not a sum of the on-chain events we can see. We cannot verify how fully it includes Confidential Intents.
+- **DefiLlama's volume derives from Dune,** so cross-checking against Dune checks our transcription, not an independent source. Recent windows differ by about 0 to 17% depending on the window definition, and that gap is unresolved.
+- **Accounts are not users.** Nearly every account is used on a single day, so adoption cannot be shown from account counts.
+- **The model's multiples are assumptions, not forecasts.** The thesis does not predict that volume will arrive.
+- **There is no unit-test suite.** Correctness is checked by reproduction: the thesis re-renders from the metrics with an empty diff, and the reconciliation and number checks above.
+- **Not financial advice.** Read-only, no wallets, keys, contracts or transactions.
+
+## Coverage
+
+The on-chain cache covers every day from 2026-01-01 to the cutoff shown on each chart (no missing days); earlier history is not pulled. Confidential Intents (generally available since 2026-07-07) are not visible in on-chain events, so every on-chain trend here is the public side only. Cross-checks and reconciliation are in [METHODOLOGY.md](METHODOLOGY.md).
 
 ## What's next
 
