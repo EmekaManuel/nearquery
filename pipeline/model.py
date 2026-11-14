@@ -53,6 +53,18 @@ def confidential_residual(vol: pd.DataFrame, dl: pd.DataFrame, end: pd.Timestamp
         }
     pd.Series(rows, name="value").to_frame().to_csv(M / "confidential_break.csv", float_format="%.6g", index_label="key")
 
+    # Reconciliation before Confidential Intents became generally available (2026-07-07): public events should match the
+    # reported total there. Derived ratios only; recomputed on every build from the same two series.
+    pre = df[(df.index >= "2026-04-01") & (df.index <= "2026-07-06")]
+    priced = v.set_index("date").loc[pre.index, "leg_sum_priced_usd"]
+    pd.Series({
+        "window_start": pre.index.min().date(), "window_end": pre.index.max().date(), "days": len(pre),
+        "public_over_reported": pre["pub"].sum() / pre["volume_usd"].sum(),
+        "priced_only_over_reported": priced.sum() / pre["volume_usd"].sum(),
+        "daily_correlation": pre["pub"].corr(pre["volume_usd"]),
+        "median_abs_daily_gap": (pre["pub"] / pre["volume_usd"] - 1).abs().median(),
+    }, name="value").to_frame().to_csv(M / "reconciliation.csv", float_format="%.6g", index_label="key")
+
 
 def main() -> None:
     a = json.loads((REF / "model_assumptions.json").read_text())

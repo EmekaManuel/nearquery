@@ -75,6 +75,11 @@ def keys() -> dict:
         "ints_pre": f"{float(brk['intents_per_day_14d_before']):,.0f}", "ints_post": f"{float(brk['intents_per_day_14d_after']):,.0f}", "ints_later": f"{float(brk['intents_per_day_days_15_to_42']):,.0f}",
         "yield_10x": f"{s10.buyback_pct_of_mcap * 100:.1f}%", "rev_10x": usd(s10.annual_buyback_usd),
     }
+    rec = pd.read_csv(M / "reconciliation.csv", index_col=0)["value"]
+    k |= {"recon_start": rec["window_start"], "recon_end": rec["window_end"], "recon_days": rec["days"],
+          "recon_ratio": f"{float(rec['public_over_reported']) * 100:.1f}%", "recon_priced": f"{float(rec['priced_only_over_reported']) * 100:.1f}%",
+          "recon_gap": f"{abs(1 - float(rec['public_over_reported'])) * 100:.1f}%", "recon_corr": f"{float(rec['daily_correlation']):.3f}",
+          "recon_median": f"{float(rec['median_abs_daily_gap']) * 100:.1f}%"}
     wash = pd.read_csv(M / "wash_screen.csv")
     wash = wash[wash.days_covered >= 28].iloc[-1]
     peers = pd.read_csv(M / "peer_fees.csv").sort_values("fees_per_1m_usd", ascending=False).reset_index(drop=True)

@@ -1,6 +1,6 @@
 # Methodology
 
-Draft. Numbers live in `THESIS.md` (rendered from the pipeline); this file defines how they are produced and where they can be wrong.
+Numbers live in `THESIS.md` (rendered from the pipeline); this file defines how they are produced and where they can be wrong.
 
 ## Sources
 
@@ -36,7 +36,7 @@ Not used: NEAR Lake S3 (deprecated 2026-03-24), neardata.xyz (recent blocks only
 - **Confidential Intents (GA 2026-07-07) are invisible on-chain** and are 35-40% of reported volume recently. Every on-chain trend here covers the public side only, so a shift to confidential reads as a decline.
 - **Cache coverage**: every day from Jan 1, 2026 to the cutoff (no missing days; THESIS.md prints the count). Nothing before 2026-01-01 is pulled. Monthly tables carry `days_covered`; a month under 28 covered days would be drawn as a gap, not zero.
 - **Newest day is partial** and dropped from every snapshot.
-- **Reconciliation** (pre-confidential, Apr 1-Jul 6): leg-sum with imputation is within about 1% of DefiLlama's daily volume (daily correlation 0.998); priced-only is about 8% lower. Against Dune's public figures read on 2026-10-30, recent windows differ by about 0 to +17% depending on the window definition (unresolved; likely rolling-window and public/confidential classification differences). Because DefiLlama and Dune share a source, agreement is a check on definition, not independent verification.
+- **Reconciliation** (pre-confidential, 2026-04-01 to 2026-07-06): recomputed on every build into `data/metrics/reconciliation.csv` and printed in THESIS.md (public leg-sum over DefiLlama's reported volume with and without imputation, daily correlation, median daily gap). **Dune comparison**: figures read by eye from Dune's public dashboard on 2026-10-30 differed from our recent windows by roughly 0 to +17% depending on the window definition. They were transcribed from screenshots, cannot be re-pulled without a paid plan, are unresolved (likely rolling-window and public/confidential classification differences) and are not used in any figure.
 - **Fees**: the on-chain protocol fee is ~0.0001% (negligible); reported fees are mostly affiliate/distribution fees that are not visible in these events, so fee inputs to the model come from DefiLlama, not from on-chain data.
 - **BigQuery data in `ft_events`** was not used (cost); deposits/withdrawals come from `mt_mint`/`mt_burn` logs.
 - **Average swap size rose ~1.9x from Aug to Oct while intents/day fell ~half**: not explained here.
