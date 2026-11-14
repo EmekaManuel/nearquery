@@ -36,12 +36,8 @@ def overview(path: str) -> dict:
     raise RuntimeError(f"DefiLlama {path} unreachable")
 
 
-def main() -> None:
-    try:
-        fees, dexs, aggs = overview("fees"), overview("dexs"), overview("bridge-aggregators")
-    except RuntimeError as e:
-        print(f"{e}; keeping the committed {OUT.relative_to(config.ROOT)}", file=sys.stderr)
-        return
+def select(fees: dict, dexs: dict, aggs: dict) -> pd.DataFrame:
+    """The fixed selection rule: pure, so it can be tested without the network."""
     rows = []
     for name, f in fees.items():
         v = dexs.get(name) or aggs.get(name)
@@ -51,7 +47,16 @@ def main() -> None:
         if cat not in CATS or v["total30d"] < MIN_VOLUME:
             continue
         rows.append({"protocol": name, "category": cat, "fees_per_1m_usd": round(f["total30d"] / v["total30d"] * 1e6)})
-    df = pd.DataFrame(rows).sort_values("fees_per_1m_usd", ascending=False)
+    return pd.DataFrame(rows, columns=["protocol", "category", "fees_per_1m_usd"]).sort_values("fees_per_1m_usd", ascending=False)
+
+
+def main() -> None:
+    try:
+        fees, dexs, aggs = overview("fees"), overview("dexs"), overview("bridge-aggregators")
+    except RuntimeError as e:
+        print(f"{e}; keeping the committed {OUT.relative_to(config.ROOT)}", file=sys.stderr)
+        return
+    df = select(fees, dexs, aggs)
     df.to_csv(OUT, index=False)
     print(f"peers: {len(df)} protocols -> {OUT.relative_to(config.ROOT)}")
     print(df.to_string(index=False))

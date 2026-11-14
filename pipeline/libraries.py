@@ -23,7 +23,8 @@ def py_license(name: str) -> str:
 
 
 def main() -> None:
-    py = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["dependencies"]
+    cfg = tomllib.loads((ROOT / "pyproject.toml").read_text())
+    py = cfg["project"]["dependencies"] + cfg.get("dependency-groups", {}).get("dev", [])
     rows = []
     for dep in py:
         name, ver = dep.split("==")

@@ -1,7 +1,7 @@
 UV ?= uv
 RUN = $(UV) run --frozen python -m
 
-.PHONY: all video thesis setup extract-logs extract-flows reference metrics model dashboard rebuild
+.PHONY: all test video thesis setup extract-logs extract-flows reference metrics model dashboard rebuild
 
 setup:
 	$(UV) sync --frozen
@@ -40,6 +40,9 @@ rebuild:
 	$(RUN) pipeline.defillama   # re-fetch the DefiLlama series (not committed, see METHODOLOGY)
 	$(RUN) pipeline.peers       # fees per $1M against other cross-chain protocols (derived ratios only)
 	$(MAKE) model dashboard
+
+test:
+	$(UV) run --frozen pytest -q
 
 thesis:
 	$(RUN) pipeline.thesis

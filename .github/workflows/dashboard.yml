@@ -14,6 +14,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - run: uv sync --frozen
+      - run: uv run --frozen pytest -q   # offline checks of the committed snapshots, before any refetch
       - run: uv run --frozen python -m pipeline.defillama
       - run: uv run --frozen python -m pipeline.peers
       - run: uv run --frozen python -m pipeline.model
