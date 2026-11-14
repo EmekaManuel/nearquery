@@ -6,7 +6,7 @@
 
 **A re-runnable investment thesis on NEAR Intents: every number computed by code, with the four signals that would prove it wrong.**
 
-[Live dashboard](https://emekamanuel.github.io/nearquery/) · [Demo video (94 s)](demo/out/nearquery-demo.mp4) · [Read the thesis](THESIS.md) · [Open notebook](notebooks/nearquery.ipynb) · [Method and limits](METHODOLOGY.md)
+[Live dashboard](https://emekamanuel.github.io/nearquery/) · [Demo video (108 s)](demo/out/nearquery-demo.mp4) · [Read the thesis](THESIS.md) · [Open notebook](notebooks/nearquery.ipynb) · [Method and limits](METHODOLOGY.md)
 
 ![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet-2f6fed) ![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab) ![Tests: 33 offline](https://img.shields.io/badge/tests-33%20offline-brightgreen) ![License: MIT](https://img.shields.io/badge/license-MIT-555555)
 
