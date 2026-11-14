@@ -8,7 +8,7 @@
 
 [Live dashboard](https://emekamanuel.github.io/nearquery/) · [Demo video (108 s)](demo/out/nearquery-demo.mp4) · [Read the thesis](THESIS.md) · [Open notebook](notebooks/nearquery.ipynb) · [Method and limits](METHODOLOGY.md)
 
-![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet-2f6fed) ![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab) ![Tests: 33 offline](https://img.shields.io/badge/tests-33%20offline-brightgreen) ![License: MIT](https://img.shields.io/badge/license-MIT-555555)
+![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet-2f6fed) ![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab) ![Tests: 33 offline](https://img.shields.io/badge/tests-33%20offline-brightgreen) [![CI](https://github.com/EmekaManuel/nearquery/actions/workflows/dashboard.yml/badge.svg)](https://github.com/EmekaManuel/nearquery/actions/workflows/dashboard.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-555555)
 
 </div>
 
@@ -164,6 +164,8 @@ brand/        Brand tokens, logos and social card
 
 The Investment Thesis track is judged on the evidence, not the conviction. Each line below names the code that does it, how it is checked, and what to try.
 
+<img src="docs/img/track-card.png" alt="What the brief asked for and what NearQuery computes: 0.43% to 4.28% token buyback yield at 10x volume, 0.6% of user volume set aside as wash and bot, NEAR Intents fees of $1,536 per $1M ranking 2 of 7 cross-chain protocols, and a dashboard plus an open notebook." width="100%">
+
 | The track asks for | In NearQuery | Code | Checked by | Try it |
 | --- | --- | --- | --- | --- |
 | **A clear, falsifiable call** | A verdict first, with the exact condition that flips it, and four triggers with thresholds defined once (`THRESH`) and shown with today's readings | [`pipeline/thesis.py`](pipeline/thesis.py), [`THESIS.template.md`](THESIS.template.md) | `make test`: every placeholder has a computed value and `THESIS.md` matches a fresh render; the video's falsifier card refuses to render if a trigger has fired | Open [THESIS.md](THESIS.md), "What would change our mind" |
@@ -209,7 +211,7 @@ The on-chain cache covers every day from 2026-01-01 to the cutoff shown on each 
 ## Built at NEAR HACKATHON
 
 - **Window:** all code, SQL and prose in this repository was written on or after 2026-10-19. The first commit (2026-10-30) is only the project scaffold; it is the `pre-hackathon` tag, so there is no earlier code and no pre-window baseline to subtract. The `hackathon-submission` tag marks the entry; the diff between the two is `https://github.com/EmekaManuel/nearquery/compare/pre-hackathon...hackathon-submission`.
-- **AI assistance:** built with Claude Code (Anthropic) as a coding assistant and reviewed by the author, as the hackathon rules allow. Correctness does not rest on who wrote the code: every figure is computed from public data and re-checked by `make all`.
+- **AI assistance:** built with Claude Code (Anthropic) as a coding assistant and reviewed by the author, as the hackathon rules allow. Correctness does not rest on who wrote the code: every figure is computed from public data and re-checked by `make all`. The demo video's voiceover was generated with ElevenLabs from the author's own cloned voice, reading the script in `demo/scripts/voiceover.py`; the video itself is rendered from code in `demo/` (Remotion, Playwright, VHS, ffmpeg).
 - **Libraries and tools:** see [LIBRARIES.md](LIBRARIES.md) (generated from the lockfiles).
 - **Other project:** [Nims](https://github.com/EmekaManuel/nims) is the author's other NEAR Hackathon entry. The two projects are independent. This repository was built from scratch and does not import or vendor Nims code.
 - **License:** MIT, see [LICENSE](LICENSE).

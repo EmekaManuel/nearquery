@@ -46,4 +46,4 @@ NEAR Explorer API (terms §4.1(e)); see METHODOLOGY.md.
 
 ## AI assistance
 
-Built with Claude Code (Anthropic) as a coding assistant and reviewed by the author. Every figure is computed from public data and reproduces with `make all`. See README.md.
+Built with Claude Code (Anthropic) as a coding assistant and reviewed by the author. Every figure is computed from public data and reproduces with `make all`. The demo voiceover was generated with ElevenLabs from the author's own cloned voice (a hosted service; no key or audio is in the repository). See README.md.
