@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="brand/social/nearquery-social-card.png" alt="NearQuery: Ask the chain. Show the work." width="100%" />
+<img src="docs/img/banner.png" alt="NearQuery: Ask the chain. Show the work. A re-runnable investment thesis on NEAR Intents. Verdict: real infrastructure, thin value for the token. The implied confidential share steps from 0.1% to 21% on 2026-09-01." width="100%" />
 
 # NearQuery
 
