@@ -1,5 +1,5 @@
 // Records the NearQuery dashboard at 1920x1080 with scripted scrolls, a slider drag and deliberate holds.
-// Every number the video will show is asserted to be visible on the page first; a mismatch aborts the run.
+// The headline numbers the video shows (the ones read from numbers.json) are asserted to be visible on the page first; a mismatch aborts the run.
 import { chromium, type Locator, type Page } from "playwright"
 import { mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path"

@@ -15,7 +15,7 @@ export default function Overview() {
       <header className="page-head">
         <p className="label">NearQuery · NEAR hackathon, thesis track</p>
         <h1 className="display">Ask the chain. Show the work.</h1>
-        <p className="lede">Is NEAR Intents becoming real cross-chain settlement, and does that create value for NEAR? Every figure below comes from public on-chain data and links to the query that produced it.</p>
+        <p className="lede">Is NEAR Intents becoming real cross-chain settlement, and does that create value for NEAR? Every figure below is computed from public on-chain data and DefiLlama’s public API, and links to the code that produced it.</p>
       </header>
       <div className="verdict">
         <b className="label">Draft verdict</b>
