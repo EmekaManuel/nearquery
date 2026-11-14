@@ -16,6 +16,11 @@ NEAR Intents is real settlement infrastructure (about $1.30B of public net swap 
 4. **The solver market is more distributed than in January, but re-concentrated in October.** Top-1 solver share of solver-side volume fell from 66% (Jan) to 32% (Oct), active solvers rose from 24 to 34; top-5 share was 74% in Jul and 90% in Oct. Solver = account facing >= 100 distinct counterparties (heuristic). (Chart: solver concentration.)
 5. **Value capture is thin.** Gross fees run 15.9 bps of reported volume; NEAR captures 34% of that (5.4 bps), and since 2026-02-23 spends it on buybacks, not burns. At $4.66 and total supply the market cap is $6.11B, so annualized captured revenue is 0.43% of market cap. Even at 10x current volume it would be $261.6M, 4.3% of market cap. (Table: value-capture scenarios.)
 
+## Two cross-checks
+
+- **Wash and bot screen.** Two stated rules (accounts with 50 or more swaps in a day, and volume swapped out and back in the same assets within a day) set aside 0.6% of user volume in 2026-10: 0.5% high-frequency and 0.08% round trips. So these two kinds do not materially inflate the headline volume. It is a screen, not a detector: it cannot see cycling across several accounts or across days. (Chart: wash and bot screen.)
+- **Fee benchmark.** NEAR Intents' gross fees are $1,536 per $1M of volume, rank 2 of 7 cross-chain protocols that DefiLlama lists with at least $100M of 30-day volume (median $433). NEAR keeps 34% of that, about $522 per $1M. Fee definitions differ by protocol, so this is a rough guide, not like for like. (Chart: fees per $1M.)
+
 ## Strongest bear case
 
 Volume is not user growth: intents/day moved -52% since August, accounts are single-use so adoption cannot be demonstrated, and the largest part of the growth story (Confidential Intents) cannot be audited on-chain; the step in the implied confidential share may even be a change in DefiLlama's series, not user behaviour. Fees are small relative to the token (0.43% yield), NEAR keeps only 34% of gross fees (solvers and frontends keep the rest), the token is rarely a party to swaps (1.9%), and gas demand is a rounding error ($118k). Solver concentration rebounded in October.

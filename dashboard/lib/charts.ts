@@ -1,6 +1,6 @@
 // Chart registry: one entry per chart. Plain data only, so server pages can hand it to client components.
 export type FmtKind = "usd" | "usd0" | "num" | "frac0" | "pu1" | "pu2"
-export type Dataset = "daily" | "weekly" | "monthly" | "flows" | "scenarios"
+export type Dataset = "daily" | "weekly" | "monthly" | "flows" | "peers" | "scenarios"
 
 export interface SeriesDef { key: string; label: string; color: string }
 export interface ChartDef {
@@ -117,6 +117,22 @@ export const CHARTS: ChartDef[] = [
     definition: "Monthly user-side volume grouped by the origin chain of the asset sold and of the asset bought. Shows which chain pairs dominate settlement.",
     method: ["Take user-side entries of two-account swaps.", "Origin chain comes from the asset id (omft prefix or bridge), see pipeline/assets.py.", "Sum the bought leg's USD value per month and pair."],
     caveats: ["HOT Omni assets are mapped only for the EVM chain ids we can be sure of.", "Swaps whose bought leg is unpriced are counted separately (unvalued_swaps)."],
+  },
+  {
+    id: "wash-screen", blurb: "How much user volume looks like round trips or bot cadence.", group: "market", title: "Wash and bot screen", kind: "line", dataset: "monthly", xKey: "month", xFmt: "month", markers: true,
+    series: [{ key: "highFreqPct", label: "High-frequency accounts (%)", color: "var(--chart-1)" }, { key: "roundTripPct", label: "Round trips (%)", color: "var(--chart-2)" }], fmt: "pu2",
+    source: "pipeline/sql/90_wash_screen.sql. Months under 28 cached days are gaps.", sql: ["90_wash_screen.sql", "00_setup.sql"], csv: "wash_screen",
+    definition: "Share of monthly user volume that a simple screen would set aside: accounts with at least 50 swaps in a day (bot-like cadence), and volume swapped out and back in the same assets within a user-day (round trips). The rest is the filtered volume. Thresholds are stated choices.",
+    method: ["Take user-side legs of two-account swaps, priced as in the other charts.", "High-frequency: an account-day with 50 or more swaps; all of its received volume is set aside.", "Round trip: per account-day, churn = 1 - (sum of net value change per asset) / (sum of gross value moved per asset); round-trip volume is received volume times churn.", "Filtered volume = user volume minus both parts."],
+    caveats: ["A screen with two stated rules, not a wash-trading detector: it cannot see cycling across several accounts or across days.", "The 50-swap threshold is a choice; a lower one would remove more.", "Imputed legs are included, as in the volume chart."],
+  },
+  {
+    id: "peer-fees", blurb: "Fees per $1M of volume, NEAR Intents against other cross-chain protocols.", group: "value", title: "Fees per $1M of volume, cross-chain protocols", kind: "bar", dataset: "peers",
+    note: "USD of fees per $1M of volume over DefiLlama's latest 30 days, as DefiLlama defines each.", fmt: "usd0", source: "pipeline/peers.py (DefiLlama 30-day totals, fetched at build; only the ratio is published).",
+    sql: [], extraFiles: ["pipeline/peers.py"], csv: "peer_fees",
+    definition: "Reported 30-day fees divided by reported 30-day volume, per $1M, for every protocol DefiLlama lists as a bridge, cross-chain bridge or bridge aggregator with at least $100M of 30-day volume. A fixed rule, not a hand-picked set.",
+    method: ["Fetch DefiLlama's fees, DEX volume and bridge-aggregator volume overviews.", "Keep bridges, cross-chain bridges and bridge aggregators with 30-day volume of at least $100M and fees above zero.", "Divide fees by volume and scale to $1M. Only this ratio is stored."],
+    caveats: ["Fee definitions differ by protocol (what users pay, what the protocol keeps, a spread), so this is a rough benchmark, not like for like.", "For NEAR Intents, gross fees are shared: NEAR captures about a third, solvers and frontends keep the rest.", "Not every cross-chain protocol is in DefiLlama's volume tables, so the set is incomplete."],
   },
   {
     id: "value-scenarios", blurb: "What volume a buyback would need to matter.", group: "value", title: "What volume would it take?", kind: "table", dataset: "scenarios", fmt: "usd",

@@ -20,7 +20,7 @@ PUBLIC = config.ROOT / "dashboard" / "public" / "data"
 BRAND = config.ROOT / "brand"
 PUBLIC_BRAND = config.ROOT / "dashboard" / "public" / "brand"
 # derived metric CSVs offered for download on chart pages (never raw third-party series)
-DOWNLOADS = ["daily_volume", "solver_concentration", "user_stickiness", "account_quality", "near_touch", "confidential_weekly", "chain_pairs", "model_scenarios", "model_observed"]
+DOWNLOADS = ["daily_volume", "solver_concentration", "user_stickiness", "account_quality", "near_touch", "confidential_weekly", "chain_pairs", "wash_screen", "peer_fees", "model_scenarios", "model_observed"]
 
 
 def intents_change(vol: pd.DataFrame) -> float:
@@ -46,10 +46,11 @@ def main() -> None:
         t = pd.read_csv(M / f"{name}.csv")
         return t[t.days_covered >= 28].set_index("month").reindex(months)
 
-    sol, stick, touch = full("solver_concentration"), full("user_stickiness"), full("near_touch")
+    sol, stick, touch, wash = full("solver_concentration"), full("user_stickiness"), full("near_touch"), full("wash_screen")
     monthly = [{"month": m, "top1": nn(sol.top1_share[m]), "top5": nn(sol.top5_share[m]),
                 "solvers": nn(sol.active_solvers[m]), "users": nn(stick.users[m]),
-                "repeatPct": nn(stick.share_2plus_days[m] * 100), "nearTouchPct": nn(touch.near_touching_share[m] * 100)}
+                "repeatPct": nn(stick.share_2plus_days[m] * 100), "nearTouchPct": nn(touch.near_touching_share[m] * 100),
+                "highFreqPct": nn(wash.high_frequency_share[m] * 100), "roundTripPct": nn(wash.round_trip_share[m] * 100)}
                for m in months]
     brk = pd.read_csv(M / "confidential_break.csv", index_col=0)["value"]
     conf = pd.read_csv(M / "confidential_weekly.csv")
@@ -58,6 +59,7 @@ def main() -> None:
     last_m = pairs[pairs.days_covered >= 28].month.max()
     top = (pairs[pairs.month == last_m].assign(pair=lambda d: d.sold_chain + " → " + d.bought_chain)
            .nlargest(10, "usd")[["pair", "usd"]])
+    peers = pd.read_csv(M / "peer_fees.csv")
     obs = pd.read_csv(M / "model_observed.csv", index_col=0)["value"]
     scen = pd.read_csv(M / "model_scenarios.csv")
     acct = pd.read_csv(M / "account_quality.csv").set_index("fmt")
@@ -68,6 +70,7 @@ def main() -> None:
                  "generated": pd.Timestamp.now("UTC").strftime("%Y-%m-%d")},
         "daily": daily, "monthly": monthly, "weekly": weekly,
         "flows": {"month": str(last_m), "rows": [{"pair": r.pair, "usd": float(r.usd)} for r in top.itertuples()]},
+        "peers": {"rows": [{"pair": r.protocol.replace(" Bridge Aggregator", "").replace(" Protocol", ""), "usd": float(r.fees_per_1m_usd)} for r in peers.itertuples()]},
         "obs": {"netSwap30d": f("pipeline_public_net_swap_usd"), "legSum30d": f("pipeline_public_legsum_usd"),
                 "confidentialShare": f("implied_confidential_share"), "grossBps": f("gross_fee_bps_of_reported_volume"),
                 "capturedBps": f("captured_bps_of_reported_volume"), "capturedShare": f("captured_share_of_gross_fees"),

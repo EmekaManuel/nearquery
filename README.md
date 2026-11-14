@@ -47,11 +47,12 @@ Investment cases for crypto projects are usually conviction: a story, a chart sc
 - **A call, up front.** [THESIS.md](THESIS.md) opens with a verdict and the exact condition that would flip it, then five findings, each tied to a chart and a number, and the strongest bear and bull cases.
 - **Numbers that cannot drift.** The thesis is a template. Every figure is filled in by code from the committed metric snapshots, so rebuilding changes the text and the charts together, and `git diff` shows exactly what moved.
 - **Charts you can audit.** The dashboard gives every chart its own page: definition, how it is computed, caveats, the DuckDB SQL behind it with a Copy button, and a CSV download.
+- **A volume-quality screen and a fee benchmark.** A stated-rule wash and bot screen on user volume, and NEAR Intents' fees per $1M of volume against other cross-chain protocols, both as charts with their code.
 - **A model you can break.** The value-capture model turns Intents fees into a buyback yield on market cap. Its assumptions are plain inputs, and sliders on the Value page recompute it in the browser with the pipeline's own formula.
 - **Falsifiers, not hedges.** Four signals, bullish and bearish, each with a stated threshold and today's reading. Any one of them moving changes the verdict in a named direction.
 - **Limits on the page.** The confidential-volume blind spot and the 2026-09-01 break are stated where the numbers appear, not in a footnote.
 
-The pipeline, the site and the demo video are all built by code ([`demo/`](demo/)), and the video asserts every on-screen figure against the page before it records.
+An [open notebook](notebooks/nearquery.ipynb) reproduces the key figures from the committed snapshots (`uv run --with jupyterlab --with matplotlib jupyter lab notebooks/nearquery.ipynb`). The pipeline, the site and the demo video are all built by code ([`demo/`](demo/)), and the video asserts every on-screen figure against the page before it records.
 
 ## Key findings (cutoff 2026-10-28)
 
@@ -85,7 +86,7 @@ Needs: `make`, [uv](https://docs.astral.sh/uv/), Python 3.12, Node 20+, internet
 | # | Do | See |
 | --- | --- | --- |
 | 1 | `make setup` | Pinned Python dependencies install into `.venv` (uv, frozen lockfile). |
-| 2 | `make rebuild` | Re-fetches DefiLlama volume, fees and revenue, reruns the value-capture model (a table of observed inputs prints), emits `dashboard/data/dashboard.json`, then builds the site: `Generating static pages (17/17)`. |
+| 2 | `make rebuild` | Re-fetches DefiLlama volume, fees and revenue, reruns the value-capture model (a table of observed inputs prints), emits `dashboard/data/dashboard.json`, then builds the site: `Generating static pages (19/19)`. |
 | 3 | `make thesis`, then `git diff THESIS.md` | The thesis is re-rendered from the metrics. The diff is empty: every number is reproducible. |
 | 4 | `npx serve dashboard/out`, open the printed URL | The overview: verdict, five headline figures (each with its date range), and the daily volume chart. |
 | 5 | On any chart click **Open ↗** | The chart's page: definition, how it is computed, caveats, the SQL (with a Copy button) and a CSV link. |
@@ -147,6 +148,8 @@ The Investment Thesis track is judged on the evidence, not the conviction. Each 
 | **Honesty about uncertainty** | The strongest bear case, the residual caveat, the 2026-09-01 break and the cross-check gaps are stated beside the numbers | [`METHODOLOGY.md`](METHODOLOGY.md), [`dashboard/lib/charts.ts`](dashboard/lib/charts.ts) | Each derived chart carries a "Read this before quoting it" card | [Implied confidential share](https://emekamanuel.github.io/nearquery/charts/confidential-residual/) |
 | **Re-runnable** | One command, no accounts or keys | [`Makefile`](Makefile) | `make thesis` then `git diff THESIS.md` is empty | `make all` |
 | **Stress-testable** | Sliders for volume, take rate and NEAR price, with the 2% and 5% market-cap trigger multiples | [`dashboard/components/ScenarioExplorer.tsx`](dashboard/components/ScenarioExplorer.tsx), [`pipeline/model.py`](pipeline/model.py) | At the defaults the slider result equals the pipeline's own 1x row | **Value capture** page |
+| **Classify swaps; filter wash and bot volume** | Monthly volume by source chain and pair, and a stated-rule wash and bot screen: it sets aside about 0.6% of user volume in the latest full month | [`pipeline/sql/80_chain_pairs.sql`](pipeline/sql/80_chain_pairs.sql), [`pipeline/sql/90_wash_screen.sql`](pipeline/sql/90_wash_screen.sql) | The rules and thresholds are stated on the chart page; it is a screen, not a detector | [Wash and bot screen](https://emekamanuel.github.io/nearquery/charts/wash-screen/) |
+| **Fees against other cross-chain protocols** | NEAR Intents' fees per $1M of volume against every bridge and bridge aggregator DefiLlama lists with at least $100M of 30-day volume | [`pipeline/peers.py`](pipeline/peers.py) | Fixed selection rule; only the ratio is published | [Fees per $1M](https://emekamanuel.github.io/nearquery/charts/peer-fees/) |
 | **Built on NEAR** | The whole analysis is of NEAR's own chain: `intents.near` settlement and the NEAR token's value capture | [`pipeline/extract_bq.py`](pipeline/extract_bq.py), [`pipeline/parse_events.py`](pipeline/parse_events.py) | Public BigQuery dataset of NEAR mainnet, read-only | Any chart's source line |
 
 ## What is real, and what is not
@@ -162,6 +165,8 @@ The Investment Thesis track is judged on the evidence, not the conviction. Each 
 - **The implied confidential share is a residual, not a measurement.** It is one minus our public total over DefiLlama's reported volume, so it absorbs any coverage difference. The thesis says it cannot tell migration from a data change.
 - **Captured revenue is DefiLlama's reported figure,** not a sum of the on-chain events we can see. We cannot verify how fully it includes Confidential Intents.
 - **DefiLlama's volume derives from Dune,** so cross-checking against Dune checks our transcription, not an independent source. Recent windows differ by about 0 to 17% depending on the window definition, and that gap is unresolved.
+- **The wash and bot screen is a screen.** Two stated rules with stated thresholds; it cannot see cycling across accounts or days.
+- **The fee benchmark is rough.** Fee definitions differ by protocol in DefiLlama, and the peer set is limited to protocols with both fees and volume listed.
 - **Accounts are not users.** Nearly every account is used on a single day, so adoption cannot be shown from account counts.
 - **The model's multiples are assumptions, not forecasts.** The thesis does not predict that volume will arrive.
 - **There is no unit-test suite.** Correctness is checked by reproduction: the thesis re-renders from the metrics with an empty diff, and the reconciliation and number checks above.
@@ -175,6 +180,7 @@ The on-chain cache covers every day from 2026-01-01 to the cutoff shown on each 
 
 - **Direct confidential volume:** replace the residual with a first-hand figure from the NEAR side if one becomes available, and re-run.
 - **Longer history:** extend the on-chain cache before 2026-01-01.
+- **Live, not daily:** the dashboard rebuilds daily; a streaming view would need a hosted backend.
 - **More triggers:** add falsifiers as new evidence appears, keeping each one defined once.
 
 ## Built at NEAR HACKATHON

@@ -10,7 +10,7 @@ const GROUPS: { id: ChartDef["group"]; label: string; sub: string }[] = [
   { id: "market", label: "Market structure", sub: "Solvers, flows, NEAR demand" },
   { id: "value", label: "Value capture", sub: "Revenue and buyback scenarios" },
 ]
-const CADENCE: Record<string, string> = { daily: "Daily", weekly: "Weekly", monthly: "Monthly", flows: "Latest month", scenarios: "Model" }
+const CADENCE: Record<string, string> = { daily: "Daily", weekly: "Weekly", monthly: "Monthly", flows: "Latest month", peers: "30 days", scenarios: "Model" }
 
 type Pt = { x: string; y: number }
 

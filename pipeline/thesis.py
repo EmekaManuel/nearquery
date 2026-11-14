@@ -75,6 +75,14 @@ def keys() -> dict:
         "ints_pre": f"{float(brk['intents_per_day_14d_before']):,.0f}", "ints_post": f"{float(brk['intents_per_day_14d_after']):,.0f}", "ints_later": f"{float(brk['intents_per_day_days_15_to_42']):,.0f}",
         "yield_10x": f"{s10.buyback_pct_of_mcap * 100:.1f}%", "rev_10x": usd(s10.annual_buyback_usd),
     }
+    wash = pd.read_csv(M / "wash_screen.csv")
+    wash = wash[wash.days_covered >= 28].iloc[-1]
+    peers = pd.read_csv(M / "peer_fees.csv").sort_values("fees_per_1m_usd", ascending=False).reset_index(drop=True)
+    near_row = peers[peers.protocol == "NEAR Intents"].index[0]
+    k |= {"wash_month": str(wash["month"])[:7], "wash_total": f"{(1 - float(wash['kept_share'])) * 100:.1f}%",
+          "wash_hf": f"{float(wash['high_frequency_share']) * 100:.1f}%", "wash_rt": f"{float(wash['round_trip_share']) * 100:.2f}%",
+          "near_fee_1m": f"${int(peers.fees_per_1m_usd[near_row]):,}", "near_fee_rank": str(near_row + 1), "n_peers": str(len(peers)),
+          "peer_median": f"${peers.fees_per_1m_usd.median():,.0f}", "near_kept_1m": f"${int(peers.fees_per_1m_usd[near_row] * float(obs['captured_share_of_gross_fees'])):,}"}
     top5_oct, top5_sep = sol.loc["2026-10-01", "top5_share"], sol.loc["2026-09-01", "top5_share"]
     fired = [yld >= THRESH["yield"], touch_oct >= THRESH["touch"] and touch_sep >= THRESH["touch"], ints_30d < THRESH["ints"],
              top5_oct >= THRESH["top5"] and top5_sep >= THRESH["top5"]]

@@ -38,6 +38,7 @@ dashboard:
 # Judges: `make setup rebuild` regenerates the model outputs and dashboard from the committed data/metrics CSVs.
 rebuild:
 	$(RUN) pipeline.defillama   # re-fetch the DefiLlama series (not committed, see METHODOLOGY)
+	$(RUN) pipeline.peers       # fees per $1M against other cross-chain protocols (derived ratios only)
 	$(MAKE) model dashboard
 
 thesis:

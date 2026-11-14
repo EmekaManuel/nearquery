@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "python3 -m pip install uv && python3 -m uv sync --frozen && cd dashboard && npm ci --no-audit --no-fund",
-  "buildCommand": "python3 -m uv run --frozen python -m pipeline.defillama && python3 -m uv run --frozen python -m pipeline.model && python3 -m uv run --frozen python -m dashboard.build && cd dashboard && npm run build",
+  "buildCommand": "python3 -m uv run --frozen python -m pipeline.defillama && python3 -m uv run --frozen python -m pipeline.peers && python3 -m uv run --frozen python -m pipeline.model && python3 -m uv run --frozen python -m dashboard.build && cd dashboard && npm run build",
   "outputDirectory": "dashboard/out"
 }

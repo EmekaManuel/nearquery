@@ -12,7 +12,7 @@ export function rowsFor(c: ChartDef, d: Dashboard): Row[] {
 export function Chart({ c: raw, d, big }: { c: ChartDef; d: Dashboard; big?: boolean }) {
   const c = fillChart(raw, d)
   const href = `/charts/${c.id}/`
-  if (c.kind === "bar") return <BarCard title={c.title} note={c.note} rows={d.flows.rows} fmt={c.fmt} source={c.source} href={big ? undefined : href} height={big ? 420 : 300} />
+  if (c.kind === "bar") return <BarCard title={c.title} note={c.note} rows={c.dataset === "peers" ? d.peers.rows : d.flows.rows} fmt={c.fmt} source={c.source} href={big ? undefined : href} height={big ? 420 : 300} />
   return (
     <ChartCard title={c.title} note={c.note} rows={rowsFor(c, d)} xKey={c.xKey!} xFmt={c.xFmt} series={c.series!} fmt={c.fmt}
       ranged={c.ranged} markers={c.markers} warn={c.warn} source={c.source} href={big ? undefined : href} height={big ? 400 : 250} />
