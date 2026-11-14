@@ -18,7 +18,7 @@ export default function Overview() {
         <p className="lede">Is NEAR Intents becoming real cross-chain settlement, and does that create value for NEAR? Every figure below is computed from public on-chain data and DefiLlama’s public API, and links to the code that produced it.</p>
       </header>
       <div className="verdict">
-        <b className="label">Draft verdict</b>
+        <b className="label">Verdict</b>
         <p>Intents looks like real infrastructure, but the data shows weak value for the token so far. Captured revenue annualizes to {usd(d.obs.revenueAnnual)}, {pct(d.obs.buybackYield, 2)} of market cap; ten times today’s volume would be {pct(ten?.pctOfMarketCap ?? null, 1)}. THESIS.md has the claim, the findings, the bear case and what would change our mind.</p>
       </div>
       <Tiles d={d} />
