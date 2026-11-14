@@ -37,7 +37,7 @@ Space Grotesk, IBM Plex Sans, IBM Plex Mono: SIL Open Font License 1.1.
 | --- | --- | --- |
 | BigQuery public dataset `bigquery-public-data.crypto_near_mainnet_us` | On-chain `intents.near` event logs (raw pull is optional) | No restriction on derived results found; Google public-dataset terms apply. |
 | DefiLlama API (`api.llama.fi`, `coins.llama.fi`) | Prices, reported volume, fees, revenue | ToS 8(7) forbids republishing their data; raw series are re-fetched at build, never committed or displayed. |
-| FastNEAR free RPC | Token metadata, NEAR total supply | Free, keyless. |
+| FastNEAR free RPC and transaction API | Token metadata, NEAR total supply, and the spot audit of 60 sampled receipts (`make audit`) | Free, keyless. |
 | Dune public dashboard | Spot cross-checks transcribed on 2026-10-30; not used in any computed number | Read by eye; no API used. |
 
 ## Excluded on purpose

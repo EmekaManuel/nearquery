@@ -1,7 +1,7 @@
 UV ?= uv
 RUN = $(UV) run --frozen python -m
 
-.PHONY: all test video thesis setup extract-logs extract-flows reference metrics model dashboard rebuild
+.PHONY: all audit test video thesis setup extract-logs extract-flows reference metrics model dashboard rebuild
 
 setup:
 	$(UV) sync --frozen
@@ -43,6 +43,10 @@ rebuild:
 
 test:
 	$(UV) run --frozen pytest -q
+
+# Spot-audit the cache against a second indexer (needs data/raw and internet; about a minute, read-only).
+audit:
+	$(RUN) pipeline.audit_rpc
 
 thesis:
 	$(RUN) pipeline.thesis

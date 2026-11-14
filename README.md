@@ -8,7 +8,7 @@
 
 [Live dashboard](https://emekamanuel.github.io/nearquery/) · [Demo video (108 s)](demo/out/nearquery-demo.mp4) · [Read the thesis](THESIS.md) · [Open notebook](notebooks/nearquery.ipynb) · [Method and limits](METHODOLOGY.md)
 
-![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet-2f6fed) ![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab) ![Tests: 33 offline](https://img.shields.io/badge/tests-33%20offline-brightgreen) [![CI](https://github.com/EmekaManuel/nearquery/actions/workflows/dashboard.yml/badge.svg)](https://github.com/EmekaManuel/nearquery/actions/workflows/dashboard.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-555555)
+![Track: Investment Thesis](https://img.shields.io/badge/track-Investment%20Thesis-00ec97) ![Data: NEAR mainnet](https://img.shields.io/badge/data-NEAR%20mainnet-2f6fed) ![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab) ![Tests: 40 offline](https://img.shields.io/badge/tests-40%20offline-brightgreen) [![CI](https://github.com/EmekaManuel/nearquery/actions/workflows/dashboard.yml/badge.svg)](https://github.com/EmekaManuel/nearquery/actions/workflows/dashboard.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-555555)
 
 </div>
 
@@ -58,7 +58,7 @@ An [open notebook](notebooks/nearquery.ipynb) reproduces the key figures from th
 
 **Two cross-checks.** A [wash and bot screen](https://emekamanuel.github.io/nearquery/charts/wash-screen/) (accounts with 50 or more swaps in a day, and same-day round trips) sets aside only about 0.6% of user volume in October, so these two kinds don't materially inflate the headline; it is a screen, not a detector. And NEAR Intents' gross fees of $1,536 per $1M of volume rank 2nd of 7 [cross-chain protocols](https://emekamanuel.github.io/nearquery/charts/peer-fees/) that DefiLlama lists with at least $100M of 30-day volume; NEAR keeps about a third of that. Fee definitions differ by protocol, so treat it as a rough guide.
 
-The step in finding 1 is the interesting part: the implied confidential share sits near 0.1% until 2026-09-01, then jumps to 21% on a month boundary while public volume fell 10%. That is as consistent with a change in a third-party data series as with users moving to Confidential Intents. NearQuery states that it cannot tell which, and says what evidence would.
+The step in finding 1 is the interesting part: the implied confidential share sits near 0.1% until 2026-09-01, then jumps to 21% on a month boundary while public volume fell 10%. That is as consistent with a change in a third-party data series as with users moving to Confidential Intents. NearQuery tests it and still cannot tell which: the step is one day and not a ramp (the share never passed 2.5% on any day from launch to the step, then 18% on the day), deposits and withdrawals did not move, and DefiLlama's fees followed public volume and not reported volume. That fits a change in the series, and it also fits confidential swaps its fee data cannot see.
 
 <img src="docs/img/residual.jpg" alt="Implied confidential share, weekly: flat near zero, then a step on 2026-09-01" width="100%" />
 
@@ -108,7 +108,7 @@ Each BigQuery chunk is dry-run first and refuses to exceed `--max-gb`; cached da
 ## Tests
 
 ```bash
-make test        # 33 offline tests, about a second, no network and no BigQuery
+make test        # 40 offline tests, about a second, no network and no BigQuery
 ```
 
 They run against the committed snapshots and guard the claims this README makes:
@@ -116,7 +116,8 @@ They run against the committed snapshots and guard the claims this README makes:
 - **Reproducibility:** `THESIS.md` is re-rendered in memory from the template and the snapshots and must match the committed file exactly; every `{{placeholder}}` must have a computed value.
 - **One source for the thresholds:** the four falsifier thresholds flow from `THRESH` into the text, and no copy of them exists in the dashboard or video code.
 - **Reconciliation:** before Confidential Intents launched, public leg-sum must stay within 2% of reported volume with a daily correlation above 0.99, and imputation must add volume.
-- **The confidential break:** the implied share stays near zero before the break date and above 10% after it.
+- **The confidential break and the step test:** the implied share stays near zero before the break date and above 10% after it; the one-day step, the flat deposits and withdrawals, and the fees that follow public volume are asserted, so the thesis text cannot drift from them.
+- **The RPC spot audit:** the committed result of 60 sampled receipts re-read from a second indexer must all match, spread over ten months. The comparison logic is tested on synthetic payloads, including a changed amount, a missing leg and a failed receipt.
 - **The model:** the 1x row equals the observed yield, buyback scales linearly with volume, and the dashboard sliders use the same formula as the pipeline.
 - **Wash screen and peers:** shares add up to one, the peer selection rule is applied as written, and only the derived ratio is published. Raw third-party series must stay gitignored.
 - **Extraction, with BigQuery mocked:** the log parser (swaps, mints, malformed JSON, failed receipts, empty days), month and day chunking, the dry-run-first and no-cache settings, the `--max-gb` budget guard, and that a cached day is never queried twice.
@@ -187,11 +188,12 @@ The Investment Thesis track is judged on the evidence, not the conviction. Each 
 
 **Not what it might sound like:**
 
-- **The implied confidential share is a residual, not a measurement.** It is one minus our public total over DefiLlama's reported volume, so it absorbs any coverage difference. The thesis says it cannot tell migration from a data change.
+- **The implied confidential share is a residual, not a measurement.** It is one minus our public total over DefiLlama's reported volume, so it absorbs any coverage difference. The thesis tests the step (one day, flat on-chain flows, fees that follow public volume) and still cannot tell migration from a data change.
 - **Captured revenue is DefiLlama's reported figure,** not a sum of the on-chain events we can see. We cannot verify how fully it includes Confidential Intents.
 - **DefiLlama's volume derives from Dune,** so cross-checking against Dune checks our transcription, not an independent source. Recent windows differ by about 0 to 17% depending on the window definition, and that gap is unresolved.
 - **The wash and bot screen is a screen.** Two stated rules with stated thresholds; it cannot see cycling across accounts or days.
 - **The fee benchmark is rough.** Fee definitions differ by protocol in DefiLlama, and the peer set is limited to protocols with both fees and volume listed.
+- **Independent validation is a spot check.** `make audit` re-reads 60 sampled receipts (six a month, January to October) from FastNEAR's transaction API, a second indexer, and compares accounts, amounts, fees and success with the cache: 60 of 60 match. That supports the extraction and parsing. It does not show the cache is complete, and it does not validate DefiLlama's totals.
 - **Accounts are not users.** Nearly every account is used on a single day, so adoption cannot be shown from account counts.
 - **The model's multiples are assumptions, not forecasts.** The thesis does not predict that volume will arrive.
 - **The tests do not call live BigQuery.** The extraction is tested with BigQuery mocked and the SQL on a synthetic cache; a run against the real public dataset needs your own Google Cloud project and is checked through the reconciliation against reported volume.
