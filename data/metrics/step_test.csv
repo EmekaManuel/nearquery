@@ -1,0 +1,15 @@
+key,value
+ga_date,2026-07-07
+break_date,2026-09-01
+steady_days,56
+steady_max_daily_share,0.024656792367743763
+day_before_share,0.010352708445092396
+break_day_share,0.1802487508619176
+post_14d_min_daily_share,0.09141143153194764
+deposits_per_day_change,0.0025358390339769166
+withdrawals_per_day_change,0.0032462165616027328
+fees_bps_of_public_before,15.29051053335316
+fees_bps_of_public_after,15.228066255990964
+fees_bps_of_reported_before,15.27792774923735
+fees_bps_of_reported_after,11.976133419836458
+fees_per_day_change,-0.10071567609275534

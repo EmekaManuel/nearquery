@@ -49,6 +49,19 @@ def test_confidential_residual_is_near_zero_before_the_break_and_not_after():
     assert float(brk["share_14d_before"]) < 0.02 < 0.05 < float(brk["share_14d_after"])
 
 
+def test_step_test_supports_what_the_thesis_says_about_the_step():
+    """The thesis quotes: a one-day step (not a ramp), flat deposits and withdrawals, fees that follow public volume."""
+    st = rd("step_test", index_col=0)["value"]
+    brk = rd("confidential_break", index_col=0)["value"]
+    assert st["break_date"] == brk["break_date"] and st["ga_date"] < st["break_date"]
+    assert float(st["steady_days"]) >= 28
+    assert float(st["steady_max_daily_share"]) < 0.05 < 0.1 < float(st["break_day_share"]), "one-day step, not a ramp"
+    assert float(st["post_14d_min_daily_share"]) > 0.05, "the share stays up after the step"
+    assert abs(float(st["deposits_per_day_change"])) < 0.05 and abs(float(st["withdrawals_per_day_change"])) < 0.05
+    assert abs(float(st["fees_bps_of_public_after"]) / float(st["fees_bps_of_public_before"]) - 1) < 0.05, "fees follow public volume"
+    assert float(st["fees_bps_of_reported_after"]) < 0.9 * float(st["fees_bps_of_reported_before"]), "fees do not follow reported volume"
+
+
 def test_peer_fees_publish_only_derived_ratios():
     p = rd("peer_fees")
     assert list(p.columns) == ["protocol", "category", "fees_per_1m_usd"], "only the ratio may be published (DefiLlama terms)"

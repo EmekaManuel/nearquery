@@ -25,7 +25,7 @@ def confidential_residual(vol: pd.DataFrame, dl: pd.DataFrame, end: pd.Timestamp
     """
     v = vol[vol["date"] <= end].copy()
     v["pub"] = v["leg_sum_priced_usd"] + v["leg_sum_imputed_usd"].fillna(0)
-    df = v.merge(dl[["date", "volume_usd"]], on="date").query("volume_usd > 0").set_index("date").sort_index()
+    df = v.merge(dl[["date", "volume_usd", "fees_usd"]], on="date").query("volume_usd > 0").set_index("date").sort_index()
     wk = df.groupby(df.index - pd.to_timedelta(df.index.weekday, unit="D")).agg(days=("pub", "size"), pub=("pub", "sum"), dl=("volume_usd", "sum"))
     wk = wk[wk["days"] == 7]
     pd.DataFrame({"week_start": wk.index.date, "days": wk["days"], "implied_confidential_share": 1 - wk["pub"] / wk["dl"]}) \
@@ -52,6 +52,8 @@ def confidential_residual(vol: pd.DataFrame, dl: pd.DataFrame, end: pd.Timestamp
             "share_month_before_break": share(df[df.index.strftime("%Y-%m") == (d - pd.Timedelta(days=1)).strftime("%Y-%m")]),
         }
     pd.Series(rows, name="value").to_frame().to_csv(M / "confidential_break.csv", float_format="%.6g", index_label="key")
+    if brk:
+        step_test(df, brk[0])
 
     # Reconciliation before Confidential Intents became generally available (2026-07-07): public events should match the
     # reported total there. Derived ratios only; recomputed on every build from the same two series.
@@ -64,6 +66,34 @@ def confidential_residual(vol: pd.DataFrame, dl: pd.DataFrame, end: pd.Timestamp
         "daily_correlation": pre["pub"].corr(pre["volume_usd"]),
         "median_abs_daily_gap": (pre["pub"] / pre["volume_usd"] - 1).abs().median(),
     }, name="value").to_frame().to_csv(M / "reconciliation.csv", float_format="%.6g", index_label="key")
+
+
+CONFIDENTIAL_GA = pd.Timestamp("2026-07-07")  # Confidential Intents became generally available (see the reconciliation window)
+
+
+def step_test(df: pd.DataFrame, d: pd.Timestamp) -> None:
+    """Test the two stories for the step on `d` (users moved to Confidential Intents, or DefiLlama changed its series).
+
+    Every quantity is a derived ratio, never a DefiLlama series. df is indexed by date with pub (public leg-sum), volume_usd
+    (reported) and fees_usd. Writes data/metrics/step_test.csv. What each story predicts, and what it cannot tell, is in
+    METHODOLOGY.md; these numbers only report what the data does on the day.
+    """
+    day = pd.Timedelta(days=1)
+    daily = 1 - df["pub"] / df["volume_usd"]
+    before, after = df.loc[d - 14 * day: d - day], df.loc[d: d + 13 * day]
+    steady = daily.loc[CONFIDENTIAL_GA: d - day]
+    flows = pd.read_csv(M / "flows_daily.csv", parse_dates=["date"]).pivot_table(index="date", columns="kind", values="usd", aggfunc="sum")
+    chg = lambda s: s.loc[d: d + 13 * day].mean() / s.loc[d - 14 * day: d - day].mean() - 1
+    bps = lambda x, col: 1e4 * x["fees_usd"].sum() / x[col].sum()
+    pd.Series({
+        "ga_date": CONFIDENTIAL_GA.date(), "break_date": d.date(),
+        "steady_days": len(steady), "steady_max_daily_share": steady.max(),
+        "day_before_share": daily[d - day], "break_day_share": daily[d], "post_14d_min_daily_share": daily.loc[d: d + 13 * day].min(),
+        "deposits_per_day_change": chg(flows["deposit"]), "withdrawals_per_day_change": chg(flows["withdraw"]),
+        "fees_bps_of_public_before": bps(before, "pub"), "fees_bps_of_public_after": bps(after, "pub"),
+        "fees_bps_of_reported_before": bps(before, "volume_usd"), "fees_bps_of_reported_after": bps(after, "volume_usd"),
+        "fees_per_day_change": after["fees_usd"].mean() / before["fees_usd"].mean() - 1,
+    }, name="value").to_frame().to_csv(M / "step_test.csv", float_format="%.6g", index_label="key")
 
 
 def main() -> None:

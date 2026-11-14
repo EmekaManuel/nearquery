@@ -30,6 +30,7 @@ def keys() -> dict:
     sol = pd.read_csv(M / "solver_concentration.csv").set_index("month")
     stick = pd.read_csv(M / "user_stickiness.csv").set_index("month")
     brk = pd.read_csv(M / "confidential_break.csv", index_col=0)["value"]
+    st = pd.read_csv(M / "step_test.csv", index_col=0)["value"]
     touch = pd.read_csv(M / "near_touch.csv").set_index("month")
     vol["usd_per_intent"] = vol.leg_sum_usd / vol.intents
     f = lambda c, m: month_mean(vol, c, m)
@@ -76,6 +77,12 @@ def keys() -> dict:
         "yield_10x": f"{s10.buyback_pct_of_mcap * 100:.1f}%", "rev_10x": usd(s10.annual_buyback_usd),
     }
     rec = pd.read_csv(M / "reconciliation.csv", index_col=0)["value"]
+    pc = lambda x, d=0: f"{float(x) * 100:.{d}f}%"
+    k |= {"step_ga": st["ga_date"], "step_days": st["steady_days"], "step_steady_max": pc(st["steady_max_daily_share"], 1),
+          "step_day": pc(st["break_day_share"]), "step_post_min": pc(st["post_14d_min_daily_share"]),
+          "step_dep": f"{float(st['deposits_per_day_change']) * 100:+.1f}%", "step_wd": f"{float(st['withdrawals_per_day_change']) * 100:+.1f}%",
+          "step_fees": f"{float(st['fees_per_day_change']) * 100:+.0f}%", "step_fpub_b": f"{float(st['fees_bps_of_public_before']):.1f}", "step_fpub_a": f"{float(st['fees_bps_of_public_after']):.1f}",
+          "step_frep_b": f"{float(st['fees_bps_of_reported_before']):.1f}", "step_frep_a": f"{float(st['fees_bps_of_reported_after']):.1f}"}
     k |= {"recon_start": rec["window_start"], "recon_end": rec["window_end"], "recon_days": rec["days"],
           "recon_ratio": f"{float(rec['public_over_reported']) * 100:.1f}%", "recon_priced": f"{float(rec['priced_only_over_reported']) * 100:.1f}%",
           "recon_gap": f"{abs(1 - float(rec['public_over_reported'])) * 100:.1f}%", "recon_corr": f"{float(rec['daily_correlation']):.3f}",
