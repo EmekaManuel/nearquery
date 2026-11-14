@@ -167,7 +167,7 @@ const Outro: React.FC<{ p: Palette; repoUrl: string }> = ({ p, repoUrl }) => {
       <Rise delay={f(1.8)} style={{ fontFamily: sans, fontWeight: 400, fontSize: 52, color: p["ink-muted"] }}>What would change your mind?</Rise>
       <Rise delay={f(2.6)} style={{ fontFamily: mono, fontWeight: 400, fontSize: 34, color: p.ink }}>{repoUrl}</Rise>
       <div style={{ position: "absolute", bottom: 56, fontFamily: mono, fontSize: 22, letterSpacing: "0.06em", textTransform: "uppercase", color: p["ink-muted"], opacity: interpolate(frame, [f(3.2), f(3.8)], [0, 1], clamp) }}>
-        Built at NEAR HACKATHON · public on-chain data · MIT
+        Built at NEAR HACKATHON · re-runnable · open notebook · MIT
       </div>
     </AbsoluteFill>
   )
@@ -212,6 +212,12 @@ export const Demo: React.FC<DemoProps> = ({ captions, numbers: n, marks, speed, 
       {seq("surprise", (
         <Clip src="clips/site.mp4" fromSec={start("surprise")} p={light} zoom={{ x: pin.x, y: pin.y, scale: 2.1, t: [zoomT, zoomT + 1.1, zoomT + 6.6, zoomT + 7.7] }}>
           <Pin p={light} x={pin.x} y={pin.y} from={zoomT + 0.9} to={zoomT + 6.6} label={n.break_date} />
+        </Clip>
+      ))}
+      {seq("checks", (
+        <Clip src="clips/site.mp4" fromSec={start("checks")} p={light}>
+          <Callout p={light} from={1.2} to={6.2} label="Wash and bot screen" text={`${n.wash_total} set aside`} style={{ right: 70, top: 215 }} />
+          <Callout p={light} from={8.2} to={13.4} label="Fees per $1M of volume" text={`${n.near_fee_1m}: rank ${n.near_fee_rank} of ${n.n_peers}`} style={{ right: 70, bottom: 170 }} />
         </Clip>
       ))}
       {seq("falsify", <Falsify p={light} n={n} />)}

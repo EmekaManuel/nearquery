@@ -12,7 +12,7 @@ import re
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 N = json.loads((ROOT / "demo" / "out" / "numbers.json").read_text())
-SHOTS = [("Hook", 8), ("Method", 10), ("The moment", 18), ("The surprise", 22), ("Falsifiers", 12), ("Re-run", 16), ("Outro", 8)]
+SHOTS = [("Hook", 8), ("Method", 10), ("The moment", 18), ("The surprise", 22), ("Checks", 14), ("Falsifiers", 12), ("Re-run", 16), ("Outro", 8)]
 WPS = 2.3  # comfortable speaking pace, words per second
 
 
@@ -35,7 +35,7 @@ def money(s: str) -> str:
 pct = lambda s: s.replace("%", " percent")
 times = lambda s: s.replace("\u00d7", " times")
 # (shot, start second on the final timeline, end second, what is on screen at that moment, line to read)
-H, M, O, S, F, R, X = 0, 8, 18, 36, 58, 70, 86
+H, M, O, S, C, F, R, X = 0, 8, 18, 36, 58, 72, 84, 100
 CUES = [
     ("Hook", H + 0.2, H + 3.95, "the counter rolls up to the figure", f"Intents settled {money(N['net_swap'])} in thirty days."),
     ("Hook", H + 4.0, H + 7.8, "the question rises", "Does any of it reach the NEAR token?"),
@@ -47,10 +47,12 @@ CUES = [
     ("The surprise", S + 0.2, S + 5.8, "implied confidential chart, flat line", f"About {pct(N['confidential'])} of volume isn't public. The obvious story: Confidential Intents."),
     ("The surprise", S + 5.9, S + 13.8, "zoom and ring land on the step", f"But it sits near zero until {day(N['break_date'])}, then jumps to {pct(N['conf_after'])}. Public volume doesn't rise."),
     ("The surprise", S + 14.2, S + 21.8, "scroll to the caveats card", "Users moving, or a data change? We can't tell, so we say so."),
+    ("Checks", C + 0.2, C + 6.6, "the wash and bot chart, then a callout", f"A wash and bot screen sets aside only {N['wash_total'].replace('%', ' percent')} of user volume."),
+    ("Checks", C + 7.0, C + 13.8, "the peer fee bars, NEAR Intents highlighted", f"And NEAR Intents' fees, {N['near_fee_1m'].replace('$', '').replace(',', '')} dollars per million, rank {N['near_fee_rank_ord']} of {N['n_peers']} cross-chain protocols."),
     ("Falsifiers", F + 0.2, F + 6.0, "the table draws row by row", "We say what would change our mind: four triggers, with today's readings."),
     ("Falsifiers", F + 6.2, F + 11.6, "the closing line fades in", f"Today, {N['triggers_today']} has triggered."),
     ("Re-run", R + 0.2, R + 4.5, "the command is typed", "One command re-runs it all. No accounts, no keys."),
-    ("Re-run", R + 4.6, R + 9.6, "the terminal scrolls (sped up)", "It rebuilds every metric from committed snapshots, then rewrites the thesis."),
+    ("Re-run", R + 4.6, R + 9.6, "the terminal scrolls (sped up)", "It refetches market data, rebuilds every metric, then rewrites the thesis."),
     ("Re-run", R + 9.8, R + 15.2, "result line: THESIS.md: no changes", "Same inputs, same output. The thesis comes out identical."),
     ("Outro", X + 0.4, X + 3.8, "logo and tagline", "NearQuery. Ask the chain. Show the work."),
     ("Outro", X + 3.9, X + 7.6, "the question, then the repo address", "What would change your mind?"),

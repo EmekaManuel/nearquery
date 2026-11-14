@@ -10,7 +10,7 @@ const OUT = join(process.cwd(), "out")
 const N = JSON.parse(readFileSync(join(OUT, "numbers.json"), "utf8")) as Record<string, string>
 // planned (shown) seconds per shot; the recording keeps 0.6 s extra so cuts never land on a transition.
 // Keep in step with SHOTS in src/captions.ts.
-const PLAN = { method: 10, moment: 18, surprise: 22 } as const
+const PLAN = { method: 10, moment: 18, surprise: 22, checks: 14 } as const
 type Shot = keyof typeof PLAN
 const PAD = 600
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -158,6 +158,33 @@ async function main() {
   const caveats = page.locator("section.card", { hasText: "Read this before quoting it" }).first()
   await scrollToEl(page, caveats, 90)
   await expectVisible(page, ["break_date"], "chart caveat")
+  await holdTo(m)
+
+  // ---- shot: checks (the wash and bot screen, then fees per $1M against other cross-chain protocols) -----------------
+  await page.goto(`${BASE}/charts/wash-screen/`, { waitUntil: "networkidle" })
+  await page.evaluate(() => document.fonts.ready)
+  await sleep(600)
+  const wcard = page.locator("section.card", { hasText: "Wash and bot screen" }).first()
+  await scrollToEl(page, wcard, 70)
+  m = begin("checks")
+  const wc = (await wcard.locator(".chart").boundingBox())!
+  const wy = wc.y + wc.height * 0.45
+  await glide(page, wc.x + 90, wy, 10)
+  for (let x = wc.x + 90; x < wc.x + wc.width - 20; x += 22) { await page.mouse.move(x, wy, { steps: 2 }); await sleep(55) }
+  await expectVisible(page, ["wash_hf_2dp"], "wash screen")
+  await waitShown(6.4, m)
+  await page.goto(`${BASE}/charts/peer-fees/`, { waitUntil: "networkidle" })
+  await page.evaluate(() => document.fonts.ready)
+  await sleep(500)
+  const pcard = page.locator("section.card", { hasText: "Fees per $1M" }).first()
+  await scrollToEl(page, pcard, 70)
+  const bar = pcard.locator(".recharts-bar-rectangle").nth(Number(N.near_fee_rank) - 1)
+  const bb = (await bar.boundingBox())!
+  await glide(page, bb.x + bb.width * 0.6, bb.y + bb.height / 2, 24)
+  await sleep(300)
+  const ptip = (await page.locator(".recharts-tooltip-wrapper").first().innerText().catch(() => "")) ?? ""
+  if (!ptip.includes("NEAR Intents") || !ptip.includes(N.near_fee_1m_tip)) throw new Error(`NUMBER MISMATCH: peer tooltip says "${ptip.replace(/\n/g, " ")}", expected NEAR Intents and ${N.near_fee_1m_tip}`)
+  console.log(`ok  peer tooltip: ${ptip.replace(/\n/g, " ")}`)
   await holdTo(m)
 
   await ctx.close()

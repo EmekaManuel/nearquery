@@ -5,7 +5,7 @@ export interface Caption { start: number; end: number; text: string; burned: boo
 
 export const FPS = 30
 /** Seconds each shot is on screen. Keep demo/scripts/voiceover.py and record_site.ts PLAN in step. */
-export const SHOTS = { hook: 8, method: 10, moment: 18, surprise: 22, falsify: 12, rerun: 16, outro: 8 } as const
+export const SHOTS = { hook: 8, method: 10, moment: 18, surprise: 22, checks: 14, falsify: 12, rerun: 16, outro: 8 } as const
 export type ShotName = keyof typeof SHOTS
 const order = Object.keys(SHOTS) as ShotName[]
 export const shotStart = (name: ShotName): number => order.slice(0, order.indexOf(name)).reduce((a, n) => a + SHOTS[n], 0)
@@ -26,10 +26,12 @@ export function buildCaptions(n: Numbers, speed: number): Caption[] {
     at("surprise", 5.8, 11.4, `The obvious story: Confidential Intents. But it sits near zero until ${n.break_date}.`),
     at("surprise", 11.4, 16.9, `That day: ${n.conf_before} before, ${n.conf_after} after. Public volume moved ${n.pub_chg}.`),
     at("surprise", 16.9, 21.8, "Users moving, or a data change? We can't tell, so we say so."),
+    at("checks", 0.2, 6.6, `A screen for wash and bot volume sets aside only ${n.wash_total} of user volume. The headline isn't inflated.`),
+    at("checks", 7.0, 13.8, `And NEAR Intents' fees, ${n.near_fee_1m} per $1M, rank ${n.near_fee_rank_ord} of ${n.n_peers} cross-chain protocols.`),
     at("falsify", 0.2, 6.0, "We also say what would change our mind: four triggers, with today's readings."),
     at("falsify", 6.0, 11.8, `Today, ${n.triggers_today} have triggered.`, false), // the card shows this line itself
     at("rerun", 0.2, 4.4, "One command re-runs it all: no accounts, no keys."),
-    at("rerun", 4.4, 9.4, "It rebuilds every metric from the committed snapshots, then rewrites the thesis."),
+    at("rerun", 4.4, 9.4, "It refetches market data, rebuilds every metric, then rewrites the thesis."),
     at("rerun", 9.4, 14.0, `Same inputs, same output: the thesis comes out identical.${speed > 1.15 ? ` (Sped up ${speed.toFixed(1)}x.)` : ""}`),
     at("outro", 0.5, 7.5, "Ask the chain. Show the work. What would change your mind?", false),
   ]

@@ -43,25 +43,33 @@ That day: 0.1% before, 21% after. Public volume moved -10%.
 Users moving, or a data change? We can't tell, so we say so.
 
 12
-00:00:58,200 --> 00:01:04,000
-We also say what would change our mind: four triggers, with today's readings.
+00:00:58,200 --> 00:01:04,600
+A screen for wash and bot volume sets aside only 0.6% of user volume. The headline isn't inflated.
 
 13
-00:01:04,000 --> 00:01:09,800
-Today, none of the four have triggered.
+00:01:05,000 --> 00:01:11,800
+And NEAR Intents' fees, $1,536 per $1M, rank 2nd of 7 cross-chain protocols.
 
 14
-00:01:10,200 --> 00:01:14,400
-One command re-runs it all: no accounts, no keys.
+00:01:12,200 --> 00:01:18,000
+We also say what would change our mind: four triggers, with today's readings.
 
 15
-00:01:14,400 --> 00:01:19,400
-It rebuilds every metric from the committed snapshots, then rewrites the thesis.
+00:01:18,000 --> 00:01:23,800
+Today, none of the four have triggered.
 
 16
-00:01:19,400 --> 00:01:24,000
-Same inputs, same output: the thesis comes out identical. (Sped up 2.2x.)
+00:01:24,200 --> 00:01:28,400
+One command re-runs it all: no accounts, no keys.
 
 17
-00:01:26,500 --> 00:01:33,500
+00:01:28,400 --> 00:01:33,400
+It refetches market data, rebuilds every metric, then rewrites the thesis.
+
+18
+00:01:33,400 --> 00:01:38,000
+Same inputs, same output: the thesis comes out identical. (Sped up 2.2x.)
+
+19
+00:01:40,500 --> 00:01:47,500
 Ask the chain. Show the work. What would change your mind?
